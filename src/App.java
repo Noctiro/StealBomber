@@ -65,6 +65,8 @@ public class App {
             return;
         }
         switch (value[0]) {
+            case "//":
+                break;
             case "Ïß³ÌÊý":
                 if (value[1].matches("[0-9]*")) {
                     thnum = Integer.parseInt(value[1]);

@@ -4,7 +4,7 @@
 
 ## 启动软件
 
-- 在终端执行 `java -jar stealbomb.jar` 即可使用
+- 在终端执行 `java -jar stealbomb.jar` 即可使用()shiy
 - 输出将显示在**控制台**上
 
 ### 启动参数
@@ -17,7 +17,7 @@
 
 ## 文本编写
 
-> 默认使用文本文件 default.txt
+> 默认使用同一文件夹下的文本文件 default.txt(需自行下载: <https://cdn.jsdelivr.net/gh/ObcbO/stealbomb/default.txt>)
 
 一行只能有 `参数` 和 `参数值` ， 中间使用**空格**隔开(一行只允许一个空格)
 
@@ -38,3 +38,8 @@
 | --- | --- |
 | $[account] | 随机生成手机号,QQ号,QQ邮箱 |
 | $[password] | 随机生成密码 |
+
+## TODO
+
+- [ ] 支持多个URL同时攻击
+- [ ] 添加GUI

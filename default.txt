@@ -1,0 +1,4 @@
+线程数 16
+请求方法 POST
+攻击网址 http://121.5.50.10/2018.php
+参数 username=$[account]&pass=$[password]

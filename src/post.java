@@ -16,6 +16,7 @@ public class post implements Runnable {
         method = tmethod;
         url = turl;
         param = tparam;
+        System.out.println(param);
         for (int i = 0; i < thnum; i++) {
             new Thread(new post()).start();
         }

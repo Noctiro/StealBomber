@@ -4,7 +4,7 @@
 
 ## 启动软件
 
-- 在终端执行 `java -jar stealbomb.jar` 即可使用()shiy
+- 在终端执行 `java --enable-preview -jar stealbomb.jar` 即可使用
 - 输出将显示在**控制台**上
 
 ### 启动参数
@@ -17,7 +17,7 @@
 
 ## 文本编写
 
-> 默认使用同一文件夹下的配置 default.properties(需自行下载: <https://cdn.jsdelivr.net/gh/ObcbO/stealbomb/default.properties>)
+> 默认自动生成的 default.properties
 
 使用Java Properties写法
 

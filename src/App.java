@@ -102,18 +102,7 @@ public class App {
                 }
                 break;
             case "参数":
-                if (value[1].contains("$[account]")) {
-                    param = value[1].replace("$[account]", "\" + account + ");
-                } else {
-                    success = false;
-                    System.out.println("ERROR: 参数 参数中不存在账号");
-                }
-                if (value[1].contains("$[password]")) {
-                    param = value[1].replace("$[password]", "\" + password + ");
-                } else {
-                    success = false;
-                    System.out.println("ERROR: 参数 参数中不存在密码");
-                }
+                param = value[1];
                 break;
             default:
                 System.out.println("ERROR: 未知参数名 " + value[0]);

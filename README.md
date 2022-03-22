@@ -30,6 +30,12 @@
 | URL | 是 | - | 发送账号密码的网址 |
 | parameter | 是 | - | 向网站发送的参数 |
 
+功能开关
+
+| 参数名 | 默认值 | 说明 |
+| --- | --- | --- |
+| genoutput | true | 控制台输出随机生成的账号密码 |
+
 ### parameter写法
 
 > 例: "username="+account+"&pass="+password

@@ -8,7 +8,7 @@ import java.net.URL;
 
 import java.util.Random;
 
-public class attect implements Runnable {
+public class attack implements Runnable {
     static String method;
     static String url;
     static String param;
@@ -23,7 +23,7 @@ public class attect implements Runnable {
         url = turl;
         param = tparam;
         for (int i = 0; i < thnum; i++) {
-            new Thread(new attect()).start();
+            new Thread(new attack()).start();
         }
     }
 

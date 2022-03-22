@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class file {
     // 默认值
-    private static int thnum = 1;// 线程数
+    private static int thnum = 16;// 线程数
     private static String method = "POST";// 请求方法
     private static String url;// 攻击网址
     private static String param;// 攻击参数
@@ -15,8 +15,10 @@ public class file {
     private static boolean success = true;
 
     private static Properties properties;
-    
-    public static boolean genoutput = false;
+
+    public static boolean genoutput;
+    public static boolean proxyswitch;
+    private static String proxyfile;
 
     static boolean start() throws IOException {
         String file;
@@ -36,9 +38,9 @@ public class file {
         properties.list(System.out);
         manage();
         System.out.println("-=-=-=-=- File processing completed");
-        //开始攻击
+        // 开始攻击
         if (success) {
-            attack.feature(genoutput);
+            attack.feature(genoutput, proxyswitch, proxyfile);
             attack.start(thnum, method, url, param);
         }
         return success;
@@ -108,18 +110,29 @@ public class file {
 
     private static void booleanmanage() {
         // 生成账号密码输出
-        genoutput = judge(properties.getProperty("genoutput").toString());
+        genoutput = judge(false, "genoutput");
+        // 代理
+        proxyswitch = judge(false, "proxyswitch");
+        proxyfile = properties.getProperty("proxyfile", "Not Found").toString();
     }
 
-    private static boolean judge(String value) {
+    // 默认值 文本
+    private static boolean judge(boolean udefault, String value) {
         boolean output = true;
+        if (properties.getProperty(value, "Not Found").toString() == "Not Found") {
+            return udefault;
+        } else
+            value = properties.getProperty(value).toString();
         if (value.toUpperCase().equals("TRUE")) {
-            output=true;
-        } else if (value.toUpperCase().equals("FALSE")){
-            output=false;
+            output = true;
+        } else if (value.toUpperCase().equals("FALSE")) {
+            output = false;
         } else {
             System.out.println("ERROR: 布尔参数的值为 true 或 false");
-            output=true;
+            output = true;
+        }
+        if (!output) {
+            output = !output;
         }
         return output;
     }

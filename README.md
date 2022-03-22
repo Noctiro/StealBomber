@@ -13,7 +13,7 @@
 
 | 参数 | 说明 | 例子 |
 | --- | --- | --- |
-| -Dfile= | 自定义配置名称(位置) | java -Dfile=../example.properties -jar steal.jar|
+| -Dfile= | 自定义配置名称(位置) | java --enable-preview -Dfile=example.properties -jar steal.jar|
 
 ## 文本编写
 

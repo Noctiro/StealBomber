@@ -98,7 +98,6 @@ public class post implements Runnable {
             httpURLConnection.connect();
             /* 4. 处理输入输出 */
             // 写入参数到请求中
-            System.out.println(param);
             String params = param;
             OutputStream out = httpURLConnection.getOutputStream();
             out.write(params.getBytes());

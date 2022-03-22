@@ -9,9 +9,9 @@ public class App {
             e.printStackTrace();
         }
         if (success) {
-            System.out.println("成功! 开始攻击");
+            System.gc();
+            while (success) {
+            }
         }
-        System.gc();
-        while (success) {}
     }
 }

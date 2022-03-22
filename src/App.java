@@ -11,6 +11,7 @@ public class App {
         if (success) {
             System.out.println("成功! 开始攻击");
         }
+        System.gc();
         while (success) {}
     }
 }

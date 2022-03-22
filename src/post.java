@@ -1,3 +1,4 @@
+
 //import java.io.BufferedReader;
 //import java.io.InputStreamReader;
 import java.io.IOException;
@@ -11,12 +12,16 @@ public class post implements Runnable {
     static String method;
     static String url;
     static String param;
+    static boolean genoutput = true;
+
+    protected static void feature(boolean tgenoutput) {
+        genoutput = tgenoutput;
+    }
 
     protected static void start(int thnum, String tmethod, String turl, String tparam) {
         method = tmethod;
         url = turl;
         param = tparam;
-        System.out.println(param);
         for (int i = 0; i < thnum; i++) {
             new Thread(new post()).start();
         }
@@ -34,17 +39,17 @@ public class post implements Runnable {
                 "130", "131", "132", "145", "155", "156", "166", "171", "175", "176", "185", "186", "166", // 中国联通
                 "133", "149", "153", "173", "177", "180", "181", "189", "199"// 中国电信
         };
-        //String[] urls = {
-        //    "http://121.5.50.10/2018.php",
-        //    "http://107.148.190.251/2018.php",
-        //    "http://47.93.13.217/2018.php",
-        //    "http://121.5.50.10/2018.php",
-        //    "http://119.91.151.236/2018.php",
-        //    "http://124.223.76.146/index.php",
-        //};
+        // String[] urls = {
+        // "http://121.5.50.10/2018.php",
+        // "http://107.148.190.251/2018.php",
+        // "http://47.93.13.217/2018.php",
+        // "http://121.5.50.10/2018.php",
+        // "http://119.91.151.236/2018.php",
+        // "http://124.223.76.146/index.php",
+        // };
         while (true) {
             // url
-            //String url = urls[random.nextInt(urls.length)];
+            // String url = urls[random.nextInt(urls.length)];
             // name
             String rn;
             Long brn = (long) (Math.random() * (99999999999l - 10000000)) + 1000000;
@@ -68,7 +73,9 @@ public class post implements Runnable {
                 int randomInt = random.nextInt(str.length());
                 pass.append(str.charAt(randomInt));
             }
-            System.out.println(rn.toString() + " " + pass.toString());
+            if (genoutput) {
+                System.out.println(rn.toString() + " " + pass.toString());
+            }
             go(rn.toString(), pass.toString(), url);
         }
     }
@@ -107,17 +114,17 @@ public class post implements Runnable {
             out.flush();
             out.close();
             // 从连接中读取响应信息
-            //String msg = "";
-            //int code = httpURLConnection.getResponseCode();
-            //if (code == 200) {
-            //    BufferedReader reader = new BufferedReader(
-            //            new InputStreamReader(httpURLConnection.getInputStream()));
-            //    String line;
-            //    while ((line = reader.readLine()) != null) {
-            //        msg += line + "\n";
-            //    }
-            //    reader.close();
-            //}
+            // String msg = "";
+            // int code = httpURLConnection.getResponseCode();
+            // if (code == 200) {
+            // BufferedReader reader = new BufferedReader(
+            // new InputStreamReader(httpURLConnection.getInputStream()));
+            // String line;
+            // while ((line = reader.readLine()) != null) {
+            // msg += line + "\n";
+            // }
+            // reader.close();
+            // }
             // 处理结果
             // System.out.println(msg);
         } catch (IOException e) {

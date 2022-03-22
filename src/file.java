@@ -7,14 +7,16 @@ import java.util.Properties;
 
 public class file {
     // 默认值
-    static int thnum = 1;// 线程数
-    static String method = "POST";// 请求方法
-    static String url;// 攻击网址
-    static String param;// 攻击参数
+    private static int thnum = 1;// 线程数
+    private static String method = "POST";// 请求方法
+    private static String url;// 攻击网址
+    private static String param;// 攻击参数
 
-    static boolean success = true;
+    private static boolean success = true;
 
-    public static Properties properties;
+    private static Properties properties;
+    
+    public static boolean genoutput = false;
 
     static boolean start() throws IOException {
         String file;
@@ -34,7 +36,9 @@ public class file {
         properties.list(System.out);
         manage();
         System.out.println("-=-=-=-=- File processing completed");
+        //开始攻击
         if (success) {
+            post.feature(genoutput);
             post.start(thnum, method, url, param);
         }
         return success;
@@ -64,6 +68,8 @@ public class file {
 
     private static void manage() {
         String temp;
+        // 一些功能开关
+        booleanmanage();
         // 线程数
         temp = properties.getProperty("threads");
         if (temp.matches("[0-9]*")) {
@@ -98,5 +104,23 @@ public class file {
         }
         // 参数
         param = properties.getProperty("parameter");
+    }
+
+    private static void booleanmanage() {
+        // 生成账号密码输出
+        genoutput = judge(properties.getProperty("genoutput").toString());
+    }
+
+    private static boolean judge(String value) {
+        boolean output = true;
+        if (value.toUpperCase().equals("TRUE")) {
+            output=true;
+        } else if (value.toUpperCase().equals("FALSE")){
+            output=false;
+        } else {
+            System.out.println("ERROR: 布尔参数的值为 true 或 false");
+            output=true;
+        }
+        return output;
     }
 }

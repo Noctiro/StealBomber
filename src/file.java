@@ -38,8 +38,8 @@ public class file {
         System.out.println("-=-=-=-=- File processing completed");
         //¿ªÊ¼¹¥»÷
         if (success) {
-            post.feature(genoutput);
-            post.start(thnum, method, url, param);
+            attect.feature(genoutput);
+            attect.start(thnum, method, url, param);
         }
         return success;
     }

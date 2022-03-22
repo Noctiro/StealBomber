@@ -4,7 +4,8 @@
 
 ## 启动软件
 
-- 在终端执行 `java --enable-preview -jar stealbomb.jar` 即可使用
+- 在终端执行 `java --enable-preview -jar stealbomb.jar`
+- 程序将自动输出默认配置文件(如果没有)
 - 输出将显示在**控制台**上
 
 ### 启动参数

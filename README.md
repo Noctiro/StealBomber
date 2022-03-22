@@ -17,7 +17,7 @@
 
 ## 文本编写
 
-> 默认自动生成的 default.properties
+> 默认使用自动生成的 default.properties
 
 使用Java Properties写法
 
@@ -29,6 +29,18 @@
 | method | 否 | POST | 支持所有的HTTP请求方法 |
 | URL | 是 | - | 发送账号密码的网址 |
 | parameter | 是 | - | 向网站发送的参数 |
+
+### parameter写法
+
+> 例: "username="+account+"&pass="+password
+
+固定值写在`""`之内，**变量**和**固定值**之间用`+`连接
+
+
+| 变量名 | 说明 |
+| --- | --- |
+| username | 随机生成QQ号,QQ邮箱,国内手机号 |
+| password | 随机密码 |
 
 ## TODO
 

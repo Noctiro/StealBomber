@@ -131,9 +131,6 @@ public class file {
             System.out.println("ERROR: 布尔参数的值为 true 或 false");
             output = true;
         }
-        if (!output) {
-            output = !output;
-        }
         return output;
     }
 }

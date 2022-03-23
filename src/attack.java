@@ -24,11 +24,11 @@ public class attack implements Runnable {
     protected static void feature(boolean tgenoutput, boolean tproxyswitch, String tproxyfile) {
         genoutput = tgenoutput;
         if (tproxyswitch) {
-            proxyhttp = proxy.readhttp(tproxyfile);
+            proxyhttp = murl.readhttp(tproxyfile);
             if (proxyhttp != null) {
                 proxyhttpswich = true;
             }
-            proxysocks = proxy.readsocks(tproxyfile);
+            proxysocks = murl.readsocks(tproxyfile);
             if (proxysocks != null) {
                 proxysocksswich = true;
             }
@@ -67,30 +67,35 @@ public class attack implements Runnable {
         // proxy
         String proxytype = "";
         String proxyurl = "";
+        String[] proxyiurl = { "", "" };
         String proxyhost = "";
         int proxyport = 0;
         if (proxyhttpswich && proxysocksswich) {
             if (random.nextBoolean()) {
                 proxytype = "http";
                 proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
-                proxyhost = proxy.host(proxyurl);
-                proxyport = proxy.port(proxyurl);
+                proxyiurl = murl.iurl(proxyurl);
+                proxyhost = proxyiurl[0];
+                proxyport = Integer.valueOf(proxyiurl[1]);
             } else {
                 proxytype = "socks";
                 proxyurl = proxysocks[random.nextInt(proxysocks.length)];
-                proxyhost = proxy.host(proxyurl);
-                proxyport = proxy.port(proxyurl);
+                proxyiurl = murl.iurl(proxyurl);
+                proxyhost = proxyiurl[0];
+                proxyport = Integer.valueOf(proxyiurl[1]);
             }
         } else if (proxyhttpswich && !proxysocksswich) {
             proxytype = "http";
             proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
-            proxyhost = proxy.host(proxyurl);
-            proxyport = proxy.port(proxyurl);
+            proxyiurl = murl.iurl(proxyurl);
+            proxyhost = proxyiurl[0];
+            proxyport = Integer.valueOf(proxyiurl[1]);
         } else if (!proxyhttpswich && proxysocksswich) {
             proxytype = "socks";
             proxyurl = proxysocks[random.nextInt(proxysocks.length)];
-            proxyhost = proxy.host(proxyurl);
-            proxyport = proxy.port(proxyurl);
+            proxyiurl = murl.iurl(proxyurl);
+            proxyhost = proxyiurl[0];
+            proxyport = Integer.valueOf(proxyiurl[1]);
         } else {
             System.out.println("ERROR: 没有找到可使用的代理");
         }

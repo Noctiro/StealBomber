@@ -14,7 +14,7 @@ public class attack implements Runnable {
     static String method;
     static String url;
     static String param;
-    static boolean genoutput = true;
+    static boolean genoutput = false;
     static boolean proxyswitch = false;
     static String[] proxyhttp;
     static String[] proxysocks;

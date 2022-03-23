@@ -70,34 +70,36 @@ public class attack implements Runnable {
         String[] proxyiurl = { "", "" };
         String proxyhost = "";
         int proxyport = 0;
-        if (proxyhttpswich && proxysocksswich) {
-            if (random.nextBoolean()) {
+        if (proxyswitch) {
+            if (proxyhttpswich && proxysocksswich) {
+                if (random.nextBoolean()) {
+                    proxytype = "http";
+                    proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
+                    proxyiurl = murl.iurl(proxyurl);
+                    proxyhost = proxyiurl[0];
+                    proxyport = Integer.valueOf(proxyiurl[1]);
+                } else {
+                    proxytype = "socks";
+                    proxyurl = proxysocks[random.nextInt(proxysocks.length)];
+                    proxyiurl = murl.iurl(proxyurl);
+                    proxyhost = proxyiurl[0];
+                    proxyport = Integer.valueOf(proxyiurl[1]);
+                }
+            } else if (proxyhttpswich && !proxysocksswich) {
                 proxytype = "http";
                 proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
                 proxyiurl = murl.iurl(proxyurl);
                 proxyhost = proxyiurl[0];
                 proxyport = Integer.valueOf(proxyiurl[1]);
-            } else {
+            } else if (!proxyhttpswich && proxysocksswich) {
                 proxytype = "socks";
                 proxyurl = proxysocks[random.nextInt(proxysocks.length)];
                 proxyiurl = murl.iurl(proxyurl);
                 proxyhost = proxyiurl[0];
                 proxyport = Integer.valueOf(proxyiurl[1]);
+            } else {
+                System.out.println("ERROR: 没有找到可使用的代理");
             }
-        } else if (proxyhttpswich && !proxysocksswich) {
-            proxytype = "http";
-            proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
-            proxyiurl = murl.iurl(proxyurl);
-            proxyhost = proxyiurl[0];
-            proxyport = Integer.valueOf(proxyiurl[1]);
-        } else if (!proxyhttpswich && proxysocksswich) {
-            proxytype = "socks";
-            proxyurl = proxysocks[random.nextInt(proxysocks.length)];
-            proxyiurl = murl.iurl(proxyurl);
-            proxyhost = proxyiurl[0];
-            proxyport = Integer.valueOf(proxyiurl[1]);
-        } else {
-            System.out.println("ERROR: 没有找到可使用的代理");
         }
         while (true) {
             // url

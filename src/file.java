@@ -62,7 +62,6 @@ public class file {
             os.flush();
             os.close();
             is.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,7 +103,7 @@ public class file {
         for (String string : urlStr) {
             int i = 0;
             if (urlStr[i].matches("^(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$")) {
-                list.add(string);
+                list.add(string.toLowerCase());
             } else {
                 success = false;
                 System.out.println("ERROR: 攻击网址 你输入的字符串不是一个网址");

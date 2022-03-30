@@ -29,7 +29,7 @@
 | threads | 否 | 16 | 并行攻击的线程数量 |
 | method | 否 | POST | 支持所有的HTTP请求方法 |
 | URL | 是 | - | 发送账号密码的网址，多个URL用 `,` 隔开([见下例](#多个攻击网址写法)) |
-| parameter | 是 | - | 向网站发送的参数 |
+| parameter | 是 | - | 向网站发送的参数([见下例](#parameter写法)) |
 | URL | 是 | - | 发送账号密码的网址 |
 | proxyfile | 否 | - | 代理文件地址 |
 
@@ -53,7 +53,7 @@ URL=https://a.a.a,http://b.b.b/,https://c.c.c
 
 ### parameter写法
 
-> 例: "username="+account+"&pass="+password
+> 例: `parameter="username="+account+"&pass="+password`
 
 固定值写在`""`之内，**变量**和**固定值**之间用`+`连接
 

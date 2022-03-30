@@ -1,21 +1,19 @@
-
-//import java.io.BufferedReader;
-//import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
-
 import java.util.Random;
+//import java.io.BufferedReader;
+//import java.io.InputStreamReader;
 
 public class attack implements Runnable {
     static String[] proxyhttp;
     static String[] proxysocks;
     static boolean proxyhttpswich = false;
     static boolean proxysocksswich = false;
-    
+
     protected static void start() {
         if (file.proxyswitch) {
             proxyhttp = murl.readhttp(file.proxyfile);

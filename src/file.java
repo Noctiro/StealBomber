@@ -98,20 +98,31 @@ public class file {
         }
         // URLS
         String rurl = properties.getProperty("URL");
-        String[] urlStr = rurl.split(",");
         List<String> list = new ArrayList<String>();
-        for (String string : urlStr) {
-            int i = 0;
-            if (urlStr[i].matches("^(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$")) {
-                list.add(string.toLowerCase());
+        if (rurl.contains(",")) {
+            String[] urlStr = rurl.split(",");
+            for (String string : urlStr) {
+                int i = 0;
+                if (urlStr[i].matches("(http|https)+://[^\\s]*")) {
+                    list.add(string.toLowerCase());
+                } else {
+                    success = false;
+                    System.out.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
+                }
+                i++;
+            }
+        } else {
+            if (rurl.matches("(http|https)+://[^\\s]*")) {
+                list.add(rurl);
             } else {
                 success = false;
                 System.out.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
             }
-            i++;
         }
-        int size = list.size();
-        urls = (String[]) list.toArray(new String[size]);
+        if (success) {
+            int size = list.size();
+            urls = (String[]) list.toArray(new String[size]);
+        }
         // 参数
         param = properties.getProperty("parameter");
     }

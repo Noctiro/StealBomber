@@ -10,7 +10,7 @@ public class murl {
         try (Scanner scanner = new Scanner(new File(filename))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                if (line.matches("^(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?:+[0-9]*$")) {
+                if (line.matches("(http|https)+://[^\\s]*")) {
                     list.add(line);
                 }
             }
@@ -30,7 +30,7 @@ public class murl {
         try (Scanner scanner = new Scanner(new File(filename))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                if (line.matches("^(socks4|socks5)://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?:+[0-9]*$")) {
+                if (line.matches("(socks4|socks5)+://[^\\s]*")) {
                     list.add(line);
                 }
             }

@@ -81,7 +81,11 @@ public class attack implements Runnable {
         }
         while (true) {
             // url
-            String url = file.urls[random.nextInt(file.urls.length - 1)].toString();
+            String url;
+            if (file.urls.length - 1 == 0) {
+                url = file.urls[0];
+            } else
+                url = file.urls[random.nextInt(file.urls.length - 1)].toString();
             // name
             String rn;
             Long brn = (long) (Math.random() * (99999999999l - 10000000)) + 1000000;
@@ -149,9 +153,8 @@ public class attack implements Runnable {
             httpURLConnection.connect();
             /* 4. 处理输入输出 */
             // 写入参数到请求中
-            String params = file.param;
             OutputStream out = httpURLConnection.getOutputStream();
-            out.write(params.getBytes());
+            out.write(file.param.getBytes());
             // 简化
             // httpURLConnection.getOutputStream().write(params.getBytes());
             out.flush();

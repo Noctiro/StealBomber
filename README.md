@@ -1,4 +1,4 @@
-# Steal Bomb
+# Steal Bomber
 
 > 这是一个用Java语言写的轰炸盗号网站软件
 

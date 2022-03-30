@@ -3,13 +3,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class file {
     // 默认值
     private static int thnum = 16;// 线程数
     private static String method = "POST";// 请求方法
-    private static String url;// 攻击网址
+    private static String[] urls;// 攻击网址
     private static String param;// 攻击参数
 
     private static boolean success = true;
@@ -41,7 +43,7 @@ public class file {
         // 开始攻击
         if (success) {
             attack.feature(genoutput, proxyswitch, proxyfile);
-            attack.start(thnum, method, url, param);
+            attack.start(thnum, method, urls, param);
         }
         return success;
     }
@@ -92,18 +94,27 @@ public class file {
             case "OPTIONS":
             case "TRACE":
             case "PATCH":
-                url = temp;
+                method = temp;
                 break;
             default:
                 System.out.println("ERROR: 请求方法 未知的请求方法");
         }
-        // 攻击网址
-        if (properties.getProperty("URL").matches("^(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$")) {
-            url = properties.getProperty("URL");
-        } else {
-            success = false;
-            System.out.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
-        }
+        // URLS
+        String rurl = properties.getProperty("URL");
+		String[] urlStr = rurl.split(",");
+        List<String> list = new ArrayList<String>();
+		for (String string : urlStr) {
+            int i = 0;
+            if (urlStr[i].matches("^(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$")) {
+                list.add(string);
+            } else {
+                success = false;
+                System.out.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
+            }
+            i++;
+		}
+        int size = list.size();
+        urls = (String[]) list.toArray(new String[size]);
         // 参数
         param = properties.getProperty("parameter");
     }

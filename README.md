@@ -4,7 +4,7 @@
 
 ## 启动软件
 
-- 在终端执行 `java --enable-preview -jar stealbomb.jar`
+- 在终端执行 `java --enable-preview -jar stealbomber.jar`
 - 程序将自动输出默认配置文件(如果没有)
 - 输出将显示在**控制台**上
 
@@ -14,7 +14,7 @@
 
 | 参数 | 说明 | 例子 |
 | --- | --- | --- |
-| -Dfile= | 自定义配置名称(位置) | java --enable-preview -Dfile="example.properties" -jar stealbomb.jar |
+| -Dfile= | 自定义配置名称(位置) | java --enable-preview -Dfile="example.properties" -jar stealbomber.jar |
 
 ## 文本编写
 

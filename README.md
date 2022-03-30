@@ -1,4 +1,4 @@
-# 输出 `Connect timed out` 貌似是正常情况，原因可能是攻击太快导致，如了解缘故可以在 `issues` 里告诉我或者联系 `QQ: 1665807109`
+## 输出 `Connect timed out` 貌似是正常情况，原因可能是攻击太快导致，如了解缘故可以在 `issues` 里告诉我或者联系 `QQ: 1665807109`
 
 # Steal Bomber
 

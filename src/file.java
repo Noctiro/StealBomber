@@ -30,7 +30,6 @@ public class file {
                 generatefile();
             }
             file = "default.properties".toString();
-            ;
         } else
             file = System.getProperty("file").toString();
         System.out.println(file);

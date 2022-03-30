@@ -9,18 +9,18 @@ import java.util.Properties;
 
 public class file {
     // 默认值
-    private static int thnum = 16;// 线程数
-    private static String method = "POST";// 请求方法
-    private static String[] urls;// 攻击网址
-    private static String param;// 攻击参数
+    static int thnum = 16;// 线程数
+    static String method = "POST";// 请求方法
+    static String[] urls;// 攻击网址
+    static String param;// 攻击参数
 
-    private static boolean success = true;
+    static boolean success = true;
 
     private static Properties properties;
 
     public static boolean genoutput;
     public static boolean proxyswitch;
-    private static String proxyfile;
+    public static String proxyfile;
 
     static boolean start() throws IOException {
         String file;
@@ -42,8 +42,7 @@ public class file {
         System.out.println("-=-=-=-=- File processing completed");
         // 开始攻击
         if (success) {
-            attack.feature(genoutput, proxyswitch, proxyfile);
-            attack.start(thnum, method, urls, param);
+            attack.start();
         }
         return success;
     }

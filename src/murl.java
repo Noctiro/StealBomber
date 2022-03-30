@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 public class murl {
     protected static String[] readhttp(String filename) {
         List<String> list = new ArrayList<String>();
@@ -46,8 +47,8 @@ public class murl {
 
     protected static String[] iurl(String url) {
         String[] iurl = { "", "" };
-        iurl[0] = url.substring(url.indexOf("://")+3, url.lastIndexOf(':'));
-        iurl[1] = url.substring(url.lastIndexOf(':')+1);
+        iurl[0] = url.substring(url.indexOf("://") + 3, url.lastIndexOf(':'));
+        iurl[1] = url.substring(url.lastIndexOf(':') + 1);
         return iurl;
     }
 }

@@ -101,9 +101,9 @@ public class file {
         }
         // URLS
         String rurl = properties.getProperty("URL");
-		String[] urlStr = rurl.split(",");
+        String[] urlStr = rurl.split(",");
         List<String> list = new ArrayList<String>();
-		for (String string : urlStr) {
+        for (String string : urlStr) {
             int i = 0;
             if (urlStr[i].matches("^(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$")) {
                 list.add(string);
@@ -112,7 +112,7 @@ public class file {
                 System.out.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
             }
             i++;
-		}
+        }
         int size = list.size();
         urls = (String[]) list.toArray(new String[size]);
         // 参数

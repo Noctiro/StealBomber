@@ -107,10 +107,10 @@ public class attack implements Runnable {
                 httpURLConnection = (HttpURLConnection) url.openConnection();
             } else {
                 if (proxytype == "http") {
-                    Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("123.0.0.1", 8080));
+                    Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyurl, proxyport));
                     httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
                 } else if (proxytype == "socks") {
-                    Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress("123.0.0.1", 8080));
+                    Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(proxyurl, proxyport));
                     httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
                 }
             }

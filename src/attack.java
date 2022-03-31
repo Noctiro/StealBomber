@@ -34,7 +34,7 @@ public class attack implements Runnable {
     public void run() {
         int max = 16;
         int min = 8;
-        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*";
+        final String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*";
         // proxy
         String proxytype = "";
         String proxyurl = "";

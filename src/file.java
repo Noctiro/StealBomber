@@ -29,16 +29,14 @@ public class file {
             if (!new File("default.properties").exists()) {
                 generatefile();
             }
-            file = "default.properties".toString();
+            file = "default.properties";
         } else
-            file = System.getProperty("file").toString();
-        System.out.println(file);
-        InputStream inputStream = file.class.getClassLoader().getResourceAsStream(file);
+            file = System.getProperty("file");
         properties = new Properties();
-        properties.load(inputStream);
+        properties.load(file.class.getClassLoader().getResourceAsStream(file));
         properties.list(System.out);
         manage();
-        System.out.println("-=-=-=-=- File processing completed");
+        System.out.println("-- File processing completed --");
         // ¿ªÊ¼¹¥»÷
         if (success) {
             attack.start();

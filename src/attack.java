@@ -13,6 +13,7 @@ public class attack implements Runnable {
     static String[] proxysocks;
     static boolean proxyhttpswich = false;
     static boolean proxysocksswich = false;
+    static Random random = new Random();
 
     protected static void start() {
         if (file.proxyswitch) {
@@ -31,17 +32,9 @@ public class attack implements Runnable {
     }
 
     public void run() {
-        Random random = new Random();
         int max = 16;
         int min = 8;
-
         String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*";
-        String[] bfnum = {
-                "134", "135", "136", "137", "138", "139", "150", "151", "152", "157", "158", "159", "182", "183", "184", // 中国移动
-                "187", "188", "178", "147", "172", "198", // 中国移动
-                "130", "131", "132", "145", "155", "156", "166", "171", "175", "176", "185", "186", "166", // 中国联通
-                "133", "149", "153", "173", "177", "180", "181", "189", "199"// 中国电信
-        };
         // proxy
         String proxytype = "";
         String proxyurl = "";
@@ -92,7 +85,7 @@ public class attack implements Runnable {
             switch (random.nextInt(2) + 1) {
                 case 1:
                     int length = random.nextInt(99999999 - 10000000) + 10000000;
-                    rn = bfnum[random.nextInt(bfnum.length)].toString() + length;
+                    rn = array.bfnum[random.nextInt(array.bfnum.length)].toString() + length;
                     break;
                 case 2:
                     rn = brn.toString() + "@qq.com";
@@ -140,14 +133,13 @@ public class attack implements Runnable {
             // 设置是否读入
             httpURLConnection.setDoInput(true);
             // 设置是否使用缓存
-            httpURLConnection.setUseCaches(false);
+            httpURLConnection.setUseCaches(true);
             // 设置此 HttpURLConnection 实例是否应该自动执行 HTTP 重定向
-            httpURLConnection.setInstanceFollowRedirects(false);
+            httpURLConnection.setInstanceFollowRedirects(true);
             // 设置请求头
             httpURLConnection.setRequestProperty("Content-Length", "40");
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            httpURLConnection.setRequestProperty("User-Agent",
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36 Edg/99.0.1150.46");
+            httpURLConnection.setRequestProperty("User-Agent", array.useragent[random.nextInt(array.useragent.length - 1)]);
             // 连接
             httpURLConnection.connect();
             /* 4. 处理输入输出 */

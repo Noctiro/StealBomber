@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +34,8 @@ public class file {
         } else
             file = System.getProperty("file");
         properties = new Properties();
-        properties.load(file.class.getClassLoader().getResourceAsStream(file));
+        //properties.load(file.class.getClassLoader().getResourceAsStream(file));
+        properties.load(new FileInputStream(System.getProperty("user.dir")+File.separator+file));
         properties.list(System.out);
         manage();
         System.out.println("-- File processing completed --");

@@ -13,5 +13,6 @@ public class App {
             while (success) {
             }
         }
+        System.exit(1);
     }
 }

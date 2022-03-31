@@ -122,7 +122,7 @@ public class attack implements Runnable {
             // 设置是否读入
             httpURLConnection.setDoInput(true);
             // 设置是否使用缓存
-            httpURLConnection.setUseCaches(true);
+            httpURLConnection.setUseCaches(false);
             // 设置此 HttpURLConnection 实例是否应该自动执行 HTTP 重定向
             httpURLConnection.setInstanceFollowRedirects(true);
             // 设置请求头

@@ -18,11 +18,11 @@ public class file {
 
     private static Properties properties;
 
-    public static boolean genoutput;
-    public static boolean proxyswitch;
-    public static String proxyfile;
+    static boolean genoutput;
+    static boolean proxyswitch;
+    static String proxyfile;
 
-    static boolean start() throws IOException {
+    protected static boolean start() throws IOException {
         String file;
         if (System.getProperty("file") == null || System.getProperty("file") == ""
                 || System.getProperty("file").trim() == "") {

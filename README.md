@@ -55,14 +55,12 @@ URL=https://a.a.a,http://b.b.b/,https://c.c.c
 
 ### parameter写法
 
-> 例: `parameter="username="+account+"&pass="+password`
-
-固定值写在`""`之内，**变量**和**固定值**之间用`+`连接
+> 例: `username=$[account]&pass=$[password]`
 
 | 变量名 | 说明 |
 | --- | --- |
-| username | 随机生成QQ号,QQ邮箱,中国大陆手机号 |
-| password | 随机密码 |
+| $[account] | 随机生成QQ号,QQ邮箱,中国大陆手机号 |
+| $[password] | 随机密码 |
 
 ### 代理文件
 

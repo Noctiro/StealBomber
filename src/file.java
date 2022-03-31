@@ -124,7 +124,7 @@ public class file {
             urls = (String[]) list.toArray(new String[size]);
         }
         // ²ÎÊý
-        param = properties.getProperty("parameter");
+        param = properties.getProperty("parameter").toString();
     }
 
     private static void booleanmanage() {

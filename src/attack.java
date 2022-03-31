@@ -154,7 +154,6 @@ public class attack implements Runnable {
             // 写入参数到请求中
             String param = file.param.replace("$[account]", name);
             param = param.replace("$[password]", pass);
-            System.out.println(param);
             OutputStream out = httpURLConnection.getOutputStream();
             out.write(param.getBytes());
             // 简化

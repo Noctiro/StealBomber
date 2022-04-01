@@ -29,10 +29,17 @@ public class file {
                 || System.getProperty("file").trim() == "") {
             if (!new File("default.properties").exists()) {
                 generatefile();
+                System.out.println("未发现配置文件, 现已自动生成默认配置文件");
+                System.exit(0);
             }
             file = "default.properties";
-        } else
+        } else {
             file = System.getProperty("file");
+            if (!new File(file).exists()) {
+                System.out.println("未发现选定的配置文件");
+                System.exit(1);
+            }
+        }
         properties = new Properties();
         // properties.load(file.class.getClassLoader().getResourceAsStream(file));
         properties.load(new FileInputStream(System.getProperty("user.dir") + File.separator + file));

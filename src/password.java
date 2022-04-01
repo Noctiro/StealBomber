@@ -1,24 +1,26 @@
 import java.util.Random;
 
 public class password {
-    static Random random;
-    static int rp;
-    static String password = "error";
+    private static Random random;
+    private static int rp;
+    private static String password = "error";
 
     protected static String get() {
         random = new Random();
         rp = random.nextInt(16 - 8) + 8;
-        switch (random.nextInt(3)) {
+        switch (random.nextInt(4)) {
             case 0:
-                letter23num();
+                Letter23Num();
                 break;
             case 1:
-                numletter23();
+                NumLetter23();
                 break;
             case 2:
                 num();
                 break;
             case 3:
+                randomNoSpecial();
+            case 4:
             default:
                 random();
                 break;
@@ -36,7 +38,17 @@ public class password {
         password = pass.toString();
     }
 
-    private static void letter23num() {
+    private static void randomNoSpecial() {
+        final String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuffer pass = new StringBuffer();
+        for (int i = 0; i < rp; i++) {
+            int randomInt = random.nextInt(str.length());
+            pass.append(str.charAt(randomInt));
+        }
+        password = pass.toString();
+    }
+
+    private static void Letter23Num() {
         final String num = "0123456789";
         final String letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuffer pass = new StringBuffer();
@@ -50,7 +62,7 @@ public class password {
         password = pass.toString();
     }
 
-    private static void numletter23() {
+    private static void NumLetter23() {
         final String num = "0123456789";
         final String letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuffer pass = new StringBuffer();

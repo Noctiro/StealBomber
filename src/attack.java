@@ -15,11 +15,11 @@ public class attack implements Runnable {
 
     protected static void start() {
         if (file.proxyswitch) {
-            proxyhttp = murl.readhttp(file.proxyfile);
+            proxyhttp = proxy.readhttp(file.proxyfile);
             if (proxyhttp != null) {
                 proxyhttpswich = true;
             }
-            proxysocks = murl.readsocks(file.proxyfile);
+            proxysocks = proxy.readsocks(file.proxyfile);
             if (proxysocks != null) {
                 proxysocksswich = true;
             }
@@ -30,9 +30,6 @@ public class attack implements Runnable {
     }
 
     public void run() {
-        int max = 16;
-        int min = 8;
-        final String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*";
         // proxy
         String proxytype = "";
         String proxyurl = "";
@@ -55,7 +52,7 @@ public class attack implements Runnable {
                 proxytype = "socks";
                 proxyurl = proxysocks[random.nextInt(proxysocks.length)];
             }
-            proxyiurl = murl.iurl(proxyurl);
+            proxyiurl = proxy.iurl(proxyurl);
             proxyhost = proxyiurl[0];
             proxyport = Integer.valueOf(proxyiurl[1]);
         }
@@ -83,17 +80,12 @@ public class attack implements Runnable {
                     break;
             }
             // rp
-            int rp = random.nextInt(max - min) + min;
-            StringBuffer pass = new StringBuffer();
-            for (int i = 0; i < rp; i++) {
-                int randomInt = random.nextInt(str.length());
-                pass.append(str.charAt(randomInt));
-            }
+            String pass = password.get();
             // Êä³ö
             if (file.genoutput) {
-                System.out.println(rn + " " + pass.toString());
+                System.out.println(rn + " " + pass);
             }
-            go(rn, pass.toString(), url, proxytype, proxyhost, proxyport);
+            go(rn, pass, url, proxytype, proxyhost, proxyport);
         }
     }
 

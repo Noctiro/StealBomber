@@ -30,6 +30,7 @@ public class file {
             if (!new File("default.properties").exists()) {
                 generatefile();
                 System.out.println("未发现配置文件, 现已自动生成默认配置文件");
+                System.out.println("请再次开启来使用该程序");
                 System.exit(0);
             }
             file = "default.properties";

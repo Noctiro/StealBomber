@@ -91,9 +91,9 @@ public class attack implements Runnable {
             }
             // Êä³ö
             if (file.genoutput) {
-                System.out.println(rn.toString() + " " + pass.toString());
+                System.out.println(rn + " " + pass.toString());
             }
-            go(rn.toString(), pass.toString(), url, proxytype, proxyhost, proxyport);
+            go(rn, pass.toString(), url, proxytype, proxyhost, proxyport);
         }
     }
 

@@ -34,8 +34,8 @@ public class file {
         } else
             file = System.getProperty("file");
         properties = new Properties();
-        //properties.load(file.class.getClassLoader().getResourceAsStream(file));
-        properties.load(new FileInputStream(System.getProperty("user.dir")+File.separator+file));
+        // properties.load(file.class.getClassLoader().getResourceAsStream(file));
+        properties.load(new FileInputStream(System.getProperty("user.dir") + File.separator + file));
         properties.list(System.out);
         manage();
         System.out.println("-- File processing completed --");
@@ -104,7 +104,7 @@ public class file {
             for (String string : urlStr) {
                 int i = 0;
                 if (urlStr[i].matches("(http|https)+://[^\\s]*")) {
-                    list.add(string.toLowerCase());
+                    list.add(string);
                 } else {
                     success = false;
                     System.out.println("ERROR: 攻击网址 你输入的字符串不是一个网址");

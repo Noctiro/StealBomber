@@ -1,3 +1,4 @@
+package attack;
 public class array {
         static final String[] bfnum = {
                         "134", "135", "136", "137", "138", "139", "150", "151", "152", "157", "158", "159", "182",

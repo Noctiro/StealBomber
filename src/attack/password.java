@@ -1,3 +1,4 @@
+package attack;
 import java.util.Random;
 
 public class password {

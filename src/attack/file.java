@@ -1,3 +1,5 @@
+package attack;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -23,7 +25,7 @@ public class file {
     static boolean proxyswitch;
     static String proxyfile;
 
-    protected static boolean start() throws IOException {
+    public static boolean start() throws IOException {
         String file;
         if (System.getProperty("file") == null || System.getProperty("file") == ""
                 || System.getProperty("file").trim() == "") {

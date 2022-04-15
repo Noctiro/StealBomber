@@ -49,10 +49,6 @@ public class file {
         properties.list(System.out);
         manage();
         System.out.println("-- File processing completed --");
-        // 开始攻击
-        if (success) {
-            attack.start();
-        }
         return success;
     }
 

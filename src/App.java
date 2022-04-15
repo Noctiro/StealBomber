@@ -10,6 +10,7 @@ public class App {
         }
         if (success) {
             System.gc();
+            attack.start.start();
             while (success) {
             }
         }

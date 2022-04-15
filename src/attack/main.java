@@ -7,14 +7,14 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.Random;
-public class start implements Runnable {
+public class main implements Runnable {
     static String[] proxyhttp;
     static String[] proxysocks;
     static boolean proxyhttpswich = false;
     static boolean proxysocksswich = false;
     static Random random = new Random();
 
-    public static void geo() {
+    public static void start() {
         if (file.proxyswitch) {
             proxyhttp = proxy.readhttp(file.proxyfile);
             if (proxyhttp != null) {
@@ -26,7 +26,7 @@ public class start implements Runnable {
             }
         }
         for (int i = 0; i < file.thnum; i++) {
-            new Thread(new start()).start();
+            new Thread(new main()).start();
         }
     }
 

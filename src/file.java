@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Properties;
 
 public class file {
-    // Ä¬ÈÏÖµ
-    static int thnum = 16;// Ïß³ÌÊı
-    static String method = "POST";// ÇëÇó·½·¨
-    static String[] urls;// ¹¥»÷ÍøÖ·
-    static String param;// ¹¥»÷²ÎÊı
+    // é»˜è®¤å€¼
+    static int thnum = 16;// çº¿ç¨‹æ•°
+    static String method = "POST";// è¯·æ±‚æ–¹æ³•
+    static String[] urls;// æ”»å‡»ç½‘å€
+    static String param;// æ”»å‡»å‚æ•°
 
     static boolean success = true;
 
@@ -29,15 +29,15 @@ public class file {
                 || System.getProperty("file").trim() == "") {
             if (!new File("default.properties").exists()) {
                 generatefile();
-                System.out.println("Î´·¢ÏÖÅäÖÃÎÄ¼ş, ÏÖÒÑ×Ô¶¯Éú³ÉÄ¬ÈÏÅäÖÃÎÄ¼ş");
-                System.out.println("ÇëÔÙ´Î¿ªÆôÀ´Ê¹ÓÃ¸Ã³ÌĞò");
+                System.out.println("æœªå‘ç°é…ç½®æ–‡ä»¶, ç°å·²è‡ªåŠ¨ç”Ÿæˆé»˜è®¤é…ç½®æ–‡ä»¶");
+                System.out.println("è¯·å†æ¬¡å¼€å¯æ¥ä½¿ç”¨è¯¥ç¨‹åº");
                 System.exit(0);
             }
             file = "default.properties";
         } else {
             file = System.getProperty("file");
             if (!new File(file).exists()) {
-                System.out.println("Î´·¢ÏÖÑ¡¶¨µÄÅäÖÃÎÄ¼ş");
+                System.out.println("æœªå‘ç°é€‰å®šçš„é…ç½®æ–‡ä»¶");
                 System.exit(1);
             }
         }
@@ -47,7 +47,7 @@ public class file {
         properties.list(System.out);
         manage();
         System.out.println("-- File processing completed --");
-        // ¿ªÊ¼¹¥»÷
+        // å¼€å§‹æ”»å‡»
         if (success) {
             attack.start();
         }
@@ -58,12 +58,12 @@ public class file {
         try {
             InputStream is = file.class.getResourceAsStream("default.properties");
             File f = new File("default.properties");
-            if (!f.exists()) {// ÎÄ¼ş²»´æÔÚÊ±ÏÈ´´½¨
+            if (!f.exists()) {// æ–‡ä»¶ä¸å­˜åœ¨æ—¶å…ˆåˆ›å»º
                 f.createNewFile();
             }
             OutputStream os = new FileOutputStream(f);
             int index = 0;
-            byte[] bytes = new byte[1024];// Ö¸¶¨Ã¿´Î¶ÁÈ¡µÄÎ»Êı£¬ÕâÀïÒÔ1024ÎªÀı
+            byte[] bytes = new byte[1024];// æŒ‡å®šæ¯æ¬¡è¯»å–çš„ä½æ•°ï¼Œè¿™é‡Œä»¥1024ä¸ºä¾‹
             while ((index = is.read(bytes)) != -1) {
                 os.write(bytes, 0, index);
             }
@@ -77,17 +77,17 @@ public class file {
 
     private static void manage() {
         String temp;
-        // Ò»Ğ©¹¦ÄÜ¿ª¹Ø
+        // ä¸€äº›åŠŸèƒ½å¼€å…³
         booleanmanage();
-        // Ïß³ÌÊı
+        // çº¿ç¨‹æ•°
         temp = properties.getProperty("threads");
         if (temp.matches("[0-9]*")) {
             thnum = Integer.parseInt(temp);
         } else {
             success = false;
-            System.out.println("ERROR: Ïß³ÌÊı ÄãÊäÈëµÄÖµ²»ÊÇÒ»¸öÕıÕûÊı");
+            System.out.println("ERROR: çº¿ç¨‹æ•° ä½ è¾“å…¥çš„å€¼ä¸æ˜¯ä¸€ä¸ªæ­£æ•´æ•°");
         }
-        // ÇëÇó·½·¨
+        // è¯·æ±‚æ–¹æ³•
         temp = properties.getProperty("method").toUpperCase();
         switch (temp) {
             case "GET":
@@ -102,7 +102,7 @@ public class file {
                 method = temp;
                 break;
             default:
-                System.out.println("ERROR: ÇëÇó·½·¨ Î´ÖªµÄÇëÇó·½·¨");
+                System.out.println("ERROR: è¯·æ±‚æ–¹æ³• æœªçŸ¥çš„è¯·æ±‚æ–¹æ³•");
         }
         // URLS
         String rurl = properties.getProperty("URL");
@@ -115,7 +115,7 @@ public class file {
                     list.add(string);
                 } else {
                     success = false;
-                    System.out.println("ERROR: ¹¥»÷ÍøÖ· ÄãÊäÈëµÄ×Ö·û´®²»ÊÇÒ»¸öÍøÖ·");
+                    System.out.println("ERROR: æ”»å‡»ç½‘å€ ä½ è¾“å…¥çš„å­—ç¬¦ä¸²ä¸æ˜¯ä¸€ä¸ªç½‘å€");
                 }
                 i++;
             }
@@ -124,26 +124,26 @@ public class file {
                 list.add(rurl);
             } else {
                 success = false;
-                System.out.println("ERROR: ¹¥»÷ÍøÖ· ÄãÊäÈëµÄ×Ö·û´®²»ÊÇÒ»¸öÍøÖ·");
+                System.out.println("ERROR: æ”»å‡»ç½‘å€ ä½ è¾“å…¥çš„å­—ç¬¦ä¸²ä¸æ˜¯ä¸€ä¸ªç½‘å€");
             }
         }
         if (success) {
             int size = list.size();
             urls = (String[]) list.toArray(new String[size]);
         }
-        // ²ÎÊı
+        // å‚æ•°
         param = properties.getProperty("parameter").toString();
     }
 
     private static void booleanmanage() {
-        // Éú³ÉÕËºÅÃÜÂëÊä³ö
+        // ç”Ÿæˆè´¦å·å¯†ç è¾“å‡º
         genoutput = judge(false, "genoutput");
-        // ´úÀí
+        // ä»£ç†
         proxyswitch = judge(false, "proxyswitch");
         proxyfile = properties.getProperty("proxyfile", "Not Found").toString();
     }
 
-    // Ä¬ÈÏÖµ ÎÄ±¾
+    // é»˜è®¤å€¼ æ–‡æœ¬
     private static boolean judge(boolean udefault, String value) {
         boolean output = true;
         if (properties.getProperty(value, "Not Found").toString() == "Not Found") {
@@ -155,7 +155,7 @@ public class file {
         } else if (value.toUpperCase().equals("FALSE")) {
             output = false;
         } else {
-            System.out.println("ERROR: ²¼¶û²ÎÊıµÄÖµÎª true »ò false");
+            System.out.println("ERROR: å¸ƒå°”å‚æ•°çš„å€¼ä¸º true æˆ– false");
             output = true;
         }
         return output;

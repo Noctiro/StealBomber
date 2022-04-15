@@ -81,7 +81,7 @@ public class attack implements Runnable {
             }
             // rp
             String pass = password.get();
-            // Êä³ö
+            // è¾“å‡º
             if (file.genoutput) {
                 System.out.println(rn + " " + pass);
             }
@@ -105,24 +105,24 @@ public class attack implements Runnable {
                 }
             }
             httpURLConnection.setRequestMethod(file.method);
-            // ³¬Ê±Ê±¼ä
+            // è¶…æ—¶æ—¶é—´
             httpURLConnection.setConnectTimeout(3000);
-            // ÉèÖÃÊÇ·ñÊä³ö
+            // è®¾ç½®æ˜¯å¦è¾“å‡º
             httpURLConnection.setDoOutput(true);
-            // ÉèÖÃÊÇ·ñ¶ÁÈë
+            // è®¾ç½®æ˜¯å¦è¯»å…¥
             httpURLConnection.setDoInput(true);
-            // ÉèÖÃÊÇ·ñÊ¹ÓÃ»º´æ
+            // è®¾ç½®æ˜¯å¦ä½¿ç”¨ç¼“å­˜
             httpURLConnection.setUseCaches(false);
-            // ÉèÖÃ´Ë HttpURLConnection ÊµÀıÊÇ·ñÓ¦¸Ã×Ô¶¯Ö´ĞĞ HTTP ÖØ¶¨Ïò
+            // è®¾ç½®æ­¤ HttpURLConnection å®ä¾‹æ˜¯å¦åº”è¯¥è‡ªåŠ¨æ‰§è¡Œ HTTP é‡å®šå‘
             httpURLConnection.setInstanceFollowRedirects(false);
-            // ÉèÖÃÇëÇóÍ·
+            // è®¾ç½®è¯·æ±‚å¤´
             httpURLConnection.setRequestProperty("Content-Length", "40");
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             httpURLConnection.setRequestProperty("User-Agent",
                     array.useragent[random.nextInt(array.useragent.length - 1)]);
-            // Á¬½Ó
+            // è¿æ¥
             httpURLConnection.connect();
-            // Ğ´Èë²ÎÊıµ½ÇëÇóÖĞ
+            // å†™å…¥å‚æ•°åˆ°è¯·æ±‚ä¸­
             String param = file.param.replace("$[account]", name);
             param = param.replace("$[password]", pass);
             OutputStream out = httpURLConnection.getOutputStream();
@@ -130,13 +130,13 @@ public class attack implements Runnable {
             out.flush();
             out.close();
         } catch (IOException e) {
-            System.out.println(surl + " ×ª·¢³ö´í£¬´íÎóĞÅÏ¢£º" + e.getLocalizedMessage() + ";" + e.getClass());
+            System.out.println(surl + " è½¬å‘å‡ºé”™ï¼Œé”™è¯¯ä¿¡æ¯ï¼š" + e.getLocalizedMessage() + ";" + e.getClass());
         } finally {
             if (null != httpURLConnection) {
                 try {
                     httpURLConnection.disconnect();
                 } catch (Exception e) {
-                    System.out.println(surl + " httpURLConnection Á÷¹Ø±ÕÒì³££º" + e.getLocalizedMessage());
+                    System.out.println(surl + " httpURLConnection æµå…³é—­å¼‚å¸¸ï¼š" + e.getLocalizedMessage());
                 }
             }
         }

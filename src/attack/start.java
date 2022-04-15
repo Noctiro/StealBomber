@@ -14,7 +14,7 @@ public class start implements Runnable {
     static boolean proxysocksswich = false;
     static Random random = new Random();
 
-    public static void start() {
+    public static void geo() {
         if (file.proxyswitch) {
             proxyhttp = proxy.readhttp(file.proxyfile);
             if (proxyhttp != null) {

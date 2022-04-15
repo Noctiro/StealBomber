@@ -39,7 +39,7 @@ public class file {
         } else {
             file = System.getProperty("file");
             if (!new File(file).exists()) {
-                System.out.println("未发现选定的配置文件");
+                System.err.println("未发现选定的配置文件");
                 System.exit(1);
             }
         }
@@ -83,7 +83,7 @@ public class file {
             thnum = Integer.parseInt(temp);
         } else {
             success = false;
-            System.out.println("ERROR: 线程数 你输入的值不是一个正整数");
+            System.err.println("ERROR: 线程数 你输入的值不是一个正整数");
         }
         // 请求方法
         temp = properties.getProperty("method").toUpperCase();
@@ -100,7 +100,7 @@ public class file {
                 method = temp;
                 break;
             default:
-                System.out.println("ERROR: 请求方法 未知的请求方法");
+                System.err.println("ERROR: 请求方法 未知的请求方法");
         }
         // URLS
         String rurl = properties.getProperty("URL");
@@ -113,7 +113,7 @@ public class file {
                     list.add(string);
                 } else {
                     success = false;
-                    System.out.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
+                    System.err.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
                 }
                 i++;
             }
@@ -122,7 +122,7 @@ public class file {
                 list.add(rurl);
             } else {
                 success = false;
-                System.out.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
+                System.err.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
             }
         }
         if (success) {
@@ -153,7 +153,7 @@ public class file {
         } else if (value.toUpperCase().equals("FALSE")) {
             output = false;
         } else {
-            System.out.println("ERROR: 布尔参数的值为 true 或 false");
+            System.err.println("ERROR: 布尔参数的值为 true 或 false");
             output = true;
         }
         return output;

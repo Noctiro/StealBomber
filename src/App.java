@@ -10,7 +10,7 @@ public class App {
         }
         if (success) {
             System.gc();
-            attack.start.start();
+            attack.start.geo();
             while (success) {
             }
         }

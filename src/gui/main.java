@@ -215,6 +215,7 @@ public class main extends JFrame {
         gbc.gridheight = 1;
         cp.setConstraints(cbutton, gbc);
         cbutton.addActionListener((e) -> {
+            attack.main.start();
         });
 
         control.add(sthreads);

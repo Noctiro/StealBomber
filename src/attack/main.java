@@ -7,6 +7,7 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.Random;
+
 public class main implements Runnable {
     static String[] proxyhttp;
     static String[] proxysocks;
@@ -15,17 +16,17 @@ public class main implements Runnable {
     static Random random = new Random();
 
     public static void start() {
-        if (file.proxyswitch) {
-            proxyhttp = proxy.readhttp(file.proxyfile);
+        if (manage.file.proxyswitch) {
+            proxyhttp = proxy.readhttp(manage.file.proxyfile);
             if (proxyhttp != null) {
                 proxyhttpswich = true;
             }
-            proxysocks = proxy.readsocks(file.proxyfile);
+            proxysocks = proxy.readsocks(manage.file.proxyfile);
             if (proxysocks != null) {
                 proxysocksswich = true;
             }
         }
-        for (int i = 0; i < file.thnum; i++) {
+        for (int i = 0; i < manage.file.thnum; i++) {
             new Thread(new main()).start();
         }
     }
@@ -37,7 +38,7 @@ public class main implements Runnable {
         String[] proxyiurl = { "", "" };
         String proxyhost = "";
         int proxyport = 0;
-        if (file.proxyswitch) {
+        if (manage.file.proxyswitch) {
             if (proxyhttpswich && proxysocksswich) {
                 if (random.nextBoolean()) {
                     proxytype = "http";
@@ -60,10 +61,10 @@ public class main implements Runnable {
         while (true) {
             // url
             String url;
-            if (file.urls.length - 1 == 0) {
-                url = file.urls[0];
+            if (manage.file.urls.length - 1 == 0) {
+                url = manage.file.urls[0];
             } else
-                url = file.urls[random.nextInt(file.urls.length - 1)].toString();
+                url = manage.file.urls[random.nextInt(manage.file.urls.length - 1)].toString();
             // name
             String rn;
             Long brn = (long) (Math.random() * (99999999999l - 10000000)) + 1000000;
@@ -83,7 +84,7 @@ public class main implements Runnable {
             // rp
             String pass = password.get();
             // 输出
-            if (file.genoutput) {
+            if (manage.file.genoutput) {
                 System.out.println(rn + " " + pass);
             }
             go(rn, pass, url, proxytype, proxyhost, proxyport);
@@ -124,7 +125,7 @@ public class main implements Runnable {
             // 连接
             httpURLConnection.connect();
             // 写入参数到请求中
-            String param = file.param.replace("$[account]", name);
+            String param = manage.file.param.replace("$[account]", name);
             param = param.replace("$[password]", pass);
             OutputStream out = httpURLConnection.getOutputStream();
             out.write(param.getBytes());

@@ -1,4 +1,4 @@
-package attack;
+package manage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,17 +12,17 @@ import java.util.Properties;
 
 public class file {
     // 默认值
-    static int thnum = 16;// 线程数
-    static String[] urls;// 攻击网址
-    static String param;// 攻击参数
+    public static int thnum = 16;// 线程数
+    public static String[] urls;// 网址
+    public static String param;// 参数
 
-    static boolean success = true;
+    public static boolean success = true;
 
     private static Properties properties;
 
-    static boolean genoutput;
-    static boolean proxyswitch;
-    static String proxyfile;
+    public static boolean genoutput;
+    public static boolean proxyswitch;
+    public static String proxyfile;
 
     public static boolean start() throws IOException {
         String file;

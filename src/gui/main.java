@@ -139,7 +139,7 @@ public class main extends JFrame {
         // VERTICAL：加高组件，使它在垂直方向上填满其显示区域，但是不改变宽度。
         // BOTH：使组件完全填满其显示区域。
 
-        gbc.insets = new Insets(2, 5, 2, 5);// top left bottom right
+        gbc.insets = new Insets(2, 2, 2, 2);// top left bottom right
 
         JLabel sthreads = new JLabel("线程数");
         gbc.weightx = 10;// 第一列分布方式为10%
@@ -155,33 +155,60 @@ public class main extends JFrame {
         tthreads.setColumns(16);
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 3;
         gbc.gridheight = 1;
         cp.setConstraints(tthreads, gbc);
 
-        JLabel texti = new JLabel("MIN");
+        JLabel surl = new JLabel("网址");
         gbc.weightx = 10;// 分布方式为10%
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        cp.setConstraints(texti, gbc);
+        cp.setConstraints(surl, gbc);
 
-        JTextField min = new JTextField();
-        min.setPreferredSize(new Dimension(100, 35));
-        min.setColumns(16);
+        JTextField turl = new JTextField();
+        turl.setPreferredSize(new Dimension(100, 35));
+        turl.setColumns(16);
         gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.gridwidth = 2;
+        gbc.gridy = 2;
+        gbc.gridwidth = 3;
         gbc.gridheight = 1;
-        cp.setConstraints(min, gbc);
+        cp.setConstraints(turl, gbc);
+
+        JLabel sparameter = new JLabel("参数");
+        gbc.weightx = 10;// 分布方式为10%
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        cp.setConstraints(sparameter, gbc);
+
+        JTextField tparameter = new JTextField();
+        tparameter.setPreferredSize(new Dimension(100, 35));
+        tparameter.setColumns(16);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.gridwidth = 3;
+        gbc.gridheight = 1;
+        cp.setConstraints(tparameter, gbc);
 
         // 按钮及按钮事件
-        JButton cbutton = new JButton("开始");// 开始/结束 按钮
+        JButton save = new JButton("保存");
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        cp.setConstraints(save, gbc);
+        save.addActionListener((e) -> {
+        });
+
+        JButton cbutton = new JButton("开始");
         gbc.gridx = 3;
-        gbc.gridy = 6;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.gridy = 4;
+        gbc.gridwidth = 1;
         gbc.gridheight = 1;
         cp.setConstraints(cbutton, gbc);
         cbutton.addActionListener((e) -> {
@@ -189,9 +216,12 @@ public class main extends JFrame {
 
         control.add(sthreads);
         control.add(tthreads);
-        control.add(texti);
-        control.add(min);
+        control.add(surl);
+        control.add(turl);
+        control.add(save);
         control.add(cbutton);
+        control.add(sparameter);
+        control.add(tparameter);
     }
 
     private static void youtput() {

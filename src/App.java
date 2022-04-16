@@ -11,7 +11,7 @@ public class App {
         if (success) {
             System.gc();
             attack.main.start();
-            gui.main.show();
+            gui.main.visit();
         }
         System.exit(1);
     }

@@ -151,6 +151,7 @@ public class main extends JFrame {
         cp.setConstraints(sthreads, gbc);
 
         JTextField tthreads = new JTextField();
+        tthreads.setText(String.valueOf(manage.file.properties.getProperty("threads")));
         tthreads.setPreferredSize(new Dimension(100, 35));
         tthreads.setColumns(16);
         gbc.gridx = 1;
@@ -169,6 +170,7 @@ public class main extends JFrame {
         cp.setConstraints(surl, gbc);
 
         JTextField turl = new JTextField();
+        turl.setText(String.valueOf(manage.file.properties.getProperty("URL")));
         turl.setPreferredSize(new Dimension(100, 35));
         turl.setColumns(16);
         gbc.gridx = 1;
@@ -187,6 +189,7 @@ public class main extends JFrame {
         cp.setConstraints(sparameter, gbc);
 
         JTextField tparameter = new JTextField();
+        tparameter.setText(String.valueOf(manage.file.properties.getProperty("parameter")));
         tparameter.setPreferredSize(new Dimension(100, 35));
         tparameter.setColumns(16);
         gbc.gridx = 1;

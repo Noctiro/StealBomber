@@ -10,7 +10,7 @@ public class App {
         }
         if (success) {
             System.gc();
-            attack.main.start();
+            //attack.main.start();
             gui.main.visit();
         }
         System.exit(1);

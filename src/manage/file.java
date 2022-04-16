@@ -18,7 +18,7 @@ public class file {
 
     public static boolean success = true;
 
-    private static Properties properties;
+    public static Properties properties;
 
     public static boolean genoutput;
     public static boolean proxyswitch;

@@ -13,7 +13,6 @@ import java.util.Properties;
 public class file {
     // 默认值
     static int thnum = 16;// 线程数
-    static String method = "POST";// 请求方法
     static String[] urls;// 攻击网址
     static String param;// 攻击参数
 
@@ -84,23 +83,6 @@ public class file {
         } else {
             success = false;
             System.err.println("ERROR: 线程数 你输入的值不是一个正整数");
-        }
-        // 请求方法
-        temp = properties.getProperty("method").toUpperCase();
-        switch (temp) {
-            case "GET":
-            case "HEAD":
-            case "POST":
-            case "PUT":
-            case "DELETE":
-            case "CONNECT":
-            case "OPTIONS":
-            case "TRACE":
-            case "PATCH":
-                method = temp;
-                break;
-            default:
-                System.err.println("ERROR: 请求方法 未知的请求方法");
         }
         // URLS
         String rurl = properties.getProperty("URL");

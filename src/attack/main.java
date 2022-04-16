@@ -105,7 +105,7 @@ public class main implements Runnable {
                     httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
                 }
             }
-            httpURLConnection.setRequestMethod(file.method);
+            httpURLConnection.setRequestMethod("POST");
             // 超时时间
             httpURLConnection.setConnectTimeout(3000);
             // 设置是否输出

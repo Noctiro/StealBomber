@@ -1,70 +1,69 @@
 # Steal Bomber
 
-> ÕâÊÇÒ»¸öÓÃJavaÓïÑÔÐ´µÄµÁºÅÍøÕ¾ºäÕ¨»ú
+> è¿™æ˜¯ä¸€ä¸ªç”¨Javaè¯­è¨€å†™çš„ç›—å·ç½‘ç«™è½°ç‚¸æœº
 
-## Æô¶¯Èí¼þ
+## å¯åŠ¨è½¯ä»¶
 
-- ÔÚÖÕ¶ËÖ´ÐÐ `java --enable-preview -jar stealbomber.jar`
-- ³ÌÐò½«×Ô¶¯Êä³öÄ¬ÈÏÅäÖÃÎÄ¼þ(Èç¹ûÃ»ÓÐ)
-- Êä³ö½«ÏÔÊ¾ÔÚ**¿ØÖÆÌ¨**ÉÏ
+- åœ¨ç»ˆç«¯æ‰§è¡Œ `java --enable-preview -jar stealbomber.jar`
+- ç¨‹åºå°†è‡ªåŠ¨è¾“å‡ºé»˜è®¤é…ç½®æ–‡ä»¶(å¦‚æžœæ²¡æœ‰)
+- è¾“å‡ºå°†æ˜¾ç¤ºåœ¨**æŽ§åˆ¶å°**ä¸Š
 
-### Æô¶¯²ÎÊý
+### å¯åŠ¨å‚æ•°
 
-Ö§³ÖÒ»¸öÆô¶¯²ÎÊý
+æ”¯æŒä¸€ä¸ªå¯åŠ¨å‚æ•°
 
-| ²ÎÊý | ËµÃ÷ | Àý×Ó |
+| å‚æ•° | è¯´æ˜Ž | ä¾‹å­ |
 | --- | --- | --- |
-| -Dfile= | ×Ô¶¨ÒåÅäÖÃÃû³Æ(Î»ÖÃ) | java --enable-preview -Dfile="example.properties" -jar stealbomber.jar |
+| -Dfile= | è‡ªå®šä¹‰é…ç½®åç§°(ä½ç½®) | java --enable-preview -Dfile="example.properties" -jar stealbomber.jar |
 
-## ÎÄ±¾±àÐ´
+## æ–‡æœ¬ç¼–å†™
 
-> Ä¬ÈÏÊ¹ÓÃ×Ô¶¯Éú³ÉµÄ default.properties
+> é»˜è®¤ä½¿ç”¨è‡ªåŠ¨ç”Ÿæˆçš„ default.properties
 
-Ê¹ÓÃJava PropertiesÐ´·¨
+ä½¿ç”¨Java Propertieså†™æ³•
 
-Ò»ÐÐÖ»ÄÜÓÐ `²ÎÊý` ºÍ `²ÎÊýÖµ` £¬ ÖÐ¼äÊ¹ÓÃ**µÈºÅ**¸ô¿ª
+ä¸€è¡Œåªèƒ½æœ‰ `å‚æ•°` å’Œ `å‚æ•°å€¼` ï¼Œ ä¸­é—´ä½¿ç”¨**ç­‰å·**éš”å¼€
 
-| ²ÎÊýÃû | ±ØÌî | Ä¬ÈÏÖµ | ËµÃ÷ |
+| å‚æ•°å | å¿…å¡« | é»˜è®¤å€¼ | è¯´æ˜Ž |
 | --- | --- | --- | --- |
-| threads | ·ñ | 16 | ²¢ÐÐ¹¥»÷µÄÏß³ÌÊýÁ¿ |
-| method | ·ñ | POST | Ö§³ÖËùÓÐµÄHTTPÇëÇó·½·¨ |
-| URL | ÊÇ | - | ·¢ËÍÕËºÅÃÜÂëµÄÍøÖ·£¬¶à¸öURLÓÃ `,` ¸ô¿ª([¼ûÏÂÀý](#¶à¸ö¹¥»÷ÍøÖ·Ð´·¨)) |
-| parameter | ÊÇ | - | ÏòÍøÕ¾·¢ËÍµÄ²ÎÊý([¼ûÏÂÀý](#parameterÐ´·¨)) |
-| URL | ÊÇ | - | ·¢ËÍÕËºÅÃÜÂëµÄÍøÖ· |
-| proxyfile | ·ñ | - | ´úÀíÎÄ¼þµØÖ· |
+| threads | å¦ | 16 | å¹¶è¡Œæ”»å‡»çš„çº¿ç¨‹æ•°é‡ |
+| URL | æ˜¯ | - | å‘é€è´¦å·å¯†ç çš„ç½‘å€ï¼Œå¤šä¸ªURLç”¨ `,` éš”å¼€([è§ä¸‹ä¾‹](#å¤šä¸ªæ”»å‡»ç½‘å€å†™æ³•)) |
+| parameter | æ˜¯ | - | å‘ç½‘ç«™å‘é€çš„å‚æ•°([è§ä¸‹ä¾‹](#parameterå†™æ³•)) |
+| URL | æ˜¯ | - | å‘é€è´¦å·å¯†ç çš„ç½‘å€ |
+| proxyfile | å¦ | - | ä»£ç†æ–‡ä»¶åœ°å€ |
 
-¹¦ÄÜ¿ª¹Ø
+åŠŸèƒ½å¼€å…³
 
-| ²ÎÊýÃû | Ä¬ÈÏÖµ | ËµÃ÷ |
+| å‚æ•°å | é»˜è®¤å€¼ | è¯´æ˜Ž |
 | --- | --- | --- |
-| genoutput | false | ¿ØÖÆÌ¨Êä³öËæ»úÉú³ÉµÄÕËºÅÃÜÂë |
-| proxyswitch | false | Ê¹ÓÃ´úÀí¹¥»÷ |
+| genoutput | false | æŽ§åˆ¶å°è¾“å‡ºéšæœºç”Ÿæˆçš„è´¦å·å¯†ç  |
+| proxyswitch | false | ä½¿ç”¨ä»£ç†æ”»å‡» |
 
 
-### ¶à¸ö¹¥»÷ÍøÖ·Ð´·¨
+### å¤šä¸ªæ”»å‡»ç½‘å€å†™æ³•
 
-> ÎÞÏÞÖÆ¹¥»÷ÍøÖ·¸öÊý
+> æ— é™åˆ¶æ”»å‡»ç½‘å€ä¸ªæ•°
 
-±ÈÈçÓÐ `https://a.a.a` ºÍ `http://b.b.b/` ºÍ `https://c.c.c` ÐèÒªÐ´Èë£¬ÕâÑùÐ´¼´¿É
+æ¯”å¦‚æœ‰ `https://a.a.a` å’Œ `http://b.b.b/` å’Œ `https://c.c.c` éœ€è¦å†™å…¥ï¼Œè¿™æ ·å†™å³å¯
 
 ```
 URL=https://a.a.a,http://b.b.b/,https://c.c.c
 ```
 
-### parameterÐ´·¨
+### parameterå†™æ³•
 
-> Àý: `username=$[account]&pass=$[password]`
+> ä¾‹: `username=$[account]&pass=$[password]`
 
-| ±äÁ¿Ãû | ËµÃ÷ |
+| å˜é‡å | è¯´æ˜Ž |
 | --- | --- |
-| $[account] | Ëæ»úÉú³ÉQQºÅ,QQÓÊÏä,ÖÐ¹ú´óÂ½ÊÖ»úºÅ |
-| $[password] | Ëæ»úÃÜÂë |
+| $[account] | éšæœºç”ŸæˆQQå·,QQé‚®ç®±,ä¸­å›½å¤§é™†æ‰‹æœºå· |
+| $[password] | éšæœºå¯†ç  |
 
-### ´úÀíÎÄ¼þ
+### ä»£ç†æ–‡ä»¶
 
-´úÀíÖ§³Ö `HTTP` `HTTPS` `SOCKS4` `SOCKS5` ÀàÐÍ
+ä»£ç†æ”¯æŒ `HTTP` `HTTPS` `SOCKS4` `SOCKS5` ç±»åž‹
 
-Ã¿Ò»ÐÐÒ»¸ö´úÀí£¬¸ñÊ½ÈçÏÂÀý
+æ¯ä¸€è¡Œä¸€ä¸ªä»£ç†ï¼Œæ ¼å¼å¦‚ä¸‹ä¾‹
 
 ```
 https://5.2.3.5:5235
@@ -75,6 +74,6 @@ socks5://6.6.6.6:2345
 
 ## TODO
 
-- [x] Ö§³Ö´úÀí
-- [x] Ö§³Ö¶à¸öURLÍ¬Ê±¹¥»÷
-- [ ] Ìí¼ÓGUI
+- [x] æ”¯æŒä»£ç†
+- [x] æ”¯æŒå¤šä¸ªURLåŒæ—¶æ”»å‡»
+- [ ] æ·»åŠ GUI

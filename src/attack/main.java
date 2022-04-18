@@ -9,26 +9,21 @@ import java.net.URL;
 import java.util.Random;
 
 public class main implements Runnable {
-    static String[] proxyhttp;
-    static String[] proxysocks;
-    static boolean proxyhttpswich = false;
-    static boolean proxysocksswich = false;
-    static Random random = new Random();
+    private static String[] proxyhttp;
+    private static String[] proxysocks;
+    private static boolean proxyhttpswich = false;
+    private static boolean proxysocksswich = false;
+    private static Random random = new Random();
 
-    public static void start() {
-        while (manage.storage.start) {
-            if (manage.file.proxyswitch) {
-                proxyhttp = proxy.readhttp(manage.file.proxyfile);
-                if (proxyhttp != null) {
-                    proxyhttpswich = true;
-                }
-                proxysocks = proxy.readsocks(manage.file.proxyfile);
-                if (proxysocks != null) {
-                    proxysocksswich = true;
-                }
+    {// 初始化
+        if (manage.file.proxyswitch) {
+            proxyhttp = proxy.readhttp(manage.file.proxyfile);
+            if (proxyhttp != null) {
+                proxyhttpswich = true;
             }
-            for (int i = 0; i < manage.file.thnum; i++) {
-                new Thread(new main(), "AttackThread-" + (i + 1)).start();
+            proxysocks = proxy.readsocks(manage.file.proxyfile);
+            if (proxysocks != null) {
+                proxysocksswich = true;
             }
         }
     }

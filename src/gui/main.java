@@ -203,7 +203,7 @@ public class main extends JFrame {
                 save.setEnabled(false);
                 cbutton.setText("停止");
                 manage.storage.start = true;
-                attack.main.start();
+                manage.thread.start();
             } else {
                 save.setEnabled(true);
                 cbutton.setText("开始");

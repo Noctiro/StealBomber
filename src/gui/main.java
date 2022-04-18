@@ -207,6 +207,9 @@ public class main extends JFrame {
                 start = true;
                 attack.main.start();
             } else {
+                for (int i = 0; i < manage.file.thnum; i++) {
+                    //("AttackThread-" + (i + 1)).interrupt();
+                }
                 save.setEnabled(true);
                 cbutton.setText("开始");
                 start = false;

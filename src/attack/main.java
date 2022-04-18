@@ -16,6 +16,7 @@ public class main implements Runnable {
     static Random random = new Random();
 
     public static void start() {
+        while (manage.storage.start) {
         if (manage.file.proxyswitch) {
             proxyhttp = proxy.readhttp(manage.file.proxyfile);
             if (proxyhttp != null) {
@@ -29,6 +30,7 @@ public class main implements Runnable {
         for (int i = 0; i < manage.file.thnum; i++) {
             new Thread(new main(), "AttackThread-" + (i + 1)).start();
         }
+    }
     }
 
     public void run() {
@@ -71,7 +73,7 @@ public class main implements Runnable {
             switch (random.nextInt(2) + 1) {
                 case 1:
                     int length = random.nextInt(99999999 - 10000000) + 10000000;
-                    rn = array.bfnum[random.nextInt(array.bfnum.length)].toString() + length;
+                    rn = manage.storage.bfnum[random.nextInt(manage.storage.bfnum.length)].toString() + length;
                     break;
                 case 2:
                     rn = brn.toString() + "@qq.com";
@@ -121,7 +123,7 @@ public class main implements Runnable {
             httpURLConnection.setRequestProperty("Content-Length", "40");
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             httpURLConnection.setRequestProperty("User-Agent",
-                    array.useragent[random.nextInt(array.useragent.length - 1)]);
+                    manage.storage.useragent[random.nextInt(manage.storage.useragent.length - 1)]);
             // 连接
             httpURLConnection.connect();
             // 写入参数到请求中

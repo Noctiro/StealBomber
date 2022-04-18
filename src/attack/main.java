@@ -27,7 +27,7 @@ public class main implements Runnable {
             }
         }
         for (int i = 0; i < manage.file.thnum; i++) {
-            new Thread(new main()).start();
+            new Thread(new main(), "AttackThread-" + (i + 1)).start();
         }
     }
 

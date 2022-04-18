@@ -31,7 +31,7 @@ public class password {
 
     private static void random() {
         final String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
-        StringBuffer pass = new StringBuffer();
+        StringBuilder pass = new StringBuilder();
         for (int i = 0; i < rp; i++) {
             int randomInt = random.nextInt(str.length());
             pass.append(str.charAt(randomInt));
@@ -41,7 +41,7 @@ public class password {
 
     private static void randomNoSpecial() {
         final String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuffer pass = new StringBuffer();
+        StringBuilder pass = new StringBuilder();
         for (int i = 0; i < rp; i++) {
             int randomInt = random.nextInt(str.length());
             pass.append(str.charAt(randomInt));
@@ -52,7 +52,7 @@ public class password {
     private static void Letter23Num() {
         final String num = "0123456789";
         final String letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        StringBuffer pass = new StringBuffer();
+        StringBuilder pass = new StringBuilder();
         int letterlong = random.nextInt(1) + 3;
         for (int i = 0; i < letterlong; i++) {
             pass.append(letter.charAt(random.nextInt(letter.length())));
@@ -66,7 +66,7 @@ public class password {
     private static void NumLetter23() {
         final String num = "0123456789";
         final String letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        StringBuffer pass = new StringBuffer();
+        StringBuilder pass = new StringBuilder();
         int letterlong = random.nextInt(1) + 3;
         for (int i = 0; i < (rp - letterlong); i++) {
             pass.append(num.charAt(random.nextInt(num.length())));

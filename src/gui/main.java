@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,29 +47,12 @@ public class main extends JFrame {
           // Thread.currentThread().getContextClassLoader().getResource("logo.png").getFile());
           // jf.setIconImage(icon.getImage());
 
-        // GridBagLayout
-        GridBagLayout cp = new GridBagLayout(); // 实例化布局对象
-        jf.setLayout(cp); // jf窗体对象设置为GridBagLayout布局
-        GridBagConstraints gbc = new GridBagConstraints();// 实例化这个对象用来对组件进行管理
-        // NONE：不调整组件大小。
-        // HORIZONTAL：加宽组件，使它在水平方向上填满其显示区域，但是不改变高度。
-        // VERTICAL：加高组件，使它在垂直方向上填满其显示区域，但是不改变宽度。
-        // BOTH：使组件完全填满其显示区域。
-
-        gbc.insets = new Insets(2, 5, 2, 5);// top left bottom right
+        jf.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         ycontrol();
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        cp.setConstraints(control, gbc);
         jf.add(control);
 
         youtput();
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        cp.setConstraints(output, gbc);
         jf.add(output);
 
         jf.setVisible(true);// 显示界面
@@ -151,7 +135,7 @@ public class main extends JFrame {
         cp.setConstraints(sthreads, gbc);
 
         JTextField tthreads = new JTextField();
-        tthreads.setText(String.valueOf(manage.file.properties.getProperty("threads")));
+        tthreads.setText(String.valueOf(manage.file.thnum));
         tthreads.setPreferredSize(new Dimension(100, 35));
         tthreads.setColumns(16);
         gbc.gridx = 1;

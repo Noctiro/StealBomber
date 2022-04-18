@@ -208,6 +208,7 @@ public class main extends JFrame {
                 save.setEnabled(true);
                 cbutton.setText("开始");
                 manage.storage.start = false;
+                manage.thread.stop();
             }
         });
 

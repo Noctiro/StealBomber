@@ -17,20 +17,20 @@ public class main implements Runnable {
 
     public static void start() {
         while (manage.storage.start) {
-        if (manage.file.proxyswitch) {
-            proxyhttp = proxy.readhttp(manage.file.proxyfile);
-            if (proxyhttp != null) {
-                proxyhttpswich = true;
+            if (manage.file.proxyswitch) {
+                proxyhttp = proxy.readhttp(manage.file.proxyfile);
+                if (proxyhttp != null) {
+                    proxyhttpswich = true;
+                }
+                proxysocks = proxy.readsocks(manage.file.proxyfile);
+                if (proxysocks != null) {
+                    proxysocksswich = true;
+                }
             }
-            proxysocks = proxy.readsocks(manage.file.proxyfile);
-            if (proxysocks != null) {
-                proxysocksswich = true;
+            for (int i = 0; i < manage.file.thnum; i++) {
+                new Thread(new main(), "AttackThread-" + (i + 1)).start();
             }
         }
-        for (int i = 0; i < manage.file.thnum; i++) {
-            new Thread(new main(), "AttackThread-" + (i + 1)).start();
-        }
-    }
     }
 
     public void run() {

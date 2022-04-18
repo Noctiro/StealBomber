@@ -30,8 +30,6 @@ public class main extends JFrame {
     static JPanel control = new JPanel();
     static JPanel output = new JPanel();
 
-    static boolean start = false;
-
     public static void visit() {
         jf.setSize(1000, 700);// 窗体大小
         jf.setLocationRelativeTo(null); // 设置窗体居中
@@ -201,18 +199,15 @@ public class main extends JFrame {
         gbc.gridheight = 1;
         cp.setConstraints(cbutton, gbc);
         cbutton.addActionListener((e) -> {
-            if (!start) {
+            if (!manage.storage.start) {
                 save.setEnabled(false);
                 cbutton.setText("停止");
-                start = true;
+                manage.storage.start = true;
                 attack.main.start();
             } else {
-                for (int i = 0; i < manage.file.thnum; i++) {
-                    //("AttackThread-" + (i + 1)).interrupt();
-                }
                 save.setEnabled(true);
                 cbutton.setText("开始");
-                start = false;
+                manage.storage.start = false;
             }
         });
 

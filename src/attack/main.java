@@ -8,7 +8,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.util.Random;
 
-public class main {
+public class main implements Runnable {
     private static String[] proxyhttp;
     private static String[] proxysocks;
     private static boolean proxyhttpswich = false;
@@ -28,7 +28,7 @@ public class main {
         }
     }
 
-    public static Runnable run() {
+    public void run() {
         // proxy
         String proxytype = "";
         String proxyurl = "";
@@ -56,6 +56,7 @@ public class main {
             proxyport = Integer.valueOf(proxyiurl[1]);
         }
         while (true) {
+            // System.out.println(Thread.currentThread().getName());
             // url
             String url;
             if (manage.file.urls.length - 1 == 0) {

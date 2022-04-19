@@ -6,7 +6,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class thread {
-
     public static ThreadPoolExecutor executPool = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>(),
             new ThreadFactory() {
@@ -18,11 +17,12 @@ public class thread {
 
     public static void start() {
         for (int i = 0; i < manage.file.thnum; i++) {
-            //new Thread(new attack.main(), "AttackThread-" + (i + 1)).start();
-            executPool.execute(attack.main.run());
+            // new Thread(new attack.main(), "AttackThread-" + (i + 1)).start();
+            executPool.execute(new attack.main());
         }
     }
 
     public static void stop() {
+        executPool.shutdownNow();
     }
 }

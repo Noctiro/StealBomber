@@ -2,6 +2,10 @@ import java.io.IOException;
 
 public class App {
     public static void main(String[] args) {
+        boolean sgui = true;
+        if (args[0] == "nogui") {
+            sgui = false;
+        }
         boolean success = false;
         try {
             success = manage.file.start();
@@ -10,8 +14,9 @@ public class App {
         }
         if (success) {
             System.gc();
-            //attack.main.start();
-            gui.main.visit();
+            if (sgui) {
+                gui.main.visit();
+            }
         }
         System.exit(1);
     }

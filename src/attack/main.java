@@ -55,7 +55,7 @@ public class main implements Runnable {
             proxyhost = proxyiurl[0];
             proxyport = Integer.valueOf(proxyiurl[1]);
         }
-        while (true) {
+        while (manage.storage.start) {
             // System.out.println(Thread.currentThread().getName());
             // url
             String url;

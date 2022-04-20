@@ -7,7 +7,6 @@
 ### 带GUI (BETA版 尚未发布)
 
 `在终端执行 java --enable-preview -jar stealbomber.jar`或`双击软件打开`
-  
 
 ### 不带GUI
 

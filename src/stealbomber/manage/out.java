@@ -8,7 +8,7 @@ public class out {
         if (stealbomber.App.sgui) {
             stealbomber.gui.main.out.setText(stealbomber.gui.main.out.getText() + "\n" + string);
             cs++;
-            if (cs == 1000) {
+            if (cs == 300) {
                 stealbomber.gui.main.out.setText("");
             }
         }

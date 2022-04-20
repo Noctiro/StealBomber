@@ -84,7 +84,7 @@ public class main implements Runnable {
             String pass = password.get();
             // 输出
             if (stealbomber.manage.file.genoutput) {
-                System.out.println(rn + " " + pass);
+                stealbomber.manage.out.println(rn + " " + pass);
             }
             go(rn, pass, url, proxytype, proxyhost, proxyport);
         }

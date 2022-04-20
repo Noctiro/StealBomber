@@ -20,6 +20,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -29,6 +30,7 @@ public class main extends JFrame {
     static JFrame jf = new JFrame("Steal Bomber");
     static JPanel control = new JPanel();
     static JPanel output = new JPanel();
+    public static JTextArea out = new JTextArea(15, 30);
 
     public static void visit() {
         jf.setSize(1000, 700);// 窗体大小
@@ -225,8 +227,8 @@ public class main extends JFrame {
     private static void youtput() {
         output.setBorder(BorderFactory.createTitledBorder("输出区"));
         output.setLayout(new BorderLayout());
-        JTextArea out = new JTextArea(10, 10);
         out.setLineWrap(true);
-        output.add(out, BorderLayout.CENTER);
+        JScrollPane sp = new JScrollPane(out);
+        output.add(sp, BorderLayout.CENTER);
     }
 }

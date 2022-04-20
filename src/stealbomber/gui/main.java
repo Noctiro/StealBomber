@@ -24,30 +24,33 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class main extends JFrame {
     static JFrame jf = new JFrame("Steal Bomber");
     static JPanel control = new JPanel();
     static JPanel output = new JPanel();
+    static JPanel statistics = new JPanel();
     public static JTextArea out = new JTextArea(15, 30);
 
     public static void visit() {
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.put("TextComponent.arc", 5);
+            UIManager.put("ScrollBar.thumbArc", 999);
+            UIManager.put("ScrollBar.thumbInsets", new Insets(2, 2, 2, 2));
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
         jf.setSize(1000, 700);// 窗体大小
         jf.setLocationRelativeTo(null); // 设置窗体居中
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// 关闭窗体事件
         jf.setResizable(false);// 允许修改大小
         menu(); // 菜单栏
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                | UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        } // 系统默认主题
-          // icon
-          // ImageIcon icon = new ImageIcon(
-          // Thread.currentThread().getContextClassLoader().getResource("logo.png").getFile());
-          // jf.setIconImage(icon.getImage());
+        // icon
+        // ImageIcon icon = new ImageIcon(
+        // Thread.currentThread().getContextClassLoader().getResource("logo.png").getFile());
+        // jf.setIconImage(icon.getImage());
 
         jf.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
@@ -56,6 +59,9 @@ public class main extends JFrame {
 
         youtput();
         jf.add(output);
+
+        stealbomber.gui.statistics.basic();
+        jf.add(statistics);
 
         jf.setVisible(true);// 显示界面
         while (true)
@@ -192,6 +198,9 @@ public class main extends JFrame {
         gbc.gridheight = 1;
         cp.setConstraints(save, gbc);
         save.addActionListener((e) -> {
+            JOptionPane.showMessageDialog(null, "还没做呢", "保存",
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null);
         });
 
         JButton cbutton = new JButton("开始");

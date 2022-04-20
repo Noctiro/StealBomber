@@ -8,8 +8,10 @@ public class out {
         if (stealbomber.App.sgui) {
             stealbomber.gui.main.out.setText(stealbomber.gui.main.out.getText() + "\n" + string);
             cs++;
-            if (cs == 300) {
+            if (cs == 200) {
                 stealbomber.gui.main.out.setText("");
+                System.out.println();
+                cs = 0;
             }
         }
     }

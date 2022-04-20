@@ -1,4 +1,4 @@
-package gui;
+package stealbomber.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -135,7 +135,7 @@ public class main extends JFrame {
         cp.setConstraints(sthreads, gbc);
 
         JTextField tthreads = new JTextField();
-        tthreads.setText(String.valueOf(manage.file.thnum));
+        tthreads.setText(String.valueOf(stealbomber.manage.file.thnum));
         tthreads.setPreferredSize(new Dimension(100, 35));
         tthreads.setColumns(16);
         gbc.gridx = 1;
@@ -154,7 +154,7 @@ public class main extends JFrame {
         cp.setConstraints(surl, gbc);
 
         JTextField turl = new JTextField();
-        turl.setText(String.valueOf(manage.file.properties.getProperty("URL")));
+        turl.setText(String.valueOf(stealbomber.manage.file.properties.getProperty("URL")));
         turl.setPreferredSize(new Dimension(100, 35));
         turl.setColumns(16);
         gbc.gridx = 1;
@@ -173,7 +173,7 @@ public class main extends JFrame {
         cp.setConstraints(sparameter, gbc);
 
         JTextField tparameter = new JTextField();
-        tparameter.setText(String.valueOf(manage.file.properties.getProperty("parameter")));
+        tparameter.setText(String.valueOf(stealbomber.manage.file.properties.getProperty("parameter")));
         tparameter.setPreferredSize(new Dimension(100, 35));
         tparameter.setColumns(16);
         gbc.gridx = 1;
@@ -199,16 +199,16 @@ public class main extends JFrame {
         gbc.gridheight = 1;
         cp.setConstraints(cbutton, gbc);
         cbutton.addActionListener((e) -> {
-            if (!manage.storage.start) {
+            if (!stealbomber.manage.storage.start) {
                 save.setEnabled(false);
                 cbutton.setText("停止");
-                manage.storage.start = true;
-                manage.thread.start();
+                stealbomber.manage.storage.start = true;
+                stealbomber.manage.thread.start();
             } else {
                 save.setEnabled(true);
                 cbutton.setText("开始");
-                manage.storage.start = false;
-                manage.thread.stop();
+                stealbomber.manage.storage.start = false;
+                stealbomber.manage.thread.stop();
             }
         });
 

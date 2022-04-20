@@ -1,4 +1,4 @@
-package attack;
+package stealbomber.attack;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -16,12 +16,12 @@ public class main implements Runnable {
     private static Random random = new Random();
 
     {// 初始化
-        if (manage.file.proxyswitch) {
-            proxyhttp = proxy.readhttp(manage.file.proxyfile);
+        if (stealbomber.manage.file.proxyswitch) {
+            proxyhttp = proxy.readhttp(stealbomber.manage.file.proxyfile);
             if (proxyhttp != null) {
                 proxyhttpswich = true;
             }
-            proxysocks = proxy.readsocks(manage.file.proxyfile);
+            proxysocks = proxy.readsocks(stealbomber.manage.file.proxyfile);
             if (proxysocks != null) {
                 proxysocksswich = true;
             }
@@ -35,7 +35,7 @@ public class main implements Runnable {
         String[] proxyiurl = { "", "" };
         String proxyhost = "";
         int proxyport = 0;
-        if (manage.file.proxyswitch) {
+        if (stealbomber.manage.file.proxyswitch) {
             if (proxyhttpswich && proxysocksswich) {
                 if (random.nextBoolean()) {
                     proxytype = "http";
@@ -55,21 +55,22 @@ public class main implements Runnable {
             proxyhost = proxyiurl[0];
             proxyport = Integer.valueOf(proxyiurl[1]);
         }
-        while (manage.storage.start) {
+        while (stealbomber.manage.storage.start) {
             // System.out.println(Thread.currentThread().getName());
             // url
             String url;
-            if (manage.file.urls.length - 1 == 0) {
-                url = manage.file.urls[0];
+            if (stealbomber.manage.file.urls.length - 1 == 0) {
+                url = stealbomber.manage.file.urls[0];
             } else
-                url = manage.file.urls[random.nextInt(manage.file.urls.length - 1)].toString();
+                url = stealbomber.manage.file.urls[random.nextInt(stealbomber.manage.file.urls.length - 1)].toString();
             // name
             String rn;
             Long brn = (long) (Math.random() * (99999999999l - 10000000)) + 1000000;
             switch (random.nextInt(2) + 1) {
                 case 1:
                     int length = random.nextInt(99999999 - 10000000) + 10000000;
-                    rn = manage.storage.bfnum[random.nextInt(manage.storage.bfnum.length)].toString() + length;
+                    rn = stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]
+                            .toString() + length;
                     break;
                 case 2:
                     rn = brn.toString() + "@qq.com";
@@ -82,7 +83,7 @@ public class main implements Runnable {
             // rp
             String pass = password.get();
             // 输出
-            if (manage.file.genoutput) {
+            if (stealbomber.manage.file.genoutput) {
                 System.out.println(rn + " " + pass);
             }
             go(rn, pass, url, proxytype, proxyhost, proxyport);
@@ -119,11 +120,12 @@ public class main implements Runnable {
             httpURLConnection.setRequestProperty("Content-Length", "40");
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             httpURLConnection.setRequestProperty("User-Agent",
-                    manage.storage.useragent[random.nextInt(manage.storage.useragent.length - 1)]);
+                    stealbomber.manage.storage.useragent[random
+                            .nextInt(stealbomber.manage.storage.useragent.length - 1)]);
             // 连接
             httpURLConnection.connect();
             // 写入参数到请求中
-            String param = manage.file.param.replace("$[account]", name);
+            String param = stealbomber.manage.file.param.replace("$[account]", name);
             param = param.replace("$[password]", pass);
             OutputStream out = httpURLConnection.getOutputStream();
             out.write(param.getBytes());

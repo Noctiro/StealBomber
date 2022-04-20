@@ -1,4 +1,4 @@
-package manage;
+package stealbomber.manage;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -16,9 +16,9 @@ public class thread {
             new ThreadPoolExecutor.CallerRunsPolicy());
 
     public static void start() {
-        for (int i = 0; i < manage.file.thnum; i++) {
+        for (int i = 0; i < stealbomber.manage.file.thnum; i++) {
             // new Thread(new attack.main(), "AttackThread-" + (i + 1)).start();
-            executPool.execute(new attack.main());
+            executPool.execute(new stealbomber.attack.main());
         }
     }
 

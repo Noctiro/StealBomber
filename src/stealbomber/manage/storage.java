@@ -1,4 +1,5 @@
-package manage;
+package stealbomber.manage;
+
 public class storage {
         public static boolean start = false;
         public static final String[] bfnum = {

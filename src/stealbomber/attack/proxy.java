@@ -1,4 +1,5 @@
-package attack;
+package stealbomber.attack;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

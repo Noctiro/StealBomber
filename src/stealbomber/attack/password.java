@@ -1,4 +1,5 @@
-package attack;
+package stealbomber.attack;
+
 import java.util.Random;
 
 public class password {

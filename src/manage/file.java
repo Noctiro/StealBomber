@@ -24,7 +24,7 @@ public class file {
     public static boolean proxyswitch;
     public static String proxyfile;
 
-    public static boolean start() throws IOException {
+    public static boolean start() {
         String file;
         if (System.getProperty("file") == null || System.getProperty("file") == ""
                 || System.getProperty("file").trim() == "") {
@@ -44,7 +44,11 @@ public class file {
         }
         properties = new Properties();
         // properties.load(file.class.getClassLoader().getResourceAsStream(file));
-        properties.load(new FileInputStream(System.getProperty("user.dir") + File.separator + file));
+        try {
+            properties.load(new FileInputStream(System.getProperty("user.dir") + File.separator + file));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         properties.list(System.out);
         manage();
         System.out.println("-- File processing completed --");

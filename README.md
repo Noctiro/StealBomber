@@ -4,7 +4,14 @@
 
 ## 启动软件
 
-- 在终端执行 `java --enable-preview -jar stealbomber.jar`
+### 带GUI (BETA版 尚未发布)
+
+`在终端执行 java --enable-preview -jar stealbomber.jar`或`双击软件打开`
+  
+
+### 不带GUI
+
+- 在终端执行 `java --enable-preview -jar stealbomber.jar nogui`
 - 程序将自动输出默认配置文件(如果没有)
 - 输出将显示在**控制台**上
 

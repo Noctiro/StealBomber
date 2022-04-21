@@ -19,10 +19,8 @@ public class App {
                 stealbomber.manage.storage.start = true;
                 stealbomber.manage.thread.start();
             }
-        } else {
-            if (!sgui) {
-                System.exit(1);
-            }
+        } else if (!sgui) {
+            System.exit(1);
         }
     }
 }

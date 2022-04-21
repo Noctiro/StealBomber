@@ -4,7 +4,6 @@ public class App {
     public static boolean sgui = true;
 
     public static void main(String[] args) {
-        boolean success = stealbomber.manage.file.start();
         for (String a : args) {
             if (a.equals("nogui")) {
                 sgui = false;
@@ -12,15 +11,15 @@ public class App {
         }
         if (sgui) {
             stealbomber.gui.main.visit();
-        }
-        if (success) {
-            System.gc();
-            if (!sgui) {
+        } else {
+            if (stealbomber.manage.file.start(System.getProperty("file"))) {
+                stealbomber.manage.file.manage();
+                System.gc();
                 stealbomber.manage.storage.start = true;
                 stealbomber.manage.thread.start();
+            } else {
+                System.exit(1);
             }
-        } else if (!sgui) {
-            System.exit(1);
         }
     }
 }

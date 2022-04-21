@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.swing.JOptionPane;
+
 public class file {
     // 默认值
     public static int thnum = 16;// 线程数
@@ -24,34 +26,36 @@ public class file {
     public static boolean proxyswitch;
     public static String proxyfile;
 
-    public static boolean start() {
+    public static boolean start(String getfile) {
         String file;
-        if (System.getProperty("file") == null || System.getProperty("file") == ""
-                || System.getProperty("file").trim() == "") {
+        properties = new Properties();
+        if (getfile == null || getfile == "" || getfile.trim() == "") {
             if (!new File("default.properties").exists()) {
+                System.out.println("未发现配置文件");
                 generatefile();
-                System.out.println("未发现配置文件, 现已自动生成默认配置文件");
-                System.out.println("请再次开启来使用该程序");
-                System.exit(0);
+                System.out.print(", 现已自动生成并使用默认配置文件");
             }
             file = "default.properties";
+            try {
+                properties.load(new FileInputStream(System.getProperty("user.dir") + File.separator + file));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
-            file = System.getProperty("file");
+            file = getfile;
+            try {
+                properties.load(new FileInputStream(file));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             if (!new File(file).exists()) {
-                System.err.println("未发现选定的配置文件");
+                warn("未发现选定的配置文件");
                 System.exit(1);
             }
         }
-        properties = new Properties();
         // properties.load(file.class.getClassLoader().getResourceAsStream(file));
-        try {
-            properties.load(new FileInputStream(System.getProperty("user.dir") + File.separator + file));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         properties.list(System.out);
-        manage();
-        System.out.println("-- File processing completed --");
+        System.out.println("-- File Readout completed --");
         return success;
     }
 
@@ -76,7 +80,7 @@ public class file {
         }
     }
 
-    private static void manage() {
+    public static void manage() {
         String temp;
         // 一些功能开关
         booleanmanage();
@@ -86,7 +90,7 @@ public class file {
             thnum = Integer.parseInt(temp);
         } else {
             success = false;
-            System.err.println("ERROR: 线程数 你输入的值不是一个正整数");
+            warn("ERROR: 线程数 你输入的值不是一个正整数");
         }
         // URLS
         String rurl = properties.getProperty("URL");
@@ -99,7 +103,7 @@ public class file {
                     list.add(string);
                 } else {
                     success = false;
-                    System.err.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
+                    warn("ERROR: 攻击网址 你输入的字符串不是一个网址");
                 }
                 i++;
             }
@@ -108,7 +112,7 @@ public class file {
                 list.add(rurl);
             } else {
                 success = false;
-                System.err.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
+                warn("ERROR: 攻击网址 你输入的字符串不是一个网址");
             }
         }
         if (success) {
@@ -139,9 +143,17 @@ public class file {
         } else if (value.toUpperCase().equals("FALSE")) {
             output = false;
         } else {
-            System.err.println("ERROR: 布尔参数的值为 true 或 false");
+            warn("ERROR: 布尔参数的值为 true 或 false");
             output = true;
         }
         return output;
+    }
+
+    private static void warn(String string) {
+        if (!stealbomber.App.sgui) {
+            warn(string);
+        } else {
+            JOptionPane.showMessageDialog(null, string, "错误", JOptionPane.ERROR_MESSAGE, null);
+        }
     }
 }

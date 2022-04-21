@@ -88,6 +88,7 @@ public class main extends JFrame {
         exitMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jf.setVisible(false);
                 System.exit(0);
             }
         });

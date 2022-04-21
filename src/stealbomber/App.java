@@ -10,16 +10,19 @@ public class App {
                 sgui = false;
             }
         }
+        if (sgui) {
+            stealbomber.gui.main.visit();
+        }
         if (success) {
             System.gc();
-            if (sgui) {
-                stealbomber.gui.main.visit();
-            } else {
+            if (!sgui) {
                 stealbomber.manage.storage.start = true;
                 stealbomber.manage.thread.start();
             }
         } else {
-            System.exit(1);
+            if (!sgui) {
+                System.exit(1);
+            }
         }
     }
 }

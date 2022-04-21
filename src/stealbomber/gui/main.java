@@ -45,7 +45,6 @@ public class main extends JFrame {
         jf.setSize(1000, 700);// 窗体大小
         jf.setLocationRelativeTo(null); // 设置窗体居中
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// 关闭窗体事件
-        jf.setResizable(false);// 允许修改大小
         menu(); // 菜单栏
         // icon
         // ImageIcon icon = new ImageIcon(

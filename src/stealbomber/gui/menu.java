@@ -5,9 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -87,6 +91,40 @@ public class menu {
                 }
             }
         });
+
+        final JMenuItem checkupdate = new JMenuItem("检查更新");
+        checkupdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                StringBuilder sb = new StringBuilder();
+                try {
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) new URL(
+                            "https://api.github.com/repos/obcbo/stealbomber/releases/latest").openConnection();
+                    httpURLConnection.setRequestMethod("GET");
+                    httpURLConnection.setReadTimeout(10000);
+                    httpURLConnection.setConnectTimeout(10000);
+                    httpURLConnection.setRequestProperty("accept", "*/*");
+                    httpURLConnection.connect();
+                    BufferedReader br = new BufferedReader(
+                            new InputStreamReader(httpURLConnection.getInputStream(), "UTF-8"));
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                    }
+
+                    int firsti = sb.indexOf("\"tag_name\":\"") + 12;
+                    if (firsti == -1) {
+                        System.out.println("没有找到字符串");
+                    } else {
+                        int secondi = sb.indexOf("\"", firsti);
+                        System.out.println("最新版本:" + sb.substring(firsti, secondi));
+                    }
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
         final JMenuItem about = new JMenuItem("关于");
         about.addActionListener(new ActionListener() {
             @Override
@@ -98,6 +136,8 @@ public class menu {
         });
 
         moreMenu.add(igithub);
+        moreMenu.addSeparator();
+        moreMenu.add(checkupdate);
         moreMenu.add(about);
     }
 }

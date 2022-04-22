@@ -16,9 +16,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 public class menu {
-    protected static JMenuBar menuBar = new JMenuBar();
-    private static JMenu optionMenu = new JMenu("基本");
-    private static JMenu moreMenu = new JMenu("更多");
+    final protected static JMenuBar menuBar = new JMenuBar();
+    final private static JMenu optionMenu = new JMenu("基本");
+    final private static JMenu moreMenu = new JMenu("更多");
 
     protected static void show() {
         optionMenu();
@@ -28,7 +28,7 @@ public class menu {
     }
 
     private static void optionMenu() {
-        JMenuItem chooseproper = new JMenuItem("选择配置文件");
+        final JMenuItem chooseproper = new JMenuItem("选择配置文件");
         chooseproper.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -43,7 +43,7 @@ public class menu {
             }
         });
 
-        JCheckBoxMenuItem ontop = new JCheckBoxMenuItem("置顶", false);
+        final JCheckBoxMenuItem ontop = new JCheckBoxMenuItem("置顶", false);
         ontop.addItemListener((ItemListener) new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -55,7 +55,7 @@ public class menu {
             }
         });
 
-        JMenuItem exitMenu = new JMenuItem("退出");
+        final JMenuItem exitMenu = new JMenuItem("退出");
         exitMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,7 +71,7 @@ public class menu {
     }
 
     private static void moreMenu() {
-        JMenuItem igithub = new JMenuItem("Github地址");
+        final JMenuItem igithub = new JMenuItem("Github地址");
         igithub.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,7 +87,7 @@ public class menu {
                 }
             }
         });
-        JMenuItem about = new JMenuItem("关于");
+        final JMenuItem about = new JMenuItem("关于");
         about.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class thread {
-    public static ThreadPoolExecutor executPool = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
+    final public static ThreadPoolExecutor executPool = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>(),
             new ThreadFactory() {
                 public Thread newThread(Runnable r) {

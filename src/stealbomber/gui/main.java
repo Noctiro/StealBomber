@@ -19,15 +19,15 @@ import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class main extends JFrame {
-    static JFrame jf = new JFrame("Steal Bomber");
-    static JPanel control = new JPanel();
-    static JPanel output = new JPanel();
-    static JPanel statistics = new JPanel();
-    public static JTextArea out = new JTextArea(15, 30);
+    final static JFrame jf = new JFrame("Steal Bomber");
+    final static JPanel control = new JPanel();
+    final static JPanel output = new JPanel();
+    final static JPanel statistics = new JPanel();
+    final public static JTextArea out = new JTextArea(15, 30);
 
-    static JTextField tthreads = new JTextField();
-    static JTextField turl = new JTextField();
-    static JTextField tparameter = new JTextField();
+    final static JTextField tthreads = new JTextField();
+    final static JTextField turl = new JTextField();
+    final static JTextField tparameter = new JTextField();
 
     public static void visit() {
         try {
@@ -38,7 +38,7 @@ public class main extends JFrame {
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
-        jf.setSize(1000, 700);// 窗体大小
+        jf.setSize(700, 700);// 窗体大小
         jf.setLocationRelativeTo(null); // 设置窗体居中
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// 关闭窗体事件
 

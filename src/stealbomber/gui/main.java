@@ -1,28 +1,15 @@
 package stealbomber.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.FlowLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -54,13 +41,15 @@ public class main extends JFrame {
         jf.setSize(1000, 700);// 窗体大小
         jf.setLocationRelativeTo(null); // 设置窗体居中
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// 关闭窗体事件
-        menu(); // 菜单栏
+
+        menu.show(); // 菜单栏
+        jf.setJMenuBar(menu.menuBar);
         // icon
         // ImageIcon icon = new ImageIcon(
         // Thread.currentThread().getContextClassLoader().getResource("logo.png").getFile());
         // jf.setIconImage(icon.getImage());
 
-        jf.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        jf.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         ycontrol();
         jf.add(control);
@@ -77,84 +66,6 @@ public class main extends JFrame {
         refresh();
         while (true)
             ;
-    }
-
-    private static void menu() {
-        JMenuBar menuBar = new JMenuBar();
-        JMenu optionMenu = new JMenu("基本");
-        JMenu moreMenu = new JMenu("更多");
-
-        JMenuItem chooseproper = new JMenuItem("选择配置文件");
-        chooseproper.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
-                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                int val = fileChooser.showOpenDialog(null);
-                if (val == JFileChooser.APPROVE_OPTION) {
-                    stealbomber.manage.file.start(fileChooser.getSelectedFile().toString());
-                    refresh();
-                }
-            }
-        });
-
-        JCheckBoxMenuItem ontop = new JCheckBoxMenuItem("置顶", false);
-        ontop.addItemListener((ItemListener) new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (ontop.getState()) {
-                    jf.setAlwaysOnTop(true);
-                } else {
-                    jf.setAlwaysOnTop(false);
-                }
-            }
-        });
-
-        JMenuItem exitMenu = new JMenuItem("退出");
-        exitMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jf.setVisible(false);
-                System.exit(0);
-            }
-        });
-        JMenuItem igithub = new JMenuItem("Github地址");
-        igithub.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (Desktop.isDesktopSupported()) {
-                    Desktop desktop = Desktop.getDesktop();
-                    try {
-                        desktop.browse(new URI("https://github.com/obcbo/stealbomber"));
-                    } catch (IOException | URISyntaxException e1) {
-                        e1.printStackTrace();
-                    }
-                } else {
-                    JOptionPane.showInputDialog(null, "Github地址", "https://github.com/obcbo/stealbomber");
-                }
-            }
-        });
-        JMenuItem about = new JMenuItem("关于");
-        about.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "StealBomber - v1.4\n作者: ObcbO", "关于",
-                        JOptionPane.INFORMATION_MESSAGE,
-                        null);
-            }
-        });
-        menuBar.add(optionMenu);
-        menuBar.add(moreMenu);
-
-        optionMenu.add(chooseproper);
-        optionMenu.add(ontop);
-        optionMenu.addSeparator();// 添加一个分割线
-        optionMenu.add(exitMenu);
-
-        moreMenu.add(igithub);
-        moreMenu.add(about);
-
-        jf.setJMenuBar(menuBar);
     }
 
     private static void ycontrol() {
@@ -273,7 +184,7 @@ public class main extends JFrame {
         output.add(sp, BorderLayout.CENTER);
     }
 
-    private static void refresh() {
+    protected static void refresh() {
         tthreads.setText(String.valueOf(stealbomber.manage.file.thnum));
         turl.setText(String.valueOf(stealbomber.manage.file.properties.getProperty("URL")));
         tparameter.setText(String.valueOf(stealbomber.manage.file.properties.getProperty("parameter")));

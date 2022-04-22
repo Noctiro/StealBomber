@@ -7,8 +7,7 @@ import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 
 public class statistics {
-    public static void basic() {
-
+    protected static void basic() {
         stealbomber.gui.main.statistics.setBorder(BorderFactory.createTitledBorder("统计区"));
 
         double[] xData = new double[] { 0.0, 1.0, 2.0 };
@@ -19,6 +18,6 @@ public class statistics {
         XChartPanel<?> chartPanel = new XChartPanel<>(chart);
         stealbomber.gui.main.statistics.add(chartPanel);
         // Show it
-        //new SwingWrapper(chart).displayChart();
+        // new SwingWrapper(chart).displayChart();
     }
 }

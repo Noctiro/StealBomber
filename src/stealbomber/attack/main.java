@@ -65,10 +65,10 @@ public class main implements Runnable {
                 url = stealbomber.manage.file.urls[random.nextInt(stealbomber.manage.file.urls.length - 1)].toString();
             // name
             String rn;
-            Long brn = (long) (Math.random() * (99999999999l - 10000000)) + 1000000;
+            Long brn = (long) (Math.random() * (99999999999l - 1000000)) + 100000;
             switch (random.nextInt(2) + 1) {
                 case 1:
-                    int length = random.nextInt(99999999 - 10000000) + 10000000;
+                    int length = random.nextInt(99999999 - 1000000) + 1000000;
                     rn = stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]
                             .toString() + length;
                     break;

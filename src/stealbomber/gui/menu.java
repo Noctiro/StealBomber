@@ -134,7 +134,8 @@ public class menu {
                                         e1.printStackTrace();
                                     }
                                 } else {
-                                    JOptionPane.showInputDialog(null, "更新地址", "https://github.com/obcbo/stealbomber/releases/latest");
+                                    JOptionPane.showInputDialog(null, "更新地址",
+                                            "https://github.com/obcbo/stealbomber/releases/latest");
                                 }
                             }
                         } else {
@@ -145,6 +146,7 @@ public class menu {
                     }
                 } catch (Exception e1) {
                     e1.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "检查更新失败", "错误", 0);
                 }
             }
         });

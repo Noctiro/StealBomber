@@ -117,7 +117,16 @@ public class menu {
                         System.out.println("没有找到字符串");
                     } else {
                         int secondi = sb.indexOf("\"", firsti);
-                        System.out.println("最新版本:" + sb.substring(firsti, secondi));
+                        System.out.println("发现新版! 版本号:" + sb.substring(firsti, secondi));
+                        if (Double.parseDouble(sb.substring(firsti, secondi)) > stealbomber.App.version) {
+                            JOptionPane.showMessageDialog(null, "发现可更新的版本", "检查更新",
+                                    JOptionPane.INFORMATION_MESSAGE,
+                                    null);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "当前已最新版本", "检查更新",
+                                    JOptionPane.INFORMATION_MESSAGE,
+                                    null);
+                        }
                     }
                 } catch (Exception e1) {
                     e1.printStackTrace();
@@ -129,7 +138,7 @@ public class menu {
         about.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "StealBomber - v1.4\n作者: ObcbO", "关于",
+                JOptionPane.showMessageDialog(null, "StealBomber - v" + stealbomber.App.version + "\n作者: ObcbO", "关于",
                         JOptionPane.INFORMATION_MESSAGE,
                         null);
             }

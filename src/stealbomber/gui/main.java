@@ -23,7 +23,7 @@ public class main extends JFrame {
     static final JPanel control = new JPanel();
     static final JPanel output = new JPanel();
     static final JPanel statistics = new JPanel();
-    final public static JTextArea out = new JTextArea(15, 30);
+    public static final JTextArea out = new JTextArea(15, 30);
 
     static final JTextField tthreads = new JTextField();
     static final JTextField turl = new JTextField();

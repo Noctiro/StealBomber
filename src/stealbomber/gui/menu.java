@@ -37,6 +37,7 @@ public class menu {
                 int val = fileChooser.showOpenDialog(null);
                 if (val == JFileChooser.APPROVE_OPTION) {
                     stealbomber.manage.file.start(fileChooser.getSelectedFile().toString());
+                    stealbomber.manage.file.manage();
                     main.refresh();
                 }
             }

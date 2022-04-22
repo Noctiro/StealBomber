@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
@@ -25,6 +27,10 @@ public class file {
     public static boolean genoutput;
     public static boolean proxyswitch;
     public static String proxyfile;
+
+    private static boolean findthnum = true;
+    private static boolean findurl = true;
+    private static boolean findparameter = true;
 
     public static boolean start(String getfile) {
         String file;
@@ -81,46 +87,73 @@ public class file {
     }
 
     public static void manage() {
+        find();
         String temp;
         // 一些功能开关
         booleanmanage();
         // 线程数
-        temp = properties.getProperty("threads");
-        if (temp.matches("[0-9]*")) {
-            thnum = Integer.parseInt(temp);
-        } else {
-            success = false;
-            warn("ERROR: 线程数 你输入的值不是一个正整数");
+        if (findthnum) {
+            temp = properties.getProperty("threads");
+            if (temp.matches("[0-9]*")) {
+                thnum = Integer.parseInt(temp);
+            } else {
+                success = false;
+                warn("ERROR: 线程数 你输入的值不是一个正整数");
+            }
         }
-        // URLS
-        String rurl = properties.getProperty("URL");
-        List<String> list = new ArrayList<String>();
-        if (rurl.contains(",")) {
-            String[] urlStr = rurl.split(",");
-            for (String string : urlStr) {
-                int i = 0;
-                if (urlStr[i].matches("(http|https)+://[^\\s]*")) {
-                    list.add(string);
+        // URL
+        if (findurl) {
+            String rurl = properties.getProperty("URL");
+            List<String> list = new ArrayList<String>();
+            if (rurl.contains(",")) {
+                String[] urlStr = rurl.split(",");
+                for (String string : urlStr) {
+                    int i = 0;
+                    if (urlStr[i].matches("(http|https)+://[^\\s]*")) {
+                        list.add(string);
+                    } else {
+                        success = false;
+                        warn("ERROR: 攻击网址 你输入的字符串不是一个网址");
+                    }
+                    i++;
+                }
+            } else {
+                if (rurl.matches("(http|https)+://[^\\s]*")) {
+                    list.add(rurl);
                 } else {
                     success = false;
                     warn("ERROR: 攻击网址 你输入的字符串不是一个网址");
                 }
-                i++;
+            }
+            if (success) {
+                int size = list.size();
+                urls = (String[]) list.toArray(new String[size]);
             }
         } else {
-            if (rurl.matches("(http|https)+://[^\\s]*")) {
-                list.add(rurl);
-            } else {
-                success = false;
-                warn("ERROR: 攻击网址 你输入的字符串不是一个网址");
-            }
-        }
-        if (success) {
-            int size = list.size();
-            urls = (String[]) list.toArray(new String[size]);
+            warn("ERROR: 攻击网址 内容异常");
         }
         // 参数
-        param = properties.getProperty("parameter").toString();
+        if (findparameter) {
+            param = properties.getProperty("parameter").toString();
+        } else {
+            warn("ERROR: 参数 内容异常");
+        }
+    }
+
+    private static void find() {
+        Set<String> set = new HashSet<String>(properties.stringPropertyNames());
+        if (!set.contains("threads")) {
+            findthnum = false;
+            return;
+        }
+        if (!set.contains("URL")) {
+            findurl = false;
+            return;
+        }
+        if (!set.contains("parameter")) {
+            findparameter = false;
+            return;
+        }
     }
 
     private static void booleanmanage() {

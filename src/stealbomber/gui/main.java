@@ -51,8 +51,6 @@ public class main extends JFrame {
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
-        stealbomber.manage.file.start(System.getProperty("file"));
-        stealbomber.manage.file.manage();
         jf.setSize(1000, 700);// 窗体大小
         jf.setLocationRelativeTo(null); // 设置窗体居中
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// 关闭窗体事件
@@ -74,6 +72,9 @@ public class main extends JFrame {
         jf.add(statistics);
 
         jf.setVisible(true);// 显示界面
+        stealbomber.manage.file.start(System.getProperty("file"));
+        stealbomber.manage.file.manage();
+        refresh();
         while (true)
             ;
     }
@@ -137,7 +138,7 @@ public class main extends JFrame {
         about.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "StealBomber - v0.4\n作者: ObcbO", "关于",
+                JOptionPane.showMessageDialog(null, "StealBomber - v1.4\n作者: ObcbO", "关于",
                         JOptionPane.INFORMATION_MESSAGE,
                         null);
             }
@@ -253,8 +254,6 @@ public class main extends JFrame {
                 stealbomber.manage.thread.stop();
             }
         });
-
-        refresh();
 
         control.add(sthreads);
         control.add(tthreads);

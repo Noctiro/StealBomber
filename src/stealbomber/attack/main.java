@@ -94,7 +94,7 @@ public class main implements Runnable {
         HttpURLConnection httpURLConnection = null;
         try {
             URL url = new URL(surl);
-            if (proxytype == "" && proxyurl == "") {
+            if (!stealbomber.manage.file.proxyswitch) {
                 httpURLConnection = (HttpURLConnection) url.openConnection();
             } else {
                 if (proxytype == "http") {

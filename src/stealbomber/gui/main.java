@@ -19,15 +19,15 @@ import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class main extends JFrame {
-    final static JFrame jf = new JFrame("Steal Bomber");
-    final static JPanel control = new JPanel();
-    final static JPanel output = new JPanel();
-    final static JPanel statistics = new JPanel();
+    static final JFrame jf = new JFrame("Steal Bomber");
+    static final JPanel control = new JPanel();
+    static final JPanel output = new JPanel();
+    static final JPanel statistics = new JPanel();
     final public static JTextArea out = new JTextArea(15, 30);
 
-    final static JTextField tthreads = new JTextField();
-    final static JTextField turl = new JTextField();
-    final static JTextField tparameter = new JTextField();
+    static final JTextField tthreads = new JTextField();
+    static final JTextField turl = new JTextField();
+    static final JTextField tparameter = new JTextField();
 
     public static void visit() {
         try {

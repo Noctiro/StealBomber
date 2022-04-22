@@ -16,9 +16,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 public class menu {
-    final protected static JMenuBar menuBar = new JMenuBar();
-    final private static JMenu optionMenu = new JMenu("基本");
-    final private static JMenu moreMenu = new JMenu("更多");
+    protected final static JMenuBar menuBar = new JMenuBar();
+    private final static JMenu optionMenu = new JMenu("基本");
+    private final static JMenu moreMenu = new JMenu("更多");
 
     protected static void show() {
         optionMenu();

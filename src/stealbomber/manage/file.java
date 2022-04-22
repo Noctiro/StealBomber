@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
-
 public class file {
     // 默认值
     public static int thnum = 16;// 线程数
@@ -55,7 +53,7 @@ public class file {
                 e.printStackTrace();
             }
             if (!new File(file).exists()) {
-                warn("未发现选定的配置文件");
+                stealbomber.manage.out.warn("未发现选定的配置文件");
                 System.exit(1);
             }
         }
@@ -98,7 +96,7 @@ public class file {
                 thnum = Integer.parseInt(temp);
             } else {
                 success = false;
-                warn("ERROR: 线程数 你输入的值不是一个正整数");
+                stealbomber.manage.out.warn("ERROR: 线程数 你输入的值不是一个正整数");
             }
         }
         // URL
@@ -113,7 +111,7 @@ public class file {
                         list.add(string);
                     } else {
                         success = false;
-                        warn("ERROR: 攻击网址 你输入的字符串不是一个网址");
+                        stealbomber.manage.out.warn("ERROR: 攻击网址 你输入的字符串不是一个网址");
                     }
                     i++;
                 }
@@ -122,7 +120,7 @@ public class file {
                     list.add(rurl);
                 } else {
                     success = false;
-                    warn("ERROR: 攻击网址 你输入的字符串不是一个网址");
+                    stealbomber.manage.out.warn("ERROR: 攻击网址 你输入的字符串不是一个网址");
                 }
             }
             if (success) {
@@ -130,13 +128,13 @@ public class file {
                 urls = (String[]) list.toArray(new String[size]);
             }
         } else {
-            warn("ERROR: 攻击网址 内容异常");
+            stealbomber.manage.out.warn("ERROR: 攻击网址 内容异常");
         }
         // 参数
         if (findparameter) {
             param = properties.getProperty("parameter").toString();
         } else {
-            warn("ERROR: 参数 内容异常");
+            stealbomber.manage.out.warn("ERROR: 参数 内容异常");
         }
     }
 
@@ -176,17 +174,9 @@ public class file {
         } else if ("FALSE".equals(value.toUpperCase())) {
             output = false;
         } else {
-            warn("ERROR: 布尔参数的值为 true 或 false");
+            stealbomber.manage.out.warn("ERROR: 布尔参数的值为 true 或 false");
             output = true;
         }
         return output;
-    }
-
-    private static void warn(String string) {
-        if (!stealbomber.App.sgui) {
-            warn(string);
-        } else {
-            JOptionPane.showMessageDialog(null, string, "错误", JOptionPane.ERROR_MESSAGE, null);
-        }
     }
 }

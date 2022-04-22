@@ -132,13 +132,13 @@ public class main implements Runnable {
             out.flush();
             out.close();
         } catch (IOException e) {
-            System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
+            stealbomber.manage.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
         } finally {
             if (null != httpURLConnection) {
                 try {
                     httpURLConnection.disconnect();
                 } catch (Exception e) {
-                    System.out.println(surl + " httpURLConnection 流关闭异常：" + e.getLocalizedMessage());
+                    stealbomber.manage.out.println(surl + " httpURLConnection 流关闭异常：" + e.getLocalizedMessage());
                 }
             }
         }

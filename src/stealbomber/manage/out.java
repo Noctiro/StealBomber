@@ -1,5 +1,7 @@
 package stealbomber.manage;
 
+import javax.swing.JOptionPane;
+
 public class out {
     static int cs = 0;
 
@@ -14,6 +16,14 @@ public class out {
                 System.out.println();
                 cs = 0;
             }
+        }
+    }
+
+    public static void warn(String string) {
+        if (!stealbomber.App.sgui) {
+            warn(string);
+        } else {
+            JOptionPane.showMessageDialog(null, string, "错误", JOptionPane.ERROR_MESSAGE, null);
         }
     }
 }

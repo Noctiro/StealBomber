@@ -171,9 +171,9 @@ public class file {
             return udefault;
         } else
             value = properties.getProperty(value).toString();
-        if (value.toUpperCase().equals("TRUE")) {
+        if ("TRUE".equals(value.toUpperCase())) {
             output = true;
-        } else if (value.toUpperCase().equals("FALSE")) {
+        } else if ("FALSE".equals(value.toUpperCase())) {
             output = false;
         } else {
             warn("ERROR: 布尔参数的值为 true 或 false");

@@ -5,7 +5,7 @@ public class App {
 
     public static void main(String[] args) {
         for (String a : args) {
-            if (a.equals("nogui")) {
+            if ("nogui".equals(a)) {
                 sgui = false;
             }
         }

@@ -1,19 +1,29 @@
 package stealbomber.manage;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class update implements Runnable {
+    private static String version = String.valueOf(stealbomber.App.version);
+    private static String downloadlink;
+    private static String info;
+
     public void run() {
         StringBuilder sb = new StringBuilder();
         HttpURLConnection httpURLConnection;
@@ -34,18 +44,21 @@ public class update implements Runnable {
 
             int firversion = sb.indexOf("\"tag_name\":\"") + 12;
             int secversion = sb.indexOf("\"", firversion);
+            version = sb.substring(firversion, secversion);
+
             int firdowanlod = sb.indexOf("\"browser_download_url\":\"") + 24;
             int secdowanlod = sb.indexOf("\"", firdowanlod);
+            downloadlink = sb.substring(firdowanlod, secdowanlod);
 
             int firinfo = sb.indexOf("\"body\":\"") + 8;
             int secinfo = sb.indexOf("\"", firinfo);
-            String info = sb.substring(firinfo, secinfo);
+            info = sb.substring(firinfo, secinfo);
             info = info.replace("\\n", "\n");
             info = info.replace("\\r", "\r");
 
-            if (Double.parseDouble(sb.substring(firversion, secversion)) > stealbomber.App.version) {
-                System.out.println("发现新版! 版本号:" + sb.substring(firversion, secversion));
-                System.out.println("下载地址: " + sb.substring(firdowanlod, secdowanlod));
+            if (Double.parseDouble(version) > stealbomber.App.version) {
+                System.out.println("发现新版! 版本号:" + version);
+                System.out.println("下载地址: " + downloadlink);
                 System.out.println(info);
                 updatedialog();
             } else {
@@ -61,17 +74,39 @@ public class update implements Runnable {
 
     private void updatedialog() {
         final JDialog dialog = new JDialog(stealbomber.gui.main.jf, "发现新版本", true);
-        dialog.setSize(400, 300);
+        dialog.setSize(400, 350);
         dialog.setResizable(false);
         dialog.setLocationRelativeTo(stealbomber.gui.main.jf);
-        
+
         JPanel panel = new JPanel();
         dialog.setContentPane(panel);
-        dialog.setLayout(new BorderLayout());
+        dialog.setLayout(new BorderLayout(5, 5));
 
-        JLabel a = new JLabel("发现新版本");
-        JButton okBtn = new JButton("确定");
-        okBtn.addActionListener(new ActionListener() {
+        JLabel tversion = new JLabel("版本: " + stealbomber.App.version + "->" + version);
+
+        JTextArea ainfo = new JTextArea(15, 15);
+        ainfo.setText(info);
+        JScrollPane tinfo = new JScrollPane(ainfo);
+
+        JButton download = new JButton("下载");
+        download.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop desktop = Desktop.getDesktop();
+                    try {
+                        desktop.browse(new URI(downloadlink));
+                    } catch (IOException | URISyntaxException e1) {
+                        e1.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showInputDialog(null, "下载地址", downloadlink);
+                }
+            }
+        });
+
+        JButton cancel = new JButton("取消");
+        cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 关闭对话框
@@ -79,8 +114,10 @@ public class update implements Runnable {
             }
         });
 
-        dialog.add(a);
-        dialog.add(okBtn);
+        panel.add(tversion, BorderLayout.WEST);
+        panel.add(tinfo, BorderLayout.EAST);
+        panel.add(download, BorderLayout.SOUTH);
+        panel.add(cancel, BorderLayout.SOUTH);
         dialog.setVisible(true);
     }
 }

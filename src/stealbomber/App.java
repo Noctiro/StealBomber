@@ -1,7 +1,7 @@
 package stealbomber;
 
 public class App {
-    public static final double version = 1.4;
+    public static final double version = 1.2;
     public static boolean sgui = true;
 
     public static void main(String[] args) {

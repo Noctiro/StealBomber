@@ -19,7 +19,7 @@ import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class main extends JFrame {
-    static final JFrame jf = new JFrame("Steal Bomber");
+    public static final JFrame jf = new JFrame("Steal Bomber");
     static final JPanel control = new JPanel();
     static final JPanel output = new JPanel();
     static final JPanel statistics = new JPanel();

@@ -1,8 +1,11 @@
 package stealbomber.manage;
 
+import java.awt.BorderLayout;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -22,12 +25,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class update implements Runnable {
+    private static StringBuilder json = new StringBuilder();
     private static String version = String.valueOf(stealbomber.App.version);
     private static String downloadlink;
     private static String info;
 
     public void run() {
-        StringBuilder sb = new StringBuilder();
         HttpURLConnection httpURLConnection;
         try {
             httpURLConnection = (HttpURLConnection) new URL(
@@ -39,22 +42,23 @@ public class update implements Runnable {
             httpURLConnection.connect();
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(httpURLConnection.getInputStream(), "UTF-8"));
-            String json;
-            while ((json = br.readLine()) != null) {
-                sb.append(json);
+
+            String temp;
+            while ((temp = br.readLine()) != null) {
+                json.append(temp);
             }
 
-            int firversion = sb.indexOf("\"tag_name\":\"") + 12;
-            int secversion = sb.indexOf("\"", firversion);
-            version = sb.substring(firversion, secversion);
+            int firversion = json.indexOf("\"tag_name\":\"") + 12;
+            int secversion = json.indexOf("\"", firversion);
+            version = json.substring(firversion, secversion);
 
-            int firdowanlod = sb.indexOf("\"browser_download_url\":\"") + 24;
-            int secdowanlod = sb.indexOf("\"", firdowanlod);
-            downloadlink = sb.substring(firdowanlod, secdowanlod);
+            int firdowanlod = json.indexOf("\"browser_download_url\":\"") + 24;
+            int secdowanlod = json.indexOf("\"", firdowanlod);
+            downloadlink = json.substring(firdowanlod, secdowanlod);
 
-            int firinfo = sb.indexOf("\"body\":\"") + 8;
-            int secinfo = sb.indexOf("\"", firinfo);
-            info = sb.substring(firinfo, secinfo);
+            int firinfo = json.indexOf("\"body\":\"") + 8;
+            int secinfo = json.indexOf("\"", firinfo);
+            info = json.substring(firinfo, secinfo);
             info = info.replace("\\n", "\n");
             info = info.replace("\\r", "\r");
 
@@ -83,55 +87,91 @@ public class update implements Runnable {
         dialog.setResizable(false);
         dialog.setLocationRelativeTo(stealbomber.gui.main.jf);
 
-        // GridBagLayout
-        GridBagLayout cp = new GridBagLayout(); // 实例化布局对象
-        dialog.setLayout(cp); // jf窗体对象设置为GridBagLayout布局
-        GridBagConstraints gbc = new GridBagConstraints();// 实例化这个对象用来对组件进行管理
-        // NONE：不调整组件大小。
-        // HORIZONTAL：加宽组件，使它在水平方向上填满其显示区域，但是不改变高度。
-        // VERTICAL：加高组件，使它在垂直方向上填满其显示区域，但是不改变宽度。
-        // BOTH：使组件完全填满其显示区域。
-
-        gbc.insets = new Insets(2, 2, 2, 2);// top left bottom right
-
         JPanel panel = new JPanel();
         dialog.setContentPane(panel);
 
-        JLabel text = new JLabel("<html><h1>发现新版本</h1></html>");
-        gbc.weightx = 10;// 第一列分布方式为10%
+        // GridBagLayout
+        GridBagLayout cp = new GridBagLayout(); // 实例化布局对象
+        panel.setLayout(cp);
+        GridBagConstraints gbc = new GridBagConstraints();// 实例化这个对象用来对组件进行管理
+
+        gbc.insets = new Insets(5, 5, 5, 5);// top left bottom right
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 2;
+
+        JLabel text = new JLabel("<html><h1>发现新版本</h1></html>");
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
         cp.setConstraints(text, gbc);
 
         JLabel tversion = new JLabel("<html>版本: <font color=\"red\">" + stealbomber.App.version
                 + "</font> -> <font color=\"green\">" + version + "</font></html>");
-        gbc.weightx = 10;// 第一列分布方式为10%
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
         cp.setConstraints(tversion, gbc);
 
         JTextArea ainfo = new JTextArea(15, 15);
         ainfo.setText(info);
-        JScrollPane tinfo = new JScrollPane(ainfo);
-        gbc.weightx = 10;// 分布方式为10%
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 5;
+        JScrollPane tinfo = new JScrollPane();
+        tinfo.setViewportView(ainfo);
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
         cp.setConstraints(tinfo, gbc);
 
-        JButton download = new JButton("下载");
-        gbc.gridx = 1;
-        gbc.gridy = 6;
-        gbc.gridwidth = 1;
+        gbc.weightx = 30;// 分布方式为40%
+        JLabel showjson = new JLabel("以JSON格式显示");
+        gbc.anchor = GridBagConstraints.SOUTHWEST;
         gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        cp.setConstraints(showjson, gbc);
+        showjson.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                final JDialog jsondialog = new JDialog(dialog, "JSON", true);
+                jsondialog.setSize(300, 250);
+                jsondialog.setResizable(false);
+                jsondialog.setLocationRelativeTo(dialog);
+                JPanel jpanel = new JPanel();
+                jpanel.setLayout(new BorderLayout());
+                jsondialog.setContentPane(jpanel);
+
+                JTextArea tajson = new JTextArea();
+                tajson.setLineWrap(true);// 自动换行
+                tajson.setText(json.toString());
+                tajson.setCaretPosition(0);
+                JScrollPane spjson = new JScrollPane(tajson);
+                spjson.setPreferredSize(new Dimension(200, 150));
+                jpanel.add(spjson);
+
+                JButton close = new JButton("关闭");
+                close.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        jsondialog.dispose();
+                    }
+                });
+                jpanel.add(close, BorderLayout.SOUTH);
+
+                jsondialog.setVisible(true);
+            }
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {
+            }
+        });
+
+        JButton download = new JButton("下载");
+        gbc.anchor = GridBagConstraints.SOUTH;
+        gbc.gridwidth = 1;
         cp.setConstraints(download, gbc);
         download.addActionListener(new ActionListener() {
             @Override
@@ -150,10 +190,8 @@ public class update implements Runnable {
         });
 
         JButton cancel = new JButton("取消");
-        gbc.gridx = 3;
-        gbc.gridy = 6;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
+        gbc.gridwidth = 0;// 该方法是设置组件水平所占用的格子数，如果为0，就说明该组件是该行的最后一个
+        gbc.anchor = GridBagConstraints.SOUTHEAST; // 当组件没有空间大时，使组件处在...
         cp.setConstraints(cancel, gbc);
         cancel.addActionListener(new ActionListener() {
             @Override
@@ -166,6 +204,7 @@ public class update implements Runnable {
         panel.add(text);
         panel.add(tversion);
         panel.add(tinfo);
+        panel.add(showjson);
         panel.add(download);
         panel.add(cancel);
         dialog.setVisible(true);

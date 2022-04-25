@@ -83,7 +83,6 @@ public class update implements Runnable {
         dialog.setResizable(false);
         dialog.setLocationRelativeTo(stealbomber.gui.main.jf);
 
-        
         // GridBagLayout
         GridBagLayout cp = new GridBagLayout(); // 实例化布局对象
         dialog.setLayout(cp); // jf窗体对象设置为GridBagLayout布局
@@ -107,7 +106,8 @@ public class update implements Runnable {
         gbc.gridheight = 2;
         cp.setConstraints(text, gbc);
 
-        JLabel tversion = new JLabel("<html>版本: <font color=\"red\">" + stealbomber.App.version + "</font> -> <font color=\"green\">" + version + "</font></html>");
+        JLabel tversion = new JLabel("<html>版本: <font color=\"red\">" + stealbomber.App.version
+                + "</font> -> <font color=\"green\">" + version + "</font></html>");
         gbc.weightx = 10;// 第一列分布方式为10%
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;

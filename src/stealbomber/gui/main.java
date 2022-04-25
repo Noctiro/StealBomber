@@ -5,12 +5,9 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.FlowLayout;
-import java.awt.Image;
 import java.awt.Insets;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -51,8 +48,7 @@ public class main extends JFrame {
         jf.setJMenuBar(menu.menuBar);
 
         // icon
-        Image icon = ImageIO.read(stealbomber.App.getClass().getResource("icon.png"));
-        jf.setIconImage(icon);
+        jf.setIconImage(stealbomber.App.icon.getImage());
 
         jf.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 

@@ -1,8 +1,12 @@
 package stealbomber;
 
+import javax.swing.ImageIcon;
+
 public class App {
     public static final double version = 1.2;
     public static boolean sgui = true;
+    public static final ImageIcon icon = new ImageIcon(
+            Thread.currentThread().getContextClassLoader().getResource("logo.png").getFile());
 
     public static void main(String[] args) {
         String start = """

@@ -108,10 +108,10 @@ public class update implements Runnable {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         cp.setConstraints(tversion, gbc);
 
-        JTextArea ainfo = new JTextArea(15, 15);
+        JTextArea ainfo = new JTextArea(200, 200);
         ainfo.setText(info);
-        JScrollPane tinfo = new JScrollPane();
-        tinfo.setViewportView(ainfo);
+        JScrollPane tinfo = new JScrollPane(ainfo);
+        gbc.gridheight = 3;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         cp.setConstraints(tinfo, gbc);
 
@@ -126,7 +126,7 @@ public class update implements Runnable {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 final JDialog jsondialog = new JDialog(dialog, "JSON", true);
                 jsondialog.setSize(300, 250);
-                jsondialog.setResizable(false);
+                jsondialog.setResizable(true);
                 jsondialog.setLocationRelativeTo(dialog);
                 JPanel jpanel = new JPanel();
                 jpanel.setLayout(new BorderLayout());

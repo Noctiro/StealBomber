@@ -5,8 +5,12 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.Insets;
+
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,7 +33,7 @@ public class main extends JFrame {
     static final JTextField turl = new JTextField();
     static final JTextField tparameter = new JTextField();
 
-    public static void visit() {
+    public static void visible() {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
             UIManager.put("TextComponent.arc", 5);
@@ -42,12 +46,13 @@ public class main extends JFrame {
         jf.setLocationRelativeTo(null); // 设置窗体居中
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// 关闭窗体事件
 
-        menu.show(); // 菜单栏
+        // 菜单栏
+        menu.show();
         jf.setJMenuBar(menu.menuBar);
+
         // icon
-        // ImageIcon icon = new ImageIcon(
-        // Thread.currentThread().getContextClassLoader().getResource("logo.png").getFile());
-        // jf.setIconImage(icon.getImage());
+        Image icon = ImageIO.read(stealbomber.App.getClass().getResource("icon.png"));
+        jf.setIconImage(icon);
 
         jf.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 

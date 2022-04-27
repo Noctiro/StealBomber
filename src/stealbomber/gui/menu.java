@@ -17,20 +17,15 @@ import javax.swing.JOptionPane;
 
 public class menu {
     protected final static JMenuBar menuBar = new JMenuBar();
-    private final static JMenu basicMenu = new JMenu("基本");
-    private final static JMenu optionMenu = new JMenu("选项");
-    private final static JMenu moreMenu = new JMenu("更多");
 
     protected static void show() {
-        basicMenu();
-        optionMenu();
-        moreMenu();
-        menuBar.add(basicMenu);
-        menuBar.add(optionMenu);
-        menuBar.add(moreMenu);
+        menuBar.add(basicMenu());
+        menuBar.add(optionMenu());
+        menuBar.add(moreMenu());
     }
 
-    private static void basicMenu() {
+    private static JMenu basicMenu() {
+        final JMenu basicMenu = new JMenu("基本");
         final JMenuItem chooseproper = new JMenuItem("选择配置文件");
         chooseproper.addActionListener(new ActionListener() {
             @Override
@@ -71,9 +66,11 @@ public class menu {
         basicMenu.add(ontop);
         basicMenu.addSeparator();// 添加一个分割线
         basicMenu.add(exitMenu);
+        return basicMenu;
     }
 
-    private static void optionMenu() {
+    private static JMenu optionMenu() {
+        final JMenu optionMenu = new JMenu("选项");
         final JCheckBoxMenuItem genoutput = new JCheckBoxMenuItem("生成输出", stealbomber.manage.file.genoutput);
         genoutput.addItemListener((ItemListener) new ItemListener() {
             @Override
@@ -100,9 +97,11 @@ public class menu {
 
         optionMenu.add(genoutput);
         optionMenu.add(proxy);
+        return optionMenu;
     }
 
-    private static void moreMenu() {
+    private static JMenu moreMenu() {
+        final JMenu moreMenu = new JMenu("更多");
         final JMenuItem igithub = new JMenuItem("Github地址");
         igithub.addActionListener(new ActionListener() {
             @Override
@@ -142,5 +141,6 @@ public class menu {
         moreMenu.addSeparator();
         moreMenu.add(checkupdate);
         moreMenu.add(about);
+        return moreMenu;
     }
 }

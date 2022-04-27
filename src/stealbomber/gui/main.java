@@ -8,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -48,7 +49,9 @@ public class main extends JFrame {
         jf.setJMenuBar(menu.menuBar);
 
         // icon
-        jf.setIconImage(stealbomber.App.icon.getImage());
+        jf.setIconImage(new ImageIcon(
+                Thread.currentThread().getContextClassLoader().getResource("stealbomber/logo.png").getFile())
+                .getImage());
 
         jf.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 

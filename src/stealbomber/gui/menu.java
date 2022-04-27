@@ -17,17 +17,20 @@ import javax.swing.JOptionPane;
 
 public class menu {
     protected final static JMenuBar menuBar = new JMenuBar();
-    private final static JMenu optionMenu = new JMenu("基本");
+    private final static JMenu basicMenu = new JMenu("基本");
+    private final static JMenu optionMenu = new JMenu("选项");
     private final static JMenu moreMenu = new JMenu("更多");
 
     protected static void show() {
+        basicMenu();
         optionMenu();
         moreMenu();
+        menuBar.add(basicMenu);
         menuBar.add(optionMenu);
         menuBar.add(moreMenu);
     }
 
-    private static void optionMenu() {
+    private static void basicMenu() {
         final JMenuItem chooseproper = new JMenuItem("选择配置文件");
         chooseproper.addActionListener(new ActionListener() {
             @Override
@@ -64,10 +67,39 @@ public class menu {
             }
         });
 
-        optionMenu.add(chooseproper);
-        optionMenu.add(ontop);
-        optionMenu.addSeparator();// 添加一个分割线
-        optionMenu.add(exitMenu);
+        basicMenu.add(chooseproper);
+        basicMenu.add(ontop);
+        basicMenu.addSeparator();// 添加一个分割线
+        basicMenu.add(exitMenu);
+    }
+
+    private static void optionMenu() {
+        final JCheckBoxMenuItem genoutput = new JCheckBoxMenuItem("生成输出", stealbomber.manage.file.genoutput);
+        genoutput.addItemListener((ItemListener) new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (genoutput.getState()) {
+                    stealbomber.manage.file.genoutput = true;
+                } else {
+                    stealbomber.manage.file.genoutput = false;
+                }
+            }
+        });
+
+        final JCheckBoxMenuItem proxy = new JCheckBoxMenuItem("代理", stealbomber.manage.file.proxyswitch);
+        proxy.addItemListener((ItemListener) new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (proxy.getState()) {
+                    stealbomber.manage.file.proxyswitch = true;
+                } else {
+                    stealbomber.manage.file.proxyswitch = false;
+                }
+            }
+        });
+
+        optionMenu.add(genoutput);
+        optionMenu.add(proxy);
     }
 
     private static void moreMenu() {

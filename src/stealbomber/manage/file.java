@@ -20,7 +20,7 @@ public class file {
 
     public static boolean success = true;
 
-    public static Properties properties;
+    public static final Properties properties = new Properties();
 
     public static boolean genoutput;
     public static boolean proxyswitch;
@@ -32,7 +32,6 @@ public class file {
 
     public static boolean start(String getfile) {
         String file;
-        properties = new Properties();
         if (getfile == null || getfile == "" || getfile.trim() == "") {
             if (!new File("default.properties").exists()) {
                 System.out.println("未发现配置文件");

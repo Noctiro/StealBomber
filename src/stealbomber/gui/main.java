@@ -22,14 +22,17 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 public class main extends JFrame {
     public static final JFrame jf = new JFrame("Steal Bomber");
-    static final JPanel control = new JPanel();
-    static final JPanel output = new JPanel();
-    static final JPanel statistics = new JPanel();
+    protected static final JPanel control = new JPanel();
+    protected static final JPanel output = new JPanel();
+    protected static final JPanel statistics = new JPanel();
     public static final JTextArea out = new JTextArea(15, 30);
 
-    static final JTextField tthreads = new JTextField();
-    static final JTextField turl = new JTextField();
-    static final JTextField tparameter = new JTextField();
+    private static final JTextField tthreads = new JTextField();
+    private static final JTextField turl = new JTextField();
+    private static final JTextField tparameter = new JTextField();
+
+    protected static final ImageIcon icon = new ImageIcon(
+            Thread.currentThread().getContextClassLoader().getResource("stealbomber/logo.png").getFile());
 
     public static void visible() {
         try {
@@ -49,9 +52,7 @@ public class main extends JFrame {
         jf.setJMenuBar(menu.menuBar);
 
         // icon
-        jf.setIconImage(new ImageIcon(
-                Thread.currentThread().getContextClassLoader().getResource("stealbomber/logo.png").getFile())
-                .getImage());
+        jf.setIconImage(icon.getImage());
 
         jf.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
@@ -192,5 +193,8 @@ public class main extends JFrame {
         tthreads.setText(String.valueOf(stealbomber.manage.file.thnum));
         turl.setText(String.valueOf(stealbomber.manage.file.properties.getProperty("URL")));
         tparameter.setText(String.valueOf(stealbomber.manage.file.properties.getProperty("parameter")));
+
+        menu.genoutput.setState(stealbomber.manage.file.genoutput);
+        menu.proxy.setState(stealbomber.manage.file.proxyswitch);
     }
 }

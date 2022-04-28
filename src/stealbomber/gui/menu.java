@@ -3,20 +3,29 @@ package stealbomber.gui;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class menu {
-    protected final static JMenuBar menuBar = new JMenuBar();
+    protected static final JMenuBar menuBar = new JMenuBar();
+
+    protected static final JCheckBoxMenuItem genoutput = new JCheckBoxMenuItem("生成输出", false);
+    protected static final JCheckBoxMenuItem proxy = new JCheckBoxMenuItem("代理", false);
 
     protected static void show() {
         menuBar.add(basicMenu());
@@ -71,7 +80,6 @@ public class menu {
 
     private static JMenu optionMenu() {
         final JMenu optionMenu = new JMenu("选项");
-        final JCheckBoxMenuItem genoutput = new JCheckBoxMenuItem("生成输出", stealbomber.manage.file.genoutput);
         genoutput.addItemListener((ItemListener) new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -83,7 +91,6 @@ public class menu {
             }
         });
 
-        final JCheckBoxMenuItem proxy = new JCheckBoxMenuItem("代理", stealbomber.manage.file.proxyswitch);
         proxy.addItemListener((ItemListener) new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -131,9 +138,51 @@ public class menu {
         about.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "StealBomber - v" + stealbomber.App.version + "\n作者: ObcbO", "关于",
-                        JOptionPane.INFORMATION_MESSAGE,
-                        null);
+                // JOptionPane.showMessageDialog(null, "StealBomber - v" +
+                // stealbomber.App.version + "\n作者: ObcbO", "关于",
+                // JOptionPane.INFORMATION_MESSAGE,
+                // null);
+                final JDialog about = new JDialog(main.jf, "关于", true);
+                about.setSize(400, 350);
+                about.setResizable(false);
+                about.setLocationRelativeTo(stealbomber.gui.main.jf);
+
+                JPanel panel = new JPanel();
+                about.setContentPane(panel);
+
+                // GridBagLayout
+                GridBagLayout cp = new GridBagLayout(); // 实例化布局对象
+                panel.setLayout(cp);
+                GridBagConstraints gbc = new GridBagConstraints();// 实例化这个对象用来对组件进行管理
+
+                gbc.insets = new Insets(5, 5, 5, 5);// top left bottom right
+                gbc.fill = GridBagConstraints.NONE;
+
+                final JLabel icon = new JLabel(main.icon);
+                gbc.gridx = 1;
+                gbc.gridy = 1;
+                gbc.gridwidth = 2;
+                gbc.gridheight = 2;
+                cp.setConstraints(icon, gbc);
+
+                final JLabel h1 = new JLabel("Steal Bomber");
+                gbc.gridx = 4;
+                gbc.gridy = 2;
+                gbc.gridwidth = 3;
+                gbc.gridheight = 1;
+                cp.setConstraints(icon, gbc);
+
+                final JLabel version = new JLabel("V" + stealbomber.App.version);
+                gbc.gridx = 5;
+                gbc.gridy = 3;
+                gbc.gridwidth = 1;
+                gbc.gridheight = 1;
+                cp.setConstraints(version, gbc);
+
+                panel.add(icon);
+                panel.add(h1);
+                panel.add(version);
+                about.setVisible(true);
             }
         });
 

@@ -155,7 +155,7 @@ public class menu {
                 panel.setLayout(cp);
                 GridBagConstraints gbc = new GridBagConstraints();// 实例化这个对象用来对组件进行管理
 
-                gbc.insets = new Insets(5, 5, 5, 5);// top left bottom right
+                gbc.insets = new Insets(1, 1, 1, 1);// top left bottom right
                 gbc.fill = GridBagConstraints.NONE;
 
                 final JLabel icon = new JLabel(main.icon);
@@ -179,7 +179,7 @@ public class menu {
                 gbc.gridheight = 1;
                 cp.setConstraints(version, gbc);
 
-                panel.add(icon);
+                //panel.add(icon);
                 panel.add(h1);
                 panel.add(version);
                 about.setVisible(true);

@@ -10,7 +10,7 @@ public class thread {
             new LinkedBlockingQueue<Runnable>(),
             new ThreadFactory() {
                 public Thread newThread(Runnable r) {
-                    return new Thread(r, "AttackThread-" + r.hashCode());
+                    return new Thread(r, "CThread-" + r.hashCode());
                 }
             },
             new ThreadPoolExecutor.CallerRunsPolicy());

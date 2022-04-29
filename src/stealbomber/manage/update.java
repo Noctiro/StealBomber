@@ -116,7 +116,7 @@ public class update implements Runnable {
         cp.setConstraints(tinfo, gbc);
 
         gbc.weightx = 30;// 分布方式为40%
-        JLabel showjson = new JLabel("显示JSON");
+        JLabel showjson = new JLabel("<html>显示JSON</html>");
         gbc.anchor = GridBagConstraints.SOUTHWEST;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
@@ -167,7 +167,7 @@ public class update implements Runnable {
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent e) {
-                showjson.setText("显示JSON");
+                showjson.setText("<html>显示JSON<html>");
             }
         });
 

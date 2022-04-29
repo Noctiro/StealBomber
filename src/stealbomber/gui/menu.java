@@ -147,7 +147,7 @@ public class menu {
                 about.setResizable(false);
                 about.setLocationRelativeTo(stealbomber.gui.main.jf);
 
-                JPanel panel = new JPanel();
+                final JPanel panel = new JPanel();
                 about.setContentPane(panel);
 
                 // GridBagLayout
@@ -156,7 +156,7 @@ public class menu {
                 GridBagConstraints gbc = new GridBagConstraints();// 实例化这个对象用来对组件进行管理
 
                 gbc.insets = new Insets(1, 1, 1, 1);// top left bottom right
-                gbc.fill = GridBagConstraints.NONE;
+                gbc.fill = GridBagConstraints.BOTH;
 
                 final JLabel icon = new JLabel(main.icon);
                 gbc.gridx = 1;
@@ -165,23 +165,31 @@ public class menu {
                 gbc.gridheight = 2;
                 cp.setConstraints(icon, gbc);
 
-                final JLabel h1 = new JLabel("Steal Bomber");
+                final JLabel h1 = new JLabel("<html><h2>Steal Bomber</h2></html>");
                 gbc.gridx = 4;
                 gbc.gridy = 2;
                 gbc.gridwidth = 3;
                 gbc.gridheight = 1;
                 cp.setConstraints(icon, gbc);
 
-                final JLabel version = new JLabel("V" + stealbomber.App.version);
+                final JLabel synopsis = new JLabel("Author: ObcbO  Version:" + stealbomber.App.version);
                 gbc.gridx = 5;
                 gbc.gridy = 3;
-                gbc.gridwidth = 1;
+                gbc.gridwidth = 3;
                 gbc.gridheight = 1;
-                cp.setConstraints(version, gbc);
+                cp.setConstraints(synopsis, gbc);
+                
+                final JLabel introduce = new JLabel("这是一个盗号网站轰炸机，支持多代理和多线程以及同时多网站攻击");
+                gbc.gridx = 2;
+                gbc.gridy = 4;
+                gbc.gridwidth = 4;
+                gbc.gridheight = 2;
+                cp.setConstraints(introduce, gbc);
 
                 //panel.add(icon);
                 panel.add(h1);
-                panel.add(version);
+                panel.add(synopsis);
+                panel.add(introduce);
                 about.setVisible(true);
             }
         });

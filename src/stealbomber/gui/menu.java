@@ -30,7 +30,7 @@ public class menu {
     protected static void show() {
         menuBar.add(basicMenu());
         menuBar.add(optionMenu());
-        menuBar.add(moreMenu());
+        menuBar.add(helpMenu());
     }
 
     private static JMenu basicMenu() {
@@ -107,8 +107,8 @@ public class menu {
         return optionMenu;
     }
 
-    private static JMenu moreMenu() {
-        final JMenu moreMenu = new JMenu("更多");
+    private static JMenu helpMenu() {
+        final JMenu helpMenu = new JMenu("帮助");
         final JMenuItem igithub = new JMenuItem("Github地址");
         igithub.addActionListener(new ActionListener() {
             @Override
@@ -158,7 +158,7 @@ public class menu {
                 gbc.insets = new Insets(1, 1, 1, 1);// top left bottom right
                 gbc.fill = GridBagConstraints.BOTH;
 
-                final JLabel icon = new JLabel(main.icon);
+                final JLabel icon = new JLabel("ERROR");
                 gbc.gridx = 1;
                 gbc.gridy = 1;
                 gbc.gridwidth = 2;
@@ -194,10 +194,10 @@ public class menu {
             }
         });
 
-        moreMenu.add(igithub);
-        moreMenu.addSeparator();
-        moreMenu.add(checkupdate);
-        moreMenu.add(about);
-        return moreMenu;
+        helpMenu.add(igithub);
+        helpMenu.addSeparator();
+        helpMenu.add(checkupdate);
+        helpMenu.add(about);
+        return helpMenu;
     }
 }

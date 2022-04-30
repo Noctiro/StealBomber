@@ -95,7 +95,7 @@ public class update implements Runnable {
         panel.setLayout(cp);
         GridBagConstraints gbc = new GridBagConstraints();// 实例化这个对象用来对组件进行管理
 
-        gbc.insets = new Insets(5, 5, 5, 5);// top left bottom right
+        gbc.insets = new Insets(5, 5, 10, 10);// top left bottom right
         gbc.fill = GridBagConstraints.BOTH;
 
         JLabel text = new JLabel("<html><h1>发现新版本</h1></html>");

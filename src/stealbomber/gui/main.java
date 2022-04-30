@@ -6,9 +6,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.FlowLayout;
 import java.awt.Insets;
-
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,9 +31,6 @@ public class main extends JFrame {
     private static final JTextField turl = new JTextField();
     private static final JTextField tparameter = new JTextField();
 
-    protected static final ImageIcon icon = new ImageIcon(
-            Thread.currentThread().getContextClassLoader().getResource("stealbomber/logo.png").getFile());
-
     public static void visible() {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -52,7 +49,11 @@ public class main extends JFrame {
         jf.setJMenuBar(menu.menuBar);
 
         // icon
-        jf.setIconImage(icon.getImage());
+        try {
+            jf.setIconImage(ImageIO.read(main.class.getResourceAsStream("logo.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         jf.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 

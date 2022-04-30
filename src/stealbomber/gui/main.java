@@ -69,8 +69,6 @@ public class main extends JFrame {
         stealbomber.manage.file.start(System.getProperty("file"));
         stealbomber.manage.file.manage();
         refresh();
-        while (true)
-            ;
     }
 
     private static void ycontrol() {
@@ -167,7 +165,6 @@ public class main extends JFrame {
                 save.setEnabled(true);
                 cbutton.setText("开始");
                 stealbomber.manage.storage.start = false;
-                stealbomber.manage.thread.stop();
             }
         });
 

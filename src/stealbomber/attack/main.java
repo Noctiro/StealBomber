@@ -88,6 +88,7 @@ public class main implements Runnable {
             }
             go(rn, pass, url, proxytype, proxyhost, proxyport);
         }
+        return;
     }
 
     private static void go(String name, String pass, String surl, String proxytype, String proxyurl, int proxyport) {

@@ -69,7 +69,6 @@ public class main implements Runnable {
             switch (random.nextInt(2)) {
                 case 0:
                     StringBuilder phonenum = new StringBuilder();
-                    System.out.println(stealbomber.manage.storage.bfnum.length);
                     phonenum.append(stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]);
                     for (byte i = 0; i < 8; i++) {
                         phonenum.append(random.nextInt(9));

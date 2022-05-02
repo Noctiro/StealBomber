@@ -34,9 +34,9 @@ public class file {
         String file;
         if (getfile == null || getfile == "" || getfile.trim() == "") {
             if (!new File("default.properties").exists()) {
-                System.out.println("未发现配置文件");
+                System.out.print("未发现配置文件");
                 generatefile();
-                System.out.print(", 现已自动生成并使用默认配置文件");
+                System.out.println(", 现已自动生成并使用默认配置文件");
             }
             file = "default.properties";
             try {

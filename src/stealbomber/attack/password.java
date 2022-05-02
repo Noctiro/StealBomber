@@ -4,86 +4,100 @@ import java.util.Random;
 
 public class password {
     private static Random random;
-    private static int rp;
-    private static String password = "error";
+    private static StringBuilder pass;
 
     protected static String get() {
+        String password = "error";
         random = new Random();
-        rp = random.nextInt(16 - 8) + 8;
-        switch (random.nextInt(4)) {
-            case 0:
-                Letter23Num();
-                break;
-            case 1:
-                NumLetter23();
-                break;
-            case 2:
-                num();
-                break;
-            case 3:
-                randomNoSpecial();
-            case 4:
-            default:
-                random();
-                break;
-        }
+        random(random.nextBoolean(), random.nextBoolean(), random.nextBoolean());
+        password = pass.toString();
         return password;
     }
 
-    private static void random() {
-        final String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
-        StringBuilder pass = new StringBuilder();
-        for (byte i = 0; i < rp; i++) {
+    private static void random(boolean letter, boolean num, boolean spcial) {
+        int extent = random.nextInt(16 - 8) + 8;
+        pass = new StringBuilder();
+        switch (random.nextInt(10)) {
+            // 全随机
+            case 0:
+                final String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+                for (byte i = 0; i < extent; i++) {
+                    int randomInt = random.nextInt(str.length());
+                    pass.append(str.charAt(randomInt));
+                }
+                break;
+            // 单类型
+            case 1:
+                bletter(extent);
+                break;
+            case 2:
+                sletter(extent);
+                break;
+            case 3:
+                num(extent);
+                break;
+            case 4:
+                spcial(extent);
+                break;
+            // 较复杂
+            case 5:
+                bletter(random.nextInt(2) + 3);
+                num(extent - 4);
+                break;
+            case 6:
+                num(extent - 4);
+                bletter(random.nextInt(2) + 3);
+                break;
+            case 7:
+                sletter(random.nextInt(2) + 3);
+                num(extent - 4);
+                break;
+            case 8:
+                num(extent - 4);
+                sletter(random.nextInt(2) + 3);
+                break;
+            case 9:
+                bletter(random.nextInt(1) + 1);
+                sletter(random.nextInt(2) + 2);
+                num(extent - 4);
+                break;
+            case 10:
+                num(extent - 4);
+                bletter(random.nextInt(1) + 1);
+                sletter(random.nextInt(2) + 2);
+                break;
+        }
+    }
+
+    private static void bletter(int length) {
+        final String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for (byte i = 0; i < length; i++) {
             int randomInt = random.nextInt(str.length());
             pass.append(str.charAt(randomInt));
         }
-        password = pass.toString();
     }
 
-    private static void randomNoSpecial() {
-        final String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuilder pass = new StringBuilder();
-        for (byte i = 0; i < rp; i++) {
+    private static void sletter(int length) {
+        final String str = "abcdefghijklmnopqrstuvwxyz";
+        for (byte i = 0; i < length; i++) {
             int randomInt = random.nextInt(str.length());
             pass.append(str.charAt(randomInt));
         }
-        password = pass.toString();
     }
 
-    private static void Letter23Num() {
-        final String num = "0123456789";
-        final String letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        StringBuilder pass = new StringBuilder();
-        int letterlong = random.nextInt(1) + 3;
-        for (byte i = 0; i < letterlong; i++) {
-            pass.append(letter.charAt(random.nextInt(letter.length())));
+    private static void num(int length) {
+        final String str = "0123456789";
+        for (byte i = 0; i < length; i++) {
+            int randomInt = random.nextInt(str.length());
+            pass.append(str.charAt(randomInt));
         }
-        for (byte i = 0; i < (rp - letterlong); i++) {
-            pass.append(num.charAt(random.nextInt(num.length())));
-        }
-        password = pass.toString();
     }
 
-    private static void NumLetter23() {
-        final String num = "0123456789";
-        final String letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        StringBuilder pass = new StringBuilder();
-        int letterlong = random.nextInt(1) + 3;
-        for (byte i = 0; i < (rp - letterlong); i++) {
-            pass.append(num.charAt(random.nextInt(num.length())));
+    private static void spcial(int length) {
+        final String str = "!@#$%^&*";
+        for (byte i = 0; i < length; i++) {
+            int randomInt = random.nextInt(str.length());
+            pass.append(str.charAt(randomInt));
         }
-        for (byte i = 0; i < letterlong; i++) {
-            pass.append(letter.charAt(random.nextInt(letter.length())));
-        }
-        password = pass.toString();
-    }
-
-    private static void num() {
-        final String num = "0123456789";
-        StringBuffer pass = new StringBuffer();
-        for (byte i = 0; i < rp; i++) {
-            pass.append(num.charAt(random.nextInt(num.length())));
-        }
-        password = pass.toString();
     }
 }

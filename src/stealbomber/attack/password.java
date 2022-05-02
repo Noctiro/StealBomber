@@ -41,30 +41,56 @@ public class password {
                 break;
             // 较复杂
             case 5:
+                // AAA(AA)123
+                ms();
                 bletter(random.nextInt(2) + 3);
+                ms();
                 num(extent - 4);
+                ms();
                 break;
             case 6:
+                // 123AAA(AA)
+                ms();
                 num(extent - 4);
+                ms();
                 bletter(random.nextInt(2) + 3);
+                ms();
                 break;
             case 7:
+                // aaa(aa)123
+                ms();
                 sletter(random.nextInt(2) + 3);
+                ms();
                 num(extent - 4);
+                ms();
                 break;
             case 8:
+                // 123aaa(aa)
+                ms();
                 num(extent - 4);
+                ms();
                 sletter(random.nextInt(2) + 3);
+                ms();
                 break;
             case 9:
+                // A(A)aa(aa)123
+                ms();
                 bletter(random.nextInt(1) + 1);
+                ms();
                 sletter(random.nextInt(2) + 2);
+                ms();
                 num(extent - 4);
+                ms();
                 break;
             case 10:
+                // 123A(A)aa(aa)
+                ms();
                 num(extent - 4);
+                ms();
                 bletter(random.nextInt(1) + 1);
+                ms();
                 sletter(random.nextInt(2) + 2);
+                ms();
                 break;
         }
     }
@@ -90,6 +116,13 @@ public class password {
         for (byte i = 0; i < length; i++) {
             int randomInt = random.nextInt(str.length());
             pass.append(str.charAt(randomInt));
+        }
+    }
+
+    private static void ms() {
+        // 20%的概率
+        if (random.nextInt(19) == 1) {
+            spcial(1);
         }
     }
 

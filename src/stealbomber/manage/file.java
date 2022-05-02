@@ -155,7 +155,7 @@ public class file {
 
     private static void booleanmanage() {
         // 生成账号密码输出
-        genoutput = judge(false, "genoutput");
+        genoutput = judge(true, "genoutput");
         // 代理
         proxyswitch = judge(false, "proxyswitch");
         proxyfile = properties.getProperty("proxyfile", "Not Found").toString();

@@ -42,7 +42,7 @@
 
 | 参数名 | 默认值 | 说明 |
 | --- | --- | --- |
-| genoutput | false | 控制台输出随机生成的账号密码 |
+| genoutput | true | 控制台输出随机生成的账号密码 |
 | proxyswitch | false | 使用代理攻击 |
 
 

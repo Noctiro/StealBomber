@@ -3,7 +3,7 @@ package stealbomber.manage;
 import javax.swing.JOptionPane;
 
 public class out {
-    static short cs = 0;
+    private static short cs = 0;
 
     public static void println(String string) {
         System.out.println(string);
@@ -12,8 +12,7 @@ public class out {
             stealbomber.gui.main.out.setCaretPosition(stealbomber.gui.main.out.getText().length());// 滚动条到底
             cs++;
             if (cs == 300) {
-                stealbomber.gui.main.out.setText("");
-                System.out.println();
+                stealbomber.gui.main.out.setText(null);
                 System.gc();
                 cs = 0;
             }

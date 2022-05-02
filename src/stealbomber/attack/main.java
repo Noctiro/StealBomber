@@ -62,22 +62,31 @@ public class main implements Runnable {
             if (stealbomber.manage.file.urls.length - 1 == 0) {
                 url = stealbomber.manage.file.urls[0];
             } else
-                url = stealbomber.manage.file.urls[random.nextInt(stealbomber.manage.file.urls.length - 1)].toString();
+                url = stealbomber.manage.file.urls[random.nextInt(stealbomber.manage.file.urls.length - 1)];
             // name
             String rn;
-            Long brn = (long) (Math.random() * (99999999999l - 1000000)) + 100000;
-            switch (random.nextInt(2) + 1) {
+            StringBuilder qqnum = new StringBuilder();
+            switch (random.nextInt(2)) {
+                case 0:
+                    StringBuilder phonenum = new StringBuilder();
+                    phonenum.append(stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]);
+                    for (byte i = 0; i < 8; i++) {
+                        phonenum.append(random.nextInt(9));
+                    }
+                    rn = phonenum.toString();
+                    break;
                 case 1:
-                    int length = random.nextInt(99999999 - 1000000) + 1000000;
-                    rn = stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]
-                            .toString() + length;
+                    for (byte i = 0; i < random.nextInt(12) + 8; i++) {
+                        qqnum.append(random.nextInt(9));
+                    }
+                    rn = qqnum.append("@qq.com").toString();
                     break;
                 case 2:
-                    rn = brn.toString() + "@qq.com";
-                    break;
-                case 3:
                 default:
-                    rn = brn.toString();
+                    for (byte i = 0; i < random.nextInt(12) + 8; i++) {
+                        qqnum.append(random.nextInt(9));
+                    }
+                    rn = qqnum.toString();
                     break;
             }
             // rp

@@ -5,7 +5,7 @@ public class App {
     public static boolean sgui = true;
 
     public static void main(String[] args) {
-        String start = """
+        System.out.print("""
                  -------------------------------------------------------------------------
                  _________ __                .__    __________              ___.
                  /   _____//  |_  ____ _____  |  |   \\______   \\ ____   _____\\_ |__   ___________
@@ -14,9 +14,8 @@ public class App {
                 /_______  /|__|  \\___  >____  /____/  |______  /\\____/|__|_|  /___  /\\___  >__|
                         \\/           \\/     \\/               \\/             \\/    \\/     \\/
                  -------------------------------------------------------------------------
-                 """;
-        System.out.print(start);
-        System.out.print("Author: ObcbO" + "\nVersion: " + version + "\n\n");
+                 """
+                + "Author: ObcbO" + "\nVersion: " + version + "\n\n");
         for (String a : args) {
             if ("nogui".equals(a)) {
                 sgui = false;

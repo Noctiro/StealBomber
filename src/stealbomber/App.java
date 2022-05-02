@@ -1,7 +1,7 @@
 package stealbomber;
 
 public class App {
-    public static final double version = 1.2;
+    public static final float version = 1.2f;
     public static boolean sgui = true;
 
     public static void main(String[] args) {
@@ -28,8 +28,8 @@ public class App {
             if (stealbomber.manage.file.start(System.getProperty("file"))) {
                 stealbomber.manage.file.manage();
                 System.gc();
-                stealbomber.manage.storage.start = true;
                 stealbomber.manage.thread.start();
+                stealbomber.manage.storage.start = true;
             } else {
                 System.exit(1);
             }

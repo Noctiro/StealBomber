@@ -166,6 +166,7 @@ public class main extends JFrame {
                 save.setEnabled(true);
                 cbutton.setText("开始");
                 stealbomber.manage.storage.start = false;
+                System.gc();
             }
         });
 

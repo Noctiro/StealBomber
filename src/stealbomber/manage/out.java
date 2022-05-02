@@ -3,7 +3,7 @@ package stealbomber.manage;
 import javax.swing.JOptionPane;
 
 public class out {
-    static int cs = 0;
+    static short cs = 0;
 
     public static void println(String string) {
         System.out.println(string);
@@ -14,6 +14,7 @@ public class out {
             if (cs == 300) {
                 stealbomber.gui.main.out.setText("");
                 System.out.println();
+                System.gc();
                 cs = 0;
             }
         }

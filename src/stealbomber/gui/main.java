@@ -68,6 +68,7 @@ public class main extends JFrame {
 
         jf.setVisible(true);// 显示界面
         stealbomber.manage.file.start(System.getProperty("file"));
+        stealbomber.manage.file.manage();
         refresh();
     }
 
@@ -143,7 +144,6 @@ public class main extends JFrame {
         gbc.gridheight = 1;
         cp.setConstraints(save, gbc);
         save.addActionListener((e) -> {
-            stealbomber.manage.file.manage();
             JOptionPane.showMessageDialog(null, "还没做呢", "保存",
                     JOptionPane.INFORMATION_MESSAGE,
                     null);
@@ -157,6 +157,7 @@ public class main extends JFrame {
         cp.setConstraints(cbutton, gbc);
         cbutton.addActionListener((e) -> {
             if (!stealbomber.manage.storage.start) {
+                stealbomber.manage.file.manage();
                 save.setEnabled(false);
                 cbutton.setText("停止");
                 stealbomber.manage.storage.start = true;

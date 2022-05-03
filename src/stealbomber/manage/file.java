@@ -81,6 +81,7 @@ public class file {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        manage();
     }
 
     public static void manage() {

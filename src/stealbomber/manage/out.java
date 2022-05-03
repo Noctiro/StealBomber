@@ -13,7 +13,7 @@ public class out {
             cs++;
             if (cs == 300) {
                 stealbomber.gui.main.out.setText(null);
-                System.gc();
+                Runtime.getRuntime().gc();
                 cs = 0;
             }
         }

@@ -23,8 +23,7 @@ public class App {
             stealbomber.gui.main.visible();
         } else {
             if (stealbomber.manage.file.start(System.getProperty("file"))) {
-                stealbomber.manage.file.manage();
-                System.gc();
+                Runtime.getRuntime().gc();
                 stealbomber.manage.thread.start();
                 stealbomber.manage.storage.start = true;
             } else {

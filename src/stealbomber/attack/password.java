@@ -9,7 +9,7 @@ public class password {
     protected static String get() {
         pass = new StringBuilder();
         int extent = random.nextInt(16 - 8) + 8;
-        switch (random.nextInt(9)) {
+        switch (random.nextInt(10)) {
             // 全随机
             case 0:
                 final String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
@@ -18,18 +18,23 @@ public class password {
                     pass.append(str.charAt(randomInt));
                 }
                 break;
-            // 单类型
+            // 弱口令
             case 1:
+                pass.append(stealbomber.manage.storage.passwords[random
+                .nextInt(stealbomber.manage.storage.passwords.length - 1)]);
+                break;
+            // 单类型
+            case 2:
                 bletter(extent);
                 break;
-            case 2:
+            case 3:
                 sletter(extent);
                 break;
-            case 3:
+            case 4:
                 num(extent);
                 break;
             // 较复杂
-            case 4:
+            case 5:
                 // AAA(AA)123
                 ms();
                 bletter(random.nextInt(2) + 3);
@@ -37,7 +42,7 @@ public class password {
                 num(extent - 4);
                 ms();
                 break;
-            case 5:
+            case 6:
                 // 123AAA(AA)
                 ms();
                 num(extent - 4);
@@ -45,7 +50,7 @@ public class password {
                 bletter(random.nextInt(2) + 3);
                 ms();
                 break;
-            case 6:
+            case 7:
                 // aaa(aa)123
                 ms();
                 sletter(random.nextInt(2) + 3);
@@ -53,7 +58,7 @@ public class password {
                 num(extent - 4);
                 ms();
                 break;
-            case 7:
+            case 8:
                 // 123aaa(aa)
                 ms();
                 num(extent - 4);
@@ -61,7 +66,7 @@ public class password {
                 sletter(random.nextInt(2) + 3);
                 ms();
                 break;
-            case 8:
+            case 9:
                 // A(A)aa(aa)123
                 ms();
                 bletter(random.nextInt(1) + 1);
@@ -71,7 +76,7 @@ public class password {
                 num(extent - 4);
                 ms();
                 break;
-            case 9:
+            case 10:
                 // 123A(A)aa(aa)
                 ms();
                 num(extent - 4);
@@ -111,7 +116,7 @@ public class password {
 
     private static void ms() {
         // 20%的概率
-        if (random.nextInt(19) == 1) {
+        if (random.nextInt(19) == 0) {
             spcial(1);
         }
     }

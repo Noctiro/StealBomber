@@ -67,7 +67,7 @@ public class main implements Runnable {
             String rn;
             StringBuilder qqnum = new StringBuilder();
             switch (random.nextInt(2)) {
-                case 0:
+                case 1:
                     StringBuilder phonenum = new StringBuilder();
                     phonenum.append(stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]);
                     for (byte i = 0; i < 8; i++) {
@@ -75,13 +75,13 @@ public class main implements Runnable {
                     }
                     rn = phonenum.toString();
                     break;
-                case 1:
+                case 2:
                     for (byte i = 0; i < random.nextInt(12) + 8; i++) {
                         qqnum.append(random.nextInt(9));
                     }
                     rn = qqnum.append("@qq.com").toString();
                     break;
-                case 2:
+                case 0:
                 default:
                     for (byte i = 0; i < random.nextInt(12) + 8; i++) {
                         qqnum.append(random.nextInt(9));

@@ -130,7 +130,7 @@ public class menu {
         checkupdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                stealbomber.manage.thread.executPool.execute(new stealbomber.manage.update());
+                new Thread(new stealbomber.manage.update());
             }
         });
 

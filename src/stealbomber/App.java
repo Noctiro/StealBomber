@@ -17,9 +17,7 @@ public class App {
                  """
                 + "Author: ObcbO" + "\nVersion: " + version + "\n\n");
         for (String a : args) {
-            if ("nogui".equals(a)) {
-                sgui = false;
-            }
+            sgui = "nogui".equals(a) ? false : true;
         }
         if (sgui) {
             stealbomber.gui.main.visible();

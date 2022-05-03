@@ -3,21 +3,13 @@ package stealbomber.attack;
 import java.util.Random;
 
 public class password {
-    private static Random random;
+    private static Random random = new Random();
     private static StringBuilder pass;
 
     protected static String get() {
-        String password = "error";
-        random = new Random();
-        random(random.nextBoolean(), random.nextBoolean(), random.nextBoolean());
-        password = pass.toString();
-        return password;
-    }
-
-    private static void random(boolean letter, boolean num, boolean spcial) {
-        int extent = random.nextInt(16 - 8) + 8;
         pass = new StringBuilder();
-        switch (random.nextInt(10)) {
+        int extent = random.nextInt(16 - 8) + 8;
+        switch (random.nextInt(9)) {
             // 全随机
             case 0:
                 final String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
@@ -36,11 +28,8 @@ public class password {
             case 3:
                 num(extent);
                 break;
-            case 4:
-                spcial(extent);
-                break;
             // 较复杂
-            case 5:
+            case 4:
                 // AAA(AA)123
                 ms();
                 bletter(random.nextInt(2) + 3);
@@ -48,7 +37,7 @@ public class password {
                 num(extent - 4);
                 ms();
                 break;
-            case 6:
+            case 5:
                 // 123AAA(AA)
                 ms();
                 num(extent - 4);
@@ -56,7 +45,7 @@ public class password {
                 bletter(random.nextInt(2) + 3);
                 ms();
                 break;
-            case 7:
+            case 6:
                 // aaa(aa)123
                 ms();
                 sletter(random.nextInt(2) + 3);
@@ -64,7 +53,7 @@ public class password {
                 num(extent - 4);
                 ms();
                 break;
-            case 8:
+            case 7:
                 // 123aaa(aa)
                 ms();
                 num(extent - 4);
@@ -72,7 +61,7 @@ public class password {
                 sletter(random.nextInt(2) + 3);
                 ms();
                 break;
-            case 9:
+            case 8:
                 // A(A)aa(aa)123
                 ms();
                 bletter(random.nextInt(1) + 1);
@@ -82,7 +71,7 @@ public class password {
                 num(extent - 4);
                 ms();
                 break;
-            case 10:
+            case 9:
                 // 123A(A)aa(aa)
                 ms();
                 num(extent - 4);
@@ -93,6 +82,7 @@ public class password {
                 ms();
                 break;
         }
+        return pass.toString();
     }
 
     private static void bletter(int length) {

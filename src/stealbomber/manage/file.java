@@ -114,13 +114,11 @@ public class file {
                     }
                     i++;
                 }
+            } else if (rurl.matches("(http|https)+://[^\\s]*")) {
+                list.add(rurl);
             } else {
-                if (rurl.matches("(http|https)+://[^\\s]*")) {
-                    list.add(rurl);
-                } else {
-                    success = false;
-                    stealbomber.manage.out.warn("ERROR: 攻击网址 你输入的字符串不是一个网址");
-                }
+                success = false;
+                stealbomber.manage.out.warn("ERROR: 攻击网址 你输入的字符串没有包含网址");
             }
             if (success) {
                 int size = list.size();

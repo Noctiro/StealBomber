@@ -59,7 +59,7 @@ public class main implements Runnable {
             // System.out.println(Thread.currentThread().getName());
             // url
             String url;
-            if (stealbomber.manage.file.urls.length - 1 == 0) {
+            if (stealbomber.manage.file.urls.length == 1) {
                 url = stealbomber.manage.file.urls[0];
             } else
                 url = stealbomber.manage.file.urls[random.nextInt(stealbomber.manage.file.urls.length - 1)];

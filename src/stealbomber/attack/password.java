@@ -19,7 +19,7 @@ public class password {
             // 全随机
             case 0:
                 for (byte i = 0; i < extent; i++) {
-                    int randomInt = random.nextInt(all.length());
+                    int randomInt = random.nextInt(all.length() - 1);
                     pass.append(all.charAt(randomInt));
                 }
                 break;
@@ -97,21 +97,21 @@ public class password {
 
     private static void bletter(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = random.nextInt(bletter.length());
+            int randomInt = random.nextInt(bletter.length() - 1);
             pass.append(bletter.charAt(randomInt));
         }
     }
 
     private static void sletter(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = random.nextInt(sletter.length());
+            int randomInt = random.nextInt(sletter.length() - 1);
             pass.append(sletter.charAt(randomInt));
         }
     }
 
     private static void num(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = random.nextInt(num.length());
+            int randomInt = random.nextInt(num.length() - 1);
             pass.append(num.charAt(randomInt));
         }
     }
@@ -125,7 +125,7 @@ public class password {
 
     private static void spcial(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = random.nextInt(spcial.length());
+            int randomInt = random.nextInt(spcial.length() - 1);
             pass.append(spcial.charAt(randomInt));
         }
     }

@@ -21,7 +21,7 @@ public class password {
             // 弱口令
             case 1:
                 pass.append(stealbomber.manage.storage.passwords[random
-                .nextInt(stealbomber.manage.storage.passwords.length - 1)]);
+                        .nextInt(stealbomber.manage.storage.passwords.length - 1)]);
                 break;
             // 单类型
             case 2:

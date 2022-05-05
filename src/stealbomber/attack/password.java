@@ -16,7 +16,7 @@ public class password {
     protected static String get() {
         pass = new StringBuilder();
         int extent = random.nextInt(16 - 8) + 8;
-        switch (random.nextInt(10)) {
+        switch (random.nextInt(7)) {
             // 全随机
             case 0:
                 for (byte i = 0; i < extent; i++) {
@@ -30,18 +30,8 @@ public class password {
                 pass.append(stealbomber.manage.storage.passwords[random
                         .nextInt(stealbomber.manage.storage.passwords.length - 1)]);
                 break;
-            // 单类型
+            // 规则生成
             case 2:
-                bletter(extent);
-                break;
-            case 3:
-                sletter(extent);
-                break;
-            case 4:
-                num(extent);
-                break;
-            // 较复杂
-            case 5:
                 // AAA(AA)123
                 ms();
                 bletter(random.nextInt(2) + 3);
@@ -49,7 +39,7 @@ public class password {
                 num(extent - 4);
                 ms();
                 break;
-            case 6:
+            case 3:
                 // 123AAA(AA)
                 ms();
                 num(extent - 4);
@@ -57,7 +47,7 @@ public class password {
                 bletter(random.nextInt(2) + 3);
                 ms();
                 break;
-            case 7:
+            case 4:
                 // aaa(aa)123
                 ms();
                 sletter(random.nextInt(2) + 3);
@@ -65,7 +55,7 @@ public class password {
                 num(extent - 4);
                 ms();
                 break;
-            case 8:
+            case 5:
                 // 123aaa(aa)
                 ms();
                 num(extent - 4);
@@ -73,7 +63,7 @@ public class password {
                 sletter(random.nextInt(2) + 3);
                 ms();
                 break;
-            case 9:
+            case 6:
                 // A(A)aa(aa)123
                 ms();
                 bletter(random.nextInt(1) + 1);
@@ -83,7 +73,7 @@ public class password {
                 num(extent - 4);
                 ms();
                 break;
-            case 10:
+            case 7:
                 // 123A(A)aa(aa)
                 ms();
                 num(extent - 4);

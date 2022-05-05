@@ -69,7 +69,8 @@ public class main implements Runnable {
             switch (random.nextInt(2)) {
                 case 2:
                     StringBuilder phonenum = new StringBuilder();
-                    phonenum.append(stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]);
+                    phonenum.append(
+                            stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]);
                     for (byte i = 0; i < 8; i++) {
                         phonenum.append(random.nextInt(9));
                     }
@@ -77,14 +78,20 @@ public class main implements Runnable {
                     break;
                 case 1:
                     for (byte i = 0; i < random.nextInt(12) + 8; i++) {
-                        qqnum.append(random.nextInt(9));
+                        if (i == 0) {
+                            qqnum.append(random.nextInt(8) + 1);
+                        } else
+                            qqnum.append(random.nextInt(9));
                     }
                     rn = qqnum.append("@qq.com").toString();
                     break;
                 case 0:
                 default:
                     for (byte i = 0; i < random.nextInt(12) + 8; i++) {
-                        qqnum.append(random.nextInt(9));
+                        if (i == 0) {
+                            qqnum.append(random.nextInt(8) + 1);
+                        } else
+                            qqnum.append(random.nextInt(9));
                     }
                     rn = qqnum.toString();
                     break;

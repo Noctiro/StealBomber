@@ -97,12 +97,7 @@ public class main implements Runnable {
                     break;
             }
             // rp
-            String pass = password.get();
-            // 输出
-            if (stealbomber.manage.file.genoutput) {
-                stealbomber.manage.out.println(rn + " " + pass);
-            }
-            go(rn, pass, url, proxytype, proxyhost, proxyport);
+            go(rn, password.get(), url, proxytype, proxyhost, proxyport);
         }
         return;
     }
@@ -148,6 +143,10 @@ public class main implements Runnable {
             out.write(param.getBytes());
             out.flush();
             out.close();
+            // 输出
+            if (stealbomber.manage.file.genoutput) {
+                stealbomber.manage.out.println(name + " " + pass);
+            }
         } catch (IOException e) {
             stealbomber.manage.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
         } finally {

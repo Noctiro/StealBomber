@@ -1,18 +1,16 @@
+<img src="logo.png" alt="logo" width="100" height="100" align="right" />
+
 # Steal Bomber
 
 > 这是一个用Java语言写的盗号网站轰炸机
 
 ## 启动软件
 
-### 带GUI (BETA版 尚未发布)
-
-`在终端执行 java --enable-preview -jar stealbomber.jar`或`双击软件打开`
-
-### 不带GUI
-
-- 在终端执行 `java --enable-preview -jar stealbomber.jar nogui`
+- 在终端执行 `java -jar stealbomber.jar`
 - 程序将自动输出默认配置文件(如果没有)
 - 输出将显示在**控制台**上
+
+> 如果无法启动请使用 `java --enable-preview -jar stealbomber.jar`
 
 ### 启动参数
 
@@ -20,7 +18,7 @@
 
 | 参数 | 说明 | 例子 |
 | --- | --- | --- |
-| -Dfile= | 自定义配置名称(位置) | java --enable-preview -Dfile="example.properties" -jar stealbomber.jar |
+| -Dfile= | 自定义配置名称(位置) | java -Dfile="example.properties" -jar stealbomber.jar |
 
 ## 文本编写
 
@@ -83,3 +81,4 @@ socks5://6.6.6.6:2345
 - [x] 支持代理
 - [x] 支持多个URL同时攻击
 - [ ] 添加GUI
+  > 放弃使用Swing制作GUI 该TODO无限期搁置中

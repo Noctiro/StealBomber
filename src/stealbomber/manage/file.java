@@ -59,6 +59,7 @@ public class file {
         // properties.load(file.class.getClassLoader().getResourceAsStream(file));
         properties.list(System.out);
         System.out.println("-- File Readout completed --");
+        manage();
         return success;
     }
 
@@ -83,7 +84,7 @@ public class file {
         }
     }
 
-    public static void manage() {
+    private static void manage() {
         find();
         String temp;
         // 一些功能开关

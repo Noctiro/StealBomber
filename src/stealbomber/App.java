@@ -23,10 +23,9 @@ public class App {
             new Thread(new stealbomber.manage.update(), "CheckUpdate").start();
         
         if (stealbomber.manage.file.start(System.getProperty("file"))) {
-            stealbomber.manage.file.manage();
             Runtime.getRuntime().gc();
-            stealbomber.manage.thread.start();
             stealbomber.manage.storage.start = true;
+            stealbomber.manage.thread.start();
         } else {
             System.exit(1);
         }

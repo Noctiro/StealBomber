@@ -2,10 +2,23 @@ name: Build
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+      system:
+        description: 'System'     
+        required: false
+        default: 'ubuntu-latest' 
+        type: choice
+        options:
+        - macos-latest
+        - windows-latest
+        - ubuntu-latest
     
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.inputs.system }}
     strategy:
       matrix:
         java: [ '13', '17' ]
@@ -22,4 +35,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: Package
-          path: build/jar
+          path: ./

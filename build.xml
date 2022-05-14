@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="StealBomber">
+    <target name="build">
+        <javac srcdir="src" destdir="bin" includeantruntime="on"/>  
+        <jar destfile="stealbomber.jar" basedir="bin">
+            <manifest>
+                <attribute name="Main-Class" value="stealbomber.App" />
+            </manifest>
+        </jar>
+    </target>
+</project>

@@ -18,7 +18,7 @@ jobs:
           distribution: 'zulu'
           java-version: ${{ matrix.java }}
 
-      - run: ant -noinput -buildfile build.xml
+      - run: ant build
       - uses: actions/upload-artifact@v3
         with:
           name: Package

@@ -5,13 +5,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class update implements Runnable {
+public class update {
     private static StringBuilder json = new StringBuilder();
     private static String version = String.valueOf(stealbomber.App.version);
     private static String downloadlink;
     private static String info;
 
-    public void run() {
+    public static void run() {
         HttpURLConnection httpURLConnection;
         try {
             httpURLConnection = (HttpURLConnection) new URL(
@@ -51,7 +51,7 @@ public class update implements Runnable {
             }
         } catch (Exception e1) {
             e1.printStackTrace();
-            out.warn("ERROR: 无法连接到 api.github.com 以检查更新");
+            System.err.println("ERROR: 无法连接到 api.github.com 以检查更新");
         }
     }
 }

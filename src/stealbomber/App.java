@@ -1,5 +1,9 @@
 package stealbomber;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class App {
     public static final float version = 1.4f;
 
@@ -19,8 +23,16 @@ public class App {
         for (String a : args) {
             cp = "cp".equals(a) ? true : false;
         }
-        if (cp)
-            new Thread(new stealbomber.manage.update(), "CheckUpdate").start();
+        if (cp) {
+            System.out.println("开始检查更新");
+            stealbomber.manage.update.run();
+			System.out.println("按回车继续");
+			try {
+                new BufferedReader(new InputStreamReader(System.in)).readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         
         if (stealbomber.manage.file.start(System.getProperty("file"))) {
             Runtime.getRuntime().gc();

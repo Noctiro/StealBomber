@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="StealBomber">
+    <property name="version" value="${version}"/>
     <target name="build">
-        <javac srcdir="src" destdir="bin" includeantruntime="on"/>  
+        <javac srcdir="src" destdir="bin" source="${version}" target="${version}" includeantruntime="on" />
         <jar destfile="stealbomber.jar" basedir="bin">
             <manifest>
                 <attribute name="Main-Class" value="stealbomber.App" />

@@ -145,16 +145,16 @@ public class main implements Runnable {
             out.close();
             // 输出
             if (stealbomber.manage.file.genoutput) {
-                stealbomber.manage.out.println(name + " " + pass);
+                System.out.println(name + " " + pass);
             }
         } catch (IOException e) {
-            stealbomber.manage.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
+            System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
         } finally {
             if (null != httpURLConnection) {
                 try {
                     httpURLConnection.disconnect();
                 } catch (Exception e) {
-                    stealbomber.manage.out.println(surl + " httpURLConnection 流关闭异常：" + e.getLocalizedMessage());
+                    System.out.println(surl + " httpURLConnection 流关闭异常：" + e.getLocalizedMessage());
                 }
             }
         }

@@ -52,7 +52,7 @@ public class file {
                 e.printStackTrace();
             }
             if (!new File(file).exists()) {
-                stealbomber.manage.out.warn("未发现选定的配置文件");
+                System.err.println("未发现选定的配置文件");
                 System.exit(1);
             }
         }
@@ -95,7 +95,7 @@ public class file {
                 thnum = Integer.parseInt(temp);
             } else {
                 success = false;
-                stealbomber.manage.out.warn("ERROR: 线程数 你输入的值不是一个正整数");
+                System.err.println("ERROR: 线程数 你输入的值不是一个正整数");
             }
         }
         // URL
@@ -110,7 +110,7 @@ public class file {
                         list.add(string);
                     } else {
                         success = false;
-                        stealbomber.manage.out.warn("ERROR: 攻击网址 你输入的字符串不是一个网址");
+                        System.err.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
                     }
                     i++;
                 }
@@ -118,20 +118,20 @@ public class file {
                 list.add(rurl);
             } else {
                 success = false;
-                stealbomber.manage.out.warn("ERROR: 攻击网址 你输入的字符串没有包含网址");
+                System.err.println("ERROR: 攻击网址 你输入的字符串没有包含网址");
             }
             if (success) {
                 int size = list.size();
                 urls = (String[]) list.toArray(new String[size]);
             }
         } else {
-            stealbomber.manage.out.warn("ERROR: 攻击网址 内容异常");
+            System.err.println("ERROR: 攻击网址 内容异常");
         }
         // 参数
         if (findparameter) {
             param = properties.getProperty("parameter").toString();
         } else {
-            stealbomber.manage.out.warn("ERROR: 参数 内容异常");
+            System.err.println("ERROR: 参数 内容异常");
         }
     }
 
@@ -171,7 +171,7 @@ public class file {
         } else if ("FALSE".equals(value.toUpperCase())) {
             output = false;
         } else {
-            stealbomber.manage.out.warn("ERROR: 布尔参数的值为 true 或 false");
+            System.err.println("ERROR: 布尔参数的值为 true 或 false");
             output = true;
         }
         return output;

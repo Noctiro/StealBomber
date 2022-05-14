@@ -1,8 +1,7 @@
 package stealbomber;
 
 public class App {
-    public static final float version = 1.2f;
-    public static boolean sgui = true;
+    public static final float version = 1.4f;
 
     public static void main(String[] args) {
         System.out.print("""
@@ -16,20 +15,20 @@ public class App {
                  -------------------------------------------------------------------------
                  """
                 + "Author: ObcbO" + "\nVersion: " + version + "\n\n");
+        boolean cp = false;
         for (String a : args) {
-            sgui = "nogui".equals(a) ? false : true;
+            cp = "cp".equals(a) ? true : false;
         }
-        if (sgui) {
-            stealbomber.gui.main.visible();
+        if (cp)
+            new Thread(new stealbomber.manage.update(), "CheckUpdate").start();
+        
+        if (stealbomber.manage.file.start(System.getProperty("file"))) {
+            stealbomber.manage.file.manage();
+            Runtime.getRuntime().gc();
+            stealbomber.manage.thread.start();
+            stealbomber.manage.storage.start = true;
         } else {
-            if (stealbomber.manage.file.start(System.getProperty("file"))) {
-                stealbomber.manage.file.manage();
-                Runtime.getRuntime().gc();
-                stealbomber.manage.thread.start();
-                stealbomber.manage.storage.start = true;
-            } else {
-                System.exit(1);
-            }
+            System.exit(1);
         }
     }
 }

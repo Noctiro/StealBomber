@@ -18,11 +18,8 @@ jobs:
           distribution: 'zulu'
           java-version: ${{ matrix.java }}
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
-      - name: Execute Gradle build
-        run: ./gradlew build
-
-      - run: ls
-      - run: tree
+      - run: ant -noinput -buildfile build.xml
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Package
+          path: build/jar

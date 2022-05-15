@@ -25,4 +25,5 @@ jobs:
       - run: mv stealbomber.jar stealbomber${{ github.event.inputs.version }}-java${{ matrix.Java }}.jar
       - uses: actions/upload-artifact@v3
         with:
-          path: ./stealbomber${{ github.event.inputs.version }}-java${{ matrix.Java }}.jar
+          name: stealbomber${{ github.event.inputs.version }}
+          path: ./*.jar

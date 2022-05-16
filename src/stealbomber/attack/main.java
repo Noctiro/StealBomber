@@ -30,9 +30,10 @@ public class main implements Runnable {
 
     public void run() {
         // proxy
-        String proxytype = "";
         String proxyurl = "";
         String[] proxyiurl = { "", "" };
+
+        String proxytype = "";
         String proxyhost = "";
         int proxyport = 0;
         if (stealbomber.manage.file.proxyswitch) {
@@ -54,6 +55,8 @@ public class main implements Runnable {
             proxyiurl = proxy.iurl(proxyurl);
             proxyhost = proxyiurl[0];
             proxyport = Integer.valueOf(proxyiurl[1]);
+            proxyurl = null;
+            proxyiurl = null;
         }
         while (stealbomber.manage.storage.start) {
             // System.out.println(Thread.currentThread().getName());

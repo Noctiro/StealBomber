@@ -15,6 +15,8 @@ public class main implements Runnable {
     private static boolean proxysocksswich = false;
     private static Random random = new Random();
 
+    private static byte error = 0;
+
     {// 初始化
         if (stealbomber.manage.file.proxyswitch) {
             proxyhttp = proxy.readhttp(stealbomber.manage.file.proxyfile);
@@ -149,6 +151,24 @@ public class main implements Runnable {
             }
         } catch (IOException e) {
             System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
+            if (error == 10) {
+                stealbomber.manage.storage.start = false;
+                error = 0;
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+                System.out.println("\n错误次数过多, 正在重新启动\n");
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+                stealbomber.manage.storage.start = true;
+                stealbomber.manage.thread.start();
+            } else if (!"java.net.SocketTimeoutException".equals(e.getClass().toString()))
+                error++;
         } finally {
             if (null != httpURLConnection) {
                 try {

@@ -89,21 +89,21 @@ public class password {
 
     private static void bletter(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = random.nextInt(type[0].length()) - 1;
+            int randomInt = random.nextInt(type[0].length() - 1) - 1;
             pass.append(type[0].charAt(randomInt));
         }
     }
 
     private static void sletter(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = random.nextInt(type[1].length()) - 1;
+            int randomInt = random.nextInt(type[1].length() - 1) - 1;
             pass.append(type[1].charAt(randomInt));
         }
     }
 
     private static void num(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = random.nextInt(type[2].length()) - 1;
+            int randomInt = random.nextInt(type[2].length() - 1) - 1;
             pass.append(type[2].charAt(randomInt));
         }
     }
@@ -117,7 +117,7 @@ public class password {
 
     private static void spcial(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = random.nextInt(type[3].length()) - 1;
+            int randomInt = random.nextInt(type[3].length() - 1) + 1;
             pass.append(type[3].charAt(randomInt));
         }
     }

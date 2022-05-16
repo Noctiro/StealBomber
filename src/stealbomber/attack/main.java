@@ -61,11 +61,8 @@ public class main implements Runnable {
         while (stealbomber.manage.storage.start) {
             // System.out.println(Thread.currentThread().getName());
             // url
-            String url;
-            if (stealbomber.manage.file.urls.length == 1) {
-                url = stealbomber.manage.file.urls[0];
-            } else
-                url = stealbomber.manage.file.urls[random.nextInt(stealbomber.manage.file.urls.length - 1)];
+            String url = stealbomber.manage.file.urls.length == 1 ? stealbomber.manage.file.urls[0]
+                    : stealbomber.manage.file.urls[random.nextInt(stealbomber.manage.file.urls.length - 1)];
             // name
             String rn;
             StringBuilder qqnum = new StringBuilder();

@@ -167,7 +167,7 @@ public class main implements Runnable {
                 }
                 stealbomber.manage.storage.start = true;
                 stealbomber.manage.thread.start();
-            } else if (!"java.net.SocketTimeoutException".equals(e.getClass().toString()))
+            } else if (!"Connect timed out".equals(e.getLocalizedMessage()))
                 error++;
         } finally {
             if (null != httpURLConnection) {

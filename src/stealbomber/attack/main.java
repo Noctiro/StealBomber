@@ -7,6 +7,7 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class main implements Runnable {
     private static String[] proxyhttp;
@@ -68,32 +69,32 @@ public class main implements Runnable {
             // name
             String rn;
             StringBuilder qqnum = new StringBuilder();
-            switch (random.nextInt(2)) {
+            switch (ThreadLocalRandom.current().nextInt(2)) {
                 case 2:
                     StringBuilder phonenum = new StringBuilder();
                     phonenum.append(
                             stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]);
                     for (byte i = 0; i < 8; i++) {
-                        phonenum.append(random.nextInt(9));
+                        phonenum.append(ThreadLocalRandom.current().nextInt(9));
                     }
                     rn = phonenum.toString();
                     break;
                 case 1:
-                    for (byte i = 0; i < random.nextInt(12) + 8; i++) {
+                    for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 12); i++) {
                         if (i == 0) {
-                            qqnum.append(random.nextInt(8) + 1);
+                            qqnum.append(ThreadLocalRandom.current().nextInt(1, 9));
                         } else
-                            qqnum.append(random.nextInt(9));
+                            qqnum.append(ThreadLocalRandom.current().nextInt(9));
                     }
                     rn = qqnum.append("@qq.com").toString();
                     break;
                 case 0:
                 default:
-                    for (byte i = 0; i < random.nextInt(12) + 8; i++) {
+                    for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 12); i++) {
                         if (i == 0) {
-                            qqnum.append(random.nextInt(8) + 1);
+                            qqnum.append(ThreadLocalRandom.current().nextInt(1, 9));
                         } else
-                            qqnum.append(random.nextInt(9));
+                            qqnum.append(ThreadLocalRandom.current().nextInt(9));
                     }
                     rn = qqnum.toString();
                     break;

@@ -13,26 +13,26 @@ public class password {
     };
 
     protected static String get() {
-        int extent = ThreadLocalRandom.current().nextInt(8, 16);
+        int extent = ThreadLocalRandom.current().nextInt(8, 17);
         pass = new StringBuilder(extent);
-        switch (ThreadLocalRandom.current().nextInt(7)) {
+        switch (ThreadLocalRandom.current().nextInt(8)) {
             // 全随机
             case 0:
                 for (byte i = 0; i < extent; i++) {
-                    int current = ThreadLocalRandom.current().nextInt(3);
-                    int randomInt = ThreadLocalRandom.current().nextInt(type[current].length() - 1);
+                    int current = ThreadLocalRandom.current().nextInt(4);
+                    int randomInt = ThreadLocalRandom.current().nextInt(type[current].length());
                     pass.append(type[current].charAt(randomInt));
                 }
                 break;
             // 弱口令
             case 1:
-                pass.append(stealbomber.manage.storage.passwords[ThreadLocalRandom.current().nextInt(stealbomber.manage.storage.passwords.length - 1)]);
+                pass.append(stealbomber.manage.storage.passwords[ThreadLocalRandom.current().nextInt(stealbomber.manage.storage.passwords.length)]);
                 break;
             // 规则生成
             case 2:
                 // AAA(AA)123
                 ms();
-                bletter(ThreadLocalRandom.current().nextInt(3,5));
+                bletter(ThreadLocalRandom.current().nextInt(3,6));
                 ms();
                 num(extent - 4);
                 ms();
@@ -42,13 +42,13 @@ public class password {
                 ms();
                 num(extent - 4);
                 ms();
-                bletter(ThreadLocalRandom.current().nextInt(3,5));
+                bletter(ThreadLocalRandom.current().nextInt(3,6));
                 ms();
                 break;
             case 4:
                 // aaa(aa)123
                 ms();
-                sletter(ThreadLocalRandom.current().nextInt(3,5));
+                sletter(ThreadLocalRandom.current().nextInt(3,6));
                 ms();
                 num(extent - 4);
                 ms();
@@ -58,15 +58,15 @@ public class password {
                 ms();
                 num(extent - 4);
                 ms();
-                sletter(ThreadLocalRandom.current().nextInt(3,5));
+                sletter(ThreadLocalRandom.current().nextInt(3,6));
                 ms();
                 break;
             case 6:
                 // A(A)aa(aa)123
                 ms();
-                bletter(ThreadLocalRandom.current().nextInt(1,2));
+                bletter(ThreadLocalRandom.current().nextInt(1,3));
                 ms();
-                sletter(ThreadLocalRandom.current().nextInt(2,4));
+                sletter(ThreadLocalRandom.current().nextInt(2,5));
                 ms();
                 num(extent - 4);
                 ms();
@@ -76,9 +76,9 @@ public class password {
                 ms();
                 num(extent - 4);
                 ms();
-                bletter(ThreadLocalRandom.current().nextInt(1,2));
+                bletter(ThreadLocalRandom.current().nextInt(1,3));
                 ms();
-                sletter(ThreadLocalRandom.current().nextInt(2,4));
+                sletter(ThreadLocalRandom.current().nextInt(2,5));
                 ms();
                 break;
         }
@@ -87,21 +87,21 @@ public class password {
 
     private static void bletter(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = ThreadLocalRandom.current().nextInt(type[0].length() - 1);
+            int randomInt = ThreadLocalRandom.current().nextInt(type[0].length());
             pass.append(type[0].charAt(randomInt));
         }
     }
 
     private static void sletter(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = ThreadLocalRandom.current().nextInt(type[1].length() - 1);
+            int randomInt = ThreadLocalRandom.current().nextInt(type[1].length());
             pass.append(type[1].charAt(randomInt));
         }
     }
 
     private static void num(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = ThreadLocalRandom.current().nextInt(type[2].length() - 1);
+            int randomInt = ThreadLocalRandom.current().nextInt(type[2].length());
             pass.append(type[2].charAt(randomInt));
         }
     }
@@ -115,7 +115,7 @@ public class password {
 
     private static void spcial(int length) {
         for (byte i = 0; i < length; i++) {
-            int randomInt = ThreadLocalRandom.current().nextInt(type[3].length() - 1);
+            int randomInt = ThreadLocalRandom.current().nextInt(type[3].length());
             pass.append(type[3].charAt(randomInt));
         }
     }

@@ -75,26 +75,26 @@ public class main implements Runnable {
                     phonenum.append(
                             stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]);
                     for (byte i = 0; i < 8; i++) {
-                        phonenum.append(ThreadLocalRandom.current().nextInt(9));
+                        phonenum.append(ThreadLocalRandom.current().nextInt(10));
                     }
                     rn = phonenum.toString();
                     break;
                 case 1:
-                    for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 12); i++) {
+                    for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
                         if (i == 0) {
-                            qqnum.append(ThreadLocalRandom.current().nextInt(1, 9));
+                            qqnum.append(ThreadLocalRandom.current().nextInt(1, 10));
                         } else
-                            qqnum.append(ThreadLocalRandom.current().nextInt(9));
+                            qqnum.append(ThreadLocalRandom.current().nextInt(10));
                     }
                     rn = qqnum.append("@qq.com").toString();
                     break;
                 case 0:
                 default:
-                    for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 12); i++) {
+                    for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
                         if (i == 0) {
-                            qqnum.append(ThreadLocalRandom.current().nextInt(1, 9));
+                            qqnum.append(ThreadLocalRandom.current().nextInt(1, 10));
                         } else
-                            qqnum.append(ThreadLocalRandom.current().nextInt(9));
+                            qqnum.append(ThreadLocalRandom.current().nextInt(10));
                     }
                     rn = qqnum.toString();
                     break;

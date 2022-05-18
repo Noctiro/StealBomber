@@ -13,8 +13,8 @@ public class password {
     };
 
     protected static String get() {
-        pass = new StringBuilder();
         int extent = ThreadLocalRandom.current().nextInt(8, 16);
+        pass = new StringBuilder(extent);
         switch (ThreadLocalRandom.current().nextInt(7)) {
             // 全随机
             case 0:

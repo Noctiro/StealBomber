@@ -16,6 +16,8 @@ public class main implements Runnable {
     private static boolean proxysocksswich = false;
     private static Random random = new Random();
 
+    private static byte error = 0;
+
     {// 初始化
         if (stealbomber.manage.file.proxyswitch) {
             proxyhttp = proxy.readhttp(stealbomber.manage.file.proxyfile);
@@ -150,7 +152,18 @@ public class main implements Runnable {
             }
         } catch (IOException e) {
             System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
-            guard.error(e.getLocalizedMessage());
+            if (error == 10) {
+                stealbomber.manage.thread.stop();
+                error = 0;
+                System.out.println("\n错误次数过多, 正在重新启动\n");
+                try {
+                    Thread.sleep(30);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+                stealbomber.manage.thread.start();
+            } else if (!"Connect timed out".equals(e.getLocalizedMessage()))
+                error++;
         } finally {
             if (null != httpURLConnection) {
                 try {

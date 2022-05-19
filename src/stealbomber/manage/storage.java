@@ -1,7 +1,6 @@
 package stealbomber.manage;
 
 public class storage {
-        public static boolean start = false;
         public static final String[] bfnum = {
                         "134", "135", "136", "137", "138", "139", "144", "147", "148", "150", "151", "152", "157",
                         "158", "159", "172", "178", "182", "183", "184", "187", "188", "195", "197", "198", "187",
@@ -53,7 +52,7 @@ public class storage {
                         "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Maxthon/4.4.3.4000 Chrome/30.0.1599.101 Safari/537.36",
                         "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 UBrowser/4.0.3214.0 Safari/537.36",
         };
-        public static final String[] passwords = { 
+        public static final String[] passwords = {
                         "a123456",
                         "zz12369",
                         "123456aa",

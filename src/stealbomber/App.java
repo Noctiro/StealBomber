@@ -36,7 +36,6 @@ public class App {
         
         if (stealbomber.manage.file.start(System.getProperty("file"))) {
             Runtime.getRuntime().gc();
-            stealbomber.manage.storage.start = true;
             stealbomber.manage.thread.start();
         } else {
             System.exit(1);

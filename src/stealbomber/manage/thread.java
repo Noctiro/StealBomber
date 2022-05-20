@@ -12,7 +12,7 @@ public class thread {
 
     public static void start() {
         on = true;
-        for (int i = 0; i < stealbomber.manage.file.thnum; i++) {
+        for (int i = 0; i < file.thnum; i++) {
             new Thread(gat, new stealbomber.attack.main(), "AttackThread-" + (i + 1)).start();
         }
     }

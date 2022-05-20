@@ -157,11 +157,10 @@ public class main implements Runnable {
             if (error >= 100) {
                 error = 0;
                 thread.on = false;
-                System.out.println("\n错误次数过多, 正在重新启动 10s\n");
+                System.out.println("\n错误次数过多, 正在重新启动 30s\n");
                 try {
-                    Thread.sleep(100);// 10s
+                    Thread.sleep(300);// 30s
                 } catch (InterruptedException e1) {
-                    e1.printStackTrace();
                 }
                 thread.stop();
                 thread.start();

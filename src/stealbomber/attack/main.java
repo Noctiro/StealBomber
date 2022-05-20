@@ -157,9 +157,9 @@ public class main implements Runnable {
             if (error >= 100) {
                 error = 0;
                 thread.on = false;
-                System.out.println("\n错误次数过多, 正在重新启动 30s\n");
+                System.out.println("\n错误次数过多, 正在重新启动 10s\n");
                 try {
-                    Thread.sleep(300);// 30s
+                    Thread.sleep(10000);// 1000ms=1s
                 } catch (InterruptedException e1) {
                 }
                 thread.stop();

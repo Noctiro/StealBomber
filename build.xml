@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="StealBomber">
     <property name="version" value="${version}"/>
+    <target name="help" description="Print help">
+       <echo>help - Print help</echo>
+       <echo>build - Export Jar</echo>
+    </target>
     <target name="build">
-        <javac srcdir="src" destdir="bin" source="${version}" target="${version}" includeantruntime="on" />
+        <javac srcdir="src" destdir="bin" optimize="on" includeantruntime="on" />
         <jar destfile="stealbomber.jar" basedir="bin">
             <manifest>
+                <attribute name="Built-By" value="ObcbO"/>
+                <section name="common">
+                  <attribute name="Specification-Title" value="StealBomber"/>
+                  <attribute name="Specification-Version" value="${version}"/>
+                </section>
                 <attribute name="Main-Class" value="stealbomber.App" />
             </manifest>
         </jar>

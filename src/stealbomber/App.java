@@ -8,7 +8,6 @@ public class App {
     public static final float version = 1.4f;
 
     public static void main(String[] args) {
-        Thread.currentThread().setPriority(10);// 最高优先级
         System.out.print("""
                  -------------------------------------------------------------------------
                  _________ __                .__    __________              ___.

@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import stealbomber.manage.thread;
+
 public class main implements Runnable {
     private static String[] proxyhttp;
     private static String[] proxysocks;
@@ -154,8 +156,14 @@ public class main implements Runnable {
             System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
             if (error >= 100) {
                 error = 0;
+                stealbomber.manage.thread.on = false;
+                System.out.println("\n错误次数过多, 正在重新启动 10s\n");
+                try {
+                    Thread.sleep(100);// 10s
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
                 stealbomber.manage.thread.stop();
-                System.out.println("\n错误次数过多, 正在重新启动\n");
                 stealbomber.manage.thread.start();
             } else if (!"Connect timed out".equals(e.getLocalizedMessage())) {
                 error = error + 5;

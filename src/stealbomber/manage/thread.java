@@ -18,7 +18,6 @@ public class thread {
     }
 
     public static void stop() {
-        on = false;
         gat.interrupt();
     }
 }

@@ -152,7 +152,7 @@ public class main implements Runnable {
             }
         } catch (IOException e) {
             System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
-            if (error == 100) {
+            if (error >= 100) {
                 error = 0;
                 stealbomber.manage.thread.stop();
                 System.out.println("\n错误次数过多, 正在重新启动\n");

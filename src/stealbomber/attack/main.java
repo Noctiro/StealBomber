@@ -18,7 +18,7 @@ public class main implements Runnable {
     private static boolean proxysocksswich = false;
     private static Random random = new Random();
 
-    private static int error = 0;
+    private static int error = 0;//错误次数
 
     {// 初始化
         if (stealbomber.manage.file.proxyswitch) {

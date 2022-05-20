@@ -156,11 +156,6 @@ public class main implements Runnable {
                 stealbomber.manage.thread.stop();
                 error = 0;
                 System.out.println("\n错误次数过多, 正在重新启动\n");
-                try {
-                    Thread.sleep(30);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
                 stealbomber.manage.thread.start();
             } else if (!"Connect timed out".equals(e.getLocalizedMessage()))
                 error++;

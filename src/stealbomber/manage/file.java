@@ -57,7 +57,7 @@ public class file {
         }
         // properties.load(file.class.getClassLoader().getResourceAsStream(file));
         properties.list(System.out);
-        System.out.println("-- File Readout completed --");
+        System.out.println("-- file readout completed --");
         manage();
         return success;
     }

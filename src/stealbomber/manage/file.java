@@ -92,9 +92,13 @@ public class file {
         // 线程数
         if (find("threads")) {
             temp = properties.getProperty("threads");
-            if (temp.matches("[0-9]*")) {
+            try {
                 thnum = Integer.parseInt(temp);
-            } else {
+                if (thnum == 0) {
+                    success = false;
+                    System.err.println("ERROR: 线程数 你输入的值不能为0");
+                } 
+            } catch (NumberFormatException e) {
                 success = false;
                 System.err.println("ERROR: 线程数 你输入的值不是一个正整数");
             }

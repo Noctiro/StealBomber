@@ -97,10 +97,12 @@ public class file {
                 if (thnum == 0) {
                     success = false;
                     System.err.println("ERROR: 线程数 你输入的值不能为0");
+                    return;
                 } 
             } catch (NumberFormatException e) {
                 success = false;
                 System.err.println("ERROR: 线程数 你输入的值不是一个正整数");
+                return;
             }
         }
         // URL
@@ -116,6 +118,7 @@ public class file {
                     } else {
                         success = false;
                         System.err.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
+                        return;
                     }
                     i++;
                 }
@@ -124,6 +127,7 @@ public class file {
             } else {
                 success = false;
                 System.err.println("ERROR: 攻击网址 你输入的字符串没有包含网址");
+                return;
             }
             if (success) {
                 int size = list.size();
@@ -132,6 +136,7 @@ public class file {
         } else {
             success = false;
             System.err.println("ERROR: 攻击网址 内容异常");
+            return;
         }
         // 参数
         if (find("parameter")) {
@@ -139,6 +144,7 @@ public class file {
         } else {
             success = false;
             System.err.println("ERROR: 参数 内容异常");
+            return;
         }
         // 输出
         if (find("genoutput")) {

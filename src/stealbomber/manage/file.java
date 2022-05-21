@@ -17,17 +17,15 @@ public class file {
     public static String[] urls;// 网址
     public static String param;// 参数
 
-    public static boolean success = true;
+    public static boolean success = true;// 读取文件是否成功
 
     public static final Properties properties = new Properties();
 
-    public static boolean genoutput;
+    public static boolean gps;// 输出成功
+    public static boolean gpr;// 输出失败
+
     public static boolean proxyswitch;
     public static String proxyfile;
-
-    private static boolean findthnum = true;
-    private static boolean findurl = true;
-    private static boolean findparameter = true;
 
     public static boolean start(String getfile) {
         String file;
@@ -75,8 +73,8 @@ public class file {
                     URL=http://47.93.13.217/2018.php
                     # 攻击参数
                     parameter=username=$[account]&pass=$[password]
-                    # 生成输出
-                    genoutput=true
+                    # 生成输出(suc, err, on, off)
+                    genoutput=off
                     # 代理
                     # proxyswitch=false
                     # proxyfile=all.txt
@@ -88,12 +86,11 @@ public class file {
     }
 
     private static void manage() {
-        find();
         String temp;
         // 一些功能开关
         booleanmanage();
         // 线程数
-        if (findthnum) {
+        if (find("threads")) {
             temp = properties.getProperty("threads");
             if (temp.matches("[0-9]*")) {
                 thnum = Integer.parseInt(temp);
@@ -103,7 +100,7 @@ public class file {
             }
         }
         // URL
-        if (findurl) {
+        if (find("URL")) {
             String rurl = properties.getProperty("URL");
             List<String> list = new ArrayList<String>();
             if (rurl.contains(",")) {
@@ -132,44 +129,52 @@ public class file {
             System.err.println("ERROR: 攻击网址 内容异常");
         }
         // 参数
-        if (findparameter) {
-            param = properties.getProperty("parameter").toString();
+        if (find("parameter")) {
+            param = properties.getProperty("parameter");
         } else {
             System.err.println("ERROR: 参数 内容异常");
         }
+        // 输出
+        if (find("genoutput")) {
+            String content = properties.getProperty("genoutput");
+            if ("suc".equals(content)) {
+                gps = true;
+                gpr = false;
+            } else if ("err".equals(content)) {
+                gps = false;
+                gpr = true;
+            } else if ("on".equals(content)) {
+                gps = gpr = true;
+            }else if ("off".equals(content)) {
+                gps = gpr = false;
+            }
+        } else {
+            gps = gpr = false;
+        }
     }
 
-    private static void find() {
+    private static boolean find(String key) {
         Set<String> set = new HashSet<String>(properties.stringPropertyNames());
-        if (!set.contains("threads")) {
-            findthnum = false;
-            return;
-        }
-        if (!set.contains("URL")) {
-            findurl = false;
-            return;
-        }
-        if (!set.contains("parameter")) {
-            findparameter = false;
-            return;
+        if (set.contains(key)) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     private static void booleanmanage() {
-        // 生成账号密码输出
-        genoutput = judge(true, "genoutput");
         // 代理
         proxyswitch = judge(false, "proxyswitch");
-        proxyfile = properties.getProperty("proxyfile", "Not Found").toString();
+        proxyfile = properties.getProperty("proxyfile", "Not Found");
     }
 
     // 默认值 文本
     private static boolean judge(boolean udefault, String value) {
         boolean output = true;
-        if (properties.getProperty(value, "Not Found").toString() == "Not Found") {
+        if (properties.getProperty(value, "Not Found") == "Not Found") {
             return udefault;
         } else
-            value = properties.getProperty(value).toString();
+            value = properties.getProperty(value);
         if ("TRUE".equals(value.toUpperCase())) {
             output = true;
         } else if ("FALSE".equals(value.toUpperCase())) {

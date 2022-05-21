@@ -148,17 +148,21 @@ public class main implements Runnable {
             out.flush();
             out.close();
             // 输出
-            if (stealbomber.manage.file.genoutput) {
+            if (stealbomber.manage.file.gps) {
                 System.out.println(name + " " + pass);
             }
         } catch (IOException e) {
-            System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
+            if (stealbomber.manage.file.gps) {
+                System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
+            }
             if (error >= 100) {
                 error = 0;
                 thread.stop();
                 new Thread(new Runnable() {
                     public void run() {
-                        System.out.println("\n错误次数过多, 正在重新启动 10s\n");
+                        if (stealbomber.manage.file.gps) {
+                            System.out.println("\n错误次数过多, 正在重新启动 10s\n");
+                        }
                         Runtime.getRuntime().gc();
                         try {
                             Thread.sleep(10000);// 1000ms=1s

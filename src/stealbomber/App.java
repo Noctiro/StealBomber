@@ -6,7 +6,7 @@ package stealbomber;
  * @author ObcbO 
  * */
 public class App {
-    public static final float VERSION = 1.4f;
+    public static final float VERSION = 1.5f;
 
     public static void main(String[] args) {
         System.out.print(

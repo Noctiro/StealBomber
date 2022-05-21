@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class password {
     private static StringBuilder pass;
 
-    private static final String[] type = {
+    private static final String[] TYPE = {
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             "abcdefghijklmnopqrstuvwxyz",
             "0123456789",
@@ -25,8 +25,8 @@ public class password {
                 case 0:
                     for (byte i = 0; i < extent; i++) {
                         int current = ThreadLocalRandom.current().nextInt(4);
-                        int randomInt = ThreadLocalRandom.current().nextInt(type[current].length());
-                        pass.append(type[current].charAt(randomInt));
+                        int randomInt = ThreadLocalRandom.current().nextInt(TYPE[current].length());
+                        pass.append(TYPE[current].charAt(randomInt));
                     }
                     break;
                 // 弱口令
@@ -87,6 +87,7 @@ public class password {
                     sletter(ThreadLocalRandom.current().nextInt(2, 5));
                     ms();
                     break;
+                default:
             }
             return pass.toString();
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -97,21 +98,21 @@ public class password {
     private static void bletter(int length) {
         for (byte i = 0; i < length; i++) {
             int randomInt = ThreadLocalRandom.current().nextInt(26);
-            pass.append(type[0].charAt(randomInt));
+            pass.append(TYPE[0].charAt(randomInt));
         }
     }
 
     private static void sletter(int length) {
         for (byte i = 0; i < length; i++) {
             int randomInt = ThreadLocalRandom.current().nextInt(26);
-            pass.append(type[1].charAt(randomInt));
+            pass.append(TYPE[1].charAt(randomInt));
         }
     }
 
     private static void num(int length) {
         for (byte i = 0; i < length; i++) {
             int randomInt = ThreadLocalRandom.current().nextInt(10);
-            pass.append(type[2].charAt(randomInt));
+            pass.append(TYPE[2].charAt(randomInt));
         }
     }
 
@@ -123,10 +124,10 @@ public class password {
     }
 
     private static void spcial(int length) {
-        // type[3].length()) = 8
+        // TYPE[3].length()) = 8
         for (byte i = 0; i < length; i++) {
             int randomInt = ThreadLocalRandom.current().nextInt(8);
-            pass.append(type[3].charAt(randomInt));
+            pass.append(TYPE[3].charAt(randomInt));
         }
     }
 }

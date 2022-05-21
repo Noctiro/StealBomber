@@ -18,7 +18,8 @@ public class main implements Runnable {
     private static boolean proxysocksswich = false;
     private static Random random = new Random();
 
-    private static int error = 0;// 错误次数
+    /** 错误次数 */
+    private static int error = 0;
 
     {// 初始化
         if (stealbomber.manage.file.proxyswitch) {
@@ -82,8 +83,9 @@ public class main implements Runnable {
                     for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
                         if (i == 0) {
                             username.append(ThreadLocalRandom.current().nextInt(1, 10));
-                        } else
+                        } else {
                             username.append(ThreadLocalRandom.current().nextInt(10));
+                        }
                     }
                     username.append("@qq.com");
                     break;
@@ -92,8 +94,9 @@ public class main implements Runnable {
                     for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
                         if (i == 0) {
                             username.append(ThreadLocalRandom.current().nextInt(1, 10));
-                        } else
+                        } else {
                             username.append(ThreadLocalRandom.current().nextInt(10));
+                        }
                     }
                     break;
             }
@@ -166,8 +169,9 @@ public class main implements Runnable {
                 }, "ReloadThread").start();
             } else if (!"Connect timed out".equals(e.getLocalizedMessage())) {
                 error = error + 5;
-            } else if ("Connect timed out".equals(e.getLocalizedMessage()))
+            } else if ("Connect timed out".equals(e.getLocalizedMessage())) {
                 error++;
+            }
         } finally {
             if (null != httpURLConnection) {
                 try {

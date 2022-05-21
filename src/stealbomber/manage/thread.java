@@ -1,5 +1,10 @@
 package stealbomber.manage;
 
+/**
+ * 线程管理
+ * 
+ * @author ObcbO
+ */
 public class thread {
     public static boolean on = false;
     private static ThreadGroup gat = new ThreadGroup("GroupAttack") {

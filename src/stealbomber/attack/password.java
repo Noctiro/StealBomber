@@ -2,6 +2,11 @@ package stealbomber.attack;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * 生成密码的类
+ * 
+ * @author ObcbO
+ */
 public class password {
     private static StringBuilder pass;
 
@@ -12,6 +17,12 @@ public class password {
             "!@#$%^&*"
     };
 
+    /**
+     * 生成社工密码
+     * 
+     * @author ObcbO
+     * @return 8~16位数密码
+     */
     protected static String get() {
         return generate();
     }

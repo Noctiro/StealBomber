@@ -1,5 +1,10 @@
 package stealbomber;
 
+/** 
+ * 程序的起点 stealbomber.app
+ * 
+ * @author ObcbO 
+ * */
 public class App {
     public static final float VERSION = 1.4f;
 

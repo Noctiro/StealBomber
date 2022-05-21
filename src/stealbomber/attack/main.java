@@ -69,40 +69,36 @@ public class main implements Runnable {
             String url = stealbomber.manage.file.urls.length == 1 ? stealbomber.manage.file.urls[0]
                     : stealbomber.manage.file.urls[random.nextInt(stealbomber.manage.file.urls.length - 1)];
             // name
-            String rn;
-            StringBuilder qqnum = new StringBuilder();
+            StringBuilder username = new StringBuilder();
             switch (ThreadLocalRandom.current().nextInt(2)) {
                 case 2:
-                    StringBuilder phonenum = new StringBuilder();
-                    phonenum.append(
+                    username.append(
                             stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]);
                     for (byte i = 0; i < 8; i++) {
-                        phonenum.append(ThreadLocalRandom.current().nextInt(10));
+                        username.append(ThreadLocalRandom.current().nextInt(10));
                     }
-                    rn = phonenum.toString();
                     break;
                 case 1:
                     for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
                         if (i == 0) {
-                            qqnum.append(ThreadLocalRandom.current().nextInt(1, 10));
+                            username.append(ThreadLocalRandom.current().nextInt(1, 10));
                         } else
-                            qqnum.append(ThreadLocalRandom.current().nextInt(10));
+                            username.append(ThreadLocalRandom.current().nextInt(10));
                     }
-                    rn = qqnum.append("@qq.com").toString();
+                    username.append("@qq.com");
                     break;
                 case 0:
                 default:
                     for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
                         if (i == 0) {
-                            qqnum.append(ThreadLocalRandom.current().nextInt(1, 10));
+                            username.append(ThreadLocalRandom.current().nextInt(1, 10));
                         } else
-                            qqnum.append(ThreadLocalRandom.current().nextInt(10));
+                            username.append(ThreadLocalRandom.current().nextInt(10));
                     }
-                    rn = qqnum.toString();
                     break;
             }
             // rp
-            go(rn, password.get(), url, proxytype, proxyhost, proxyport);
+            go(username.toString(), password.get(), url, proxytype, proxyhost, proxyport);
         }
         return;
     }
@@ -160,6 +156,7 @@ public class main implements Runnable {
                 new Thread(new Runnable() {
                     public void run() {
                         System.out.println("\n错误次数过多, 正在重新启动 10s\n");
+                        Runtime.getRuntime().gc();
                         try {
                             Thread.sleep(10000);// 1000ms=1s
                         } catch (InterruptedException e1) {

@@ -152,7 +152,7 @@ public class main implements Runnable {
                 System.out.println(name + " " + pass);
             }
         } catch (IOException e) {
-            if (stealbomber.manage.file.gps) {
+            if (stealbomber.manage.file.gpr) {
                 System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
             }
             if (error >= 100) {
@@ -160,7 +160,7 @@ public class main implements Runnable {
                 thread.stop();
                 new Thread(new Runnable() {
                     public void run() {
-                        if (stealbomber.manage.file.gps) {
+                        if (stealbomber.manage.file.gpr) {
                             System.out.println("\n错误次数过多, 正在重新启动 10s\n");
                         }
                         Runtime.getRuntime().gc();

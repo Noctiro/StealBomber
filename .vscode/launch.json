@@ -9,7 +9,7 @@
             "name": "Launch App",
             "request": "launch",
             "mainClass": "stealbomber.App",
-            "projectName": "StealBomber"
+            "projectName": "stealbomber_c230f25e"
         }
     ]
 }

@@ -1,9 +1,5 @@
 package stealbomber;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class App {
     public static final float version = 1.4f;
 
@@ -17,21 +13,6 @@ public class App {
                         " ____) | ||  __/ (_| | | | |_) | (_) | | | | | | |_) |  __/ |   " + " V" + version + "\n" +
                         "|_____/ /__/___|/__,_|_| |____/ /___/|_| |_| |_|_.__/ /___|_|   " + " Author: ObcbO" + "\n" +
                         " ------------------------------------https://github.com/obcbo/stealbomber\n");
-        boolean cp = false;
-        for (String a : args) {
-            cp = "cp".equals(a) ? true : false;
-        }
-        if (cp) {
-            System.out.println("开始检查更新");
-            stealbomber.manage.update.run();
-            System.out.println("按回车继续");
-            try {
-                new BufferedReader(new InputStreamReader(System.in)).readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
         if (stealbomber.manage.file.start(System.getProperty("file"))) {
             Runtime.getRuntime().gc();
             stealbomber.manage.thread.start();

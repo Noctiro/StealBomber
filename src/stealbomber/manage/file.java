@@ -1,11 +1,10 @@
 package stealbomber.manage;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -65,20 +64,24 @@ public class file {
 
     private static void generatefile() {
         try {
-            InputStream is = file.class.getResourceAsStream("default.properties");
-            File f = new File("default.properties");
-            if (!f.exists()) {// 文件不存在时先创建
-                f.createNewFile();
-            }
-            OutputStream os = new FileOutputStream(f);
-            int index = 0;
-            byte[] bytes = new byte[1024];// 指定每次读取的位数，这里以1024为例
-            while ((index = is.read(bytes)) != -1) {
-                os.write(bytes, 0, index);
-            }
-            os.flush();
-            os.close();
-            is.close();
+            BufferedWriter out = new BufferedWriter(new FileWriter("default.properties"));
+            out.write("""
+                    # StealBomber
+                    # Author: ObcbO
+                    # https://github.com/obcbo/stealbomber
+                    # 线程数
+                    threads=16
+                    # 攻击网址 可同时使用多个网址(用,来隔开)
+                    URL=http://47.93.13.217/2018.php
+                    # 攻击参数
+                    parameter=username=$[account]&pass=$[password]
+                    # 生成输出
+                    genoutput=true
+                    # 代理
+                    # proxyswitch=false
+                    # proxyfile=all.txt
+                    """);
+            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

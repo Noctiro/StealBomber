@@ -21,7 +21,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: ${{ matrix.java }}
-      - run: ant build -Dversion=${{ github.event.inputs.version }}
+      - run: ant build -Dversion="${{ github.event.inputs.version }}"
       - run: mv stealbomber.jar stealbomber${{ github.event.inputs.version }}-java${{ matrix.Java }}.jar
       - uses: actions/upload-artifact@v3
         with:

@@ -6,17 +6,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch Current File",
-            "request": "launch",
-            "mainClass": "stealbomber.App"
-            //"mainClass": "${file}"
-        },
-        {
-            "type": "java",
             "name": "Launch App",
             "request": "launch",
             "mainClass": "stealbomber.App",
-            "projectName": "stealbomber_c230f25e"
+            "projectName": "StealBomber"
         }
     ]
 }

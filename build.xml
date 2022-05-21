@@ -8,11 +8,7 @@
     </target>
     <target name="build">
         <mkdir dir="${bin.dir}" />
-        <javac srcdir="src" destdir="${bin.dir}" optimize="on" includeantruntime="on">
-            <configuration>
-                <argLine>--enable-preview</argLine>
-            </configuration>
-        </javac>
+        <javac srcdir="src" destdir="${bin.dir}" optimize="on" includeantruntime="on" />
         <jar destfile="stealbomber.jar" basedir="${bin.dir}">
             <manifest>
                 <attribute name="Built-By" value="ObcbO" />

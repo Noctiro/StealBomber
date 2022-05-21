@@ -126,12 +126,14 @@ public class file {
                 urls = (String[]) list.toArray(new String[size]);
             }
         } else {
+            success = false;
             System.err.println("ERROR: 攻击网址 内容异常");
         }
         // 参数
         if (find("parameter")) {
             param = properties.getProperty("parameter");
         } else {
+            success = false;
             System.err.println("ERROR: 参数 内容异常");
         }
         // 输出

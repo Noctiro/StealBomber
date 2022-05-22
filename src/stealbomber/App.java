@@ -20,7 +20,7 @@ public final class App {
                         " /___ /| __/ _ // _` | | |  _ < / _ /| '_ ` _ /| '_ / / _ / '__|\n" +
                         " ____) | ||  __/ (_| | | | |_) | (_) | | | | | | |_) |  __/ |   " + " V" + VERSION + "\n" +
                         "|_____/ /__/___|/__,_|_| |____/ /___/|_| |_| |_|_.__/ /___|_|   " + " Author: ObcbO" + "\n" +
-                        " ------------------------------------https://github.com/obcbo/stealbomber\n");
+                        "-------------------------------------https://github.com/obcbo/stealbomber\n");
         if (GetFile.start(System.getProperty("file"))) {
             System.gc();
             ThreadControl.start();

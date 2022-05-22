@@ -25,8 +25,6 @@ public class Center implements Runnable {
 
     /** 错误次数 */
     private static int error = 0;
-    /** final值 */
-    private static final String ERR = "Connect timed out";
     /** final长度 */
     private static final int UAL = stealbomber.manage.Storage.UA.length;
     private static final int NUMSEGL = stealbomber.manage.Storage.NUMSEG.length;
@@ -168,6 +166,7 @@ public class Center implements Runnable {
                 ThreadControl.stop();
                 new Thread(new Runnable() {
                     public void run() {
+                        System.gc();
                         if (stealbomber.manage.GetFile.gpr) {
                             System.out.println("\n错误次数过多, 正在重新启动 10s\n");
                         }
@@ -178,9 +177,9 @@ public class Center implements Runnable {
                         ThreadControl.start();
                     }
                 }, "ReloadThread").start();
-            } else if (!ERR.equals(e.getLocalizedMessage())) {
+            } else if (!"Connect timed out".equals(e.getLocalizedMessage())) {
                 error = error + 5;
-            } else if (ERR.equals(e.getLocalizedMessage())) {
+            } else if ("Connect timed out".equals(e.getLocalizedMessage())) {
                 error++;
             }
         } finally {

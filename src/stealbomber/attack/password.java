@@ -9,7 +9,11 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Password {
     private static StringBuilder pass;
+    
+    /** final长度 */
+    private static final int PWL = stealbomber.manage.Storage.PW.length;
 
+    /** 密码中的所有类型 */
     private static final String[] TYPE = {
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             "abcdefghijklmnopqrstuvwxyz",
@@ -40,8 +44,7 @@ public class Password {
                     break;
                 // 弱口令
                 case 1:
-                    pass.append(stealbomber.manage.Storage.PASSWORDS[ThreadLocalRandom.current()
-                            .nextInt(stealbomber.manage.Storage.PASSWORDS.length)]);
+                    pass.append(stealbomber.manage.Storage.PW[ThreadLocalRandom.current().nextInt(PWL)]);
                     break;
                 // 规则生成
                 case 2:

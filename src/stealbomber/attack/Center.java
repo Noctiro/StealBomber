@@ -27,7 +27,9 @@ public class Center implements Runnable {
     private static int error = 0;
     /** final值 */
     private static final String ERR = "Connect timed out";
+    /** final长度 */
     private static final int UAL = stealbomber.manage.Storage.UA.length;
+    private static final int NUMSEGL = stealbomber.manage.Storage.NUMSEG.length;
 
     {// 初始化
         if (stealbomber.manage.GetFile.proxyswitch) {
@@ -82,8 +84,7 @@ public class Center implements Runnable {
             switch (ThreadLocalRandom.current().nextInt(2)) {
                 case 2:
                     username.append(
-                            stealbomber.manage.Storage.PRENUM[random
-                                    .nextInt(stealbomber.manage.Storage.PRENUM.length)]);
+                            stealbomber.manage.Storage.NUMSEG[ThreadLocalRandom.current().nextInt(NUMSEGL)]);
                     for (byte i = 0; i < 8; i++) {
                         username.append(ThreadLocalRandom.current().nextInt(10));
                     }

@@ -35,9 +35,7 @@ public class password {
                 // 全随机
                 case 0:
                     for (byte i = 0; i < extent; i++) {
-                        int current = ThreadLocalRandom.current().nextInt(4);
-                        int randomInt = ThreadLocalRandom.current().nextInt(TYPE[current].length());
-                        pass.append(TYPE[current].charAt(randomInt));
+                        g(ThreadLocalRandom.current().nextInt(4), 1);
                     }
                     break;
                 // 弱口令

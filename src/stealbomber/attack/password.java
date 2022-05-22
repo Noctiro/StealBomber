@@ -114,7 +114,7 @@ public class password {
     }
 
     private static void g(int options, int length) {
-        int tlength = switch (options) {
+        int tlength = switch (options) {// 某种类型的长度
             case 0 -> 26;// 大写
             case 1 -> 26;// 小写
             case 2 -> 10;// 数字

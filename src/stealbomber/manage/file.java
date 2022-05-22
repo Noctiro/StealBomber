@@ -12,14 +12,14 @@ import java.util.Properties;
 import java.util.Set;
 
 public class file {
-    // 默认值
+    // 初始化值为默认值
+    private static boolean success = true;// 读取文件是否成功
+    private static final Properties properties = new Properties();
+
+    // 值与开关
     public static int thnum = 16;// 线程数
     public static String[] urls;// 网址
     public static String param;// 参数
-
-    public static boolean success = true;// 读取文件是否成功
-
-    public static final Properties properties = new Properties();
 
     public static boolean gps;// 输出成功
     public static boolean gpr;// 输出失败
@@ -82,6 +82,8 @@ public class file {
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
+            success = false;
+            System.err.println("ERROR: 生成配置文件 生成失败");
         }
     }
 

@@ -64,7 +64,7 @@ public class main implements Runnable {
             proxyurl = null;
             proxyiurl = null;
         }
-        while (stealbomber.manage.thread.on) {
+        while (thread.on) {
             // System.out.println(Thread.currentThread().getName());
             // url
             String url = stealbomber.manage.file.urls.length == 1 ? stealbomber.manage.file.urls[0]

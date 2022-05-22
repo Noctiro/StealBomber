@@ -49,53 +49,53 @@ public class password {
                 case 2:
                     // AAA(AA)123
                     ms();
-                    bletter(ThreadLocalRandom.current().nextInt(3, 6));
+                    g(0, ThreadLocalRandom.current().nextInt(3, 6));
                     ms();
-                    num(extent - 4);
+                    g(2, extent - 4);
                     ms();
                     break;
                 case 3:
                     // 123AAA(AA)
                     ms();
-                    num(extent - 4);
+                    g(2, extent - 4);
                     ms();
-                    bletter(ThreadLocalRandom.current().nextInt(3, 6));
+                    g(0, ThreadLocalRandom.current().nextInt(3, 6));
                     ms();
                     break;
                 case 4:
                     // aaa(aa)123
                     ms();
-                    sletter(ThreadLocalRandom.current().nextInt(3, 6));
+                    g(1, ThreadLocalRandom.current().nextInt(3, 6));
                     ms();
-                    num(extent - 4);
+                    g(2, extent - 4);
                     ms();
                     break;
                 case 5:
                     // 123aaa(aa)
                     ms();
-                    num(extent - 4);
+                    g(2, extent - 4);
                     ms();
-                    sletter(ThreadLocalRandom.current().nextInt(3, 6));
+                    g(1, ThreadLocalRandom.current().nextInt(3, 6));
                     ms();
                     break;
                 case 6:
                     // A(A)aa(aa)123
                     ms();
-                    bletter(ThreadLocalRandom.current().nextInt(1, 3));
+                    g(0, ThreadLocalRandom.current().nextInt(1, 3));
                     ms();
-                    sletter(ThreadLocalRandom.current().nextInt(2, 5));
+                    g(1, ThreadLocalRandom.current().nextInt(2, 5));
                     ms();
-                    num(extent - 4);
+                    g(2, extent - 4);
                     ms();
                     break;
                 case 7:
                     // 123A(A)aa(aa)
                     ms();
-                    num(extent - 4);
+                    g(2, extent - 4);
                     ms();
-                    bletter(ThreadLocalRandom.current().nextInt(1, 3));
+                    g(0, ThreadLocalRandom.current().nextInt(1, 3));
                     ms();
-                    sletter(ThreadLocalRandom.current().nextInt(2, 5));
+                    g(1, ThreadLocalRandom.current().nextInt(2, 5));
                     ms();
                     break;
                 default:
@@ -106,39 +106,24 @@ public class password {
         }
     }
 
-    private static void bletter(int length) {
-        for (byte i = 0; i < length; i++) {
-            int randomInt = ThreadLocalRandom.current().nextInt(26);
-            pass.append(TYPE[0].charAt(randomInt));
-        }
-    }
-
-    private static void sletter(int length) {
-        for (byte i = 0; i < length; i++) {
-            int randomInt = ThreadLocalRandom.current().nextInt(26);
-            pass.append(TYPE[1].charAt(randomInt));
-        }
-    }
-
-    private static void num(int length) {
-        for (byte i = 0; i < length; i++) {
-            int randomInt = ThreadLocalRandom.current().nextInt(10);
-            pass.append(TYPE[2].charAt(randomInt));
-        }
-    }
-
     private static void ms() {
         // 25%的概率
         if (ThreadLocalRandom.current().nextInt(19) == 0) {
-            spcial(1);
+            g(3, 1);
         }
     }
 
-    private static void spcial(int length) {
-        // TYPE[3].length()) = 8
+    private static void g(int options, int length) {
+        int tlength = switch (options) {
+            case 0 -> 26;// 大写
+            case 1 -> 26;// 小写
+            case 2 -> 10;// 数字
+            case 3 -> 8;// 特殊符号
+            default -> throw new IllegalArgumentException("Unexpected value: " + options);
+        };
         for (byte i = 0; i < length; i++) {
-            int randomInt = ThreadLocalRandom.current().nextInt(8);
-            pass.append(TYPE[3].charAt(randomInt));
+            int randomInt = ThreadLocalRandom.current().nextInt(tlength);
+            pass.append(TYPE[options].charAt(randomInt));
         }
     }
 }

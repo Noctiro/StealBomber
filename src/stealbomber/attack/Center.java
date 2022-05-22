@@ -26,10 +26,14 @@ public class Center implements Runnable {
     /** 错误次数 */
     private static int error = 0;
     /** final长度 */
-    private static final int UAL = stealbomber.manage.Storage.UA.length;
-    private static final int NUMSEGL = stealbomber.manage.Storage.NUMSEG.length;
+    private static final int UAL;
+    private static final int NUMSEGL;
+    private static final int URLL;
 
-    {// 初始化
+    static {// 初始化
+        UAL = stealbomber.manage.Storage.UA.length;
+        NUMSEGL = stealbomber.manage.Storage.NUMSEG.length;
+        URLL = stealbomber.manage.GetFile.urls.length;
         if (stealbomber.manage.GetFile.proxyswitch) {
             proxyhttp = AckProxy.readhttp(stealbomber.manage.GetFile.proxyfile);
             if (proxyhttp != null) {
@@ -75,8 +79,8 @@ public class Center implements Runnable {
         while (ThreadControl.on) {
             // System.out.println(Thread.currentThread().getName());
             // url
-            String url = stealbomber.manage.GetFile.urls.length == 1 ? stealbomber.manage.GetFile.urls[0]
-                    : stealbomber.manage.GetFile.urls[random.nextInt(stealbomber.manage.GetFile.urls.length - 1)];
+            String url = URLL == 1 ? stealbomber.manage.GetFile.urls[0]
+                    : stealbomber.manage.GetFile.urls[ThreadLocalRandom.current().nextInt(URLL)];
             // name
             StringBuilder username = new StringBuilder();
             switch (ThreadLocalRandom.current().nextInt(2)) {

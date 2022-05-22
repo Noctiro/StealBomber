@@ -100,7 +100,7 @@ public class file {
                     success = false;
                     System.err.println("ERROR: 线程数 你输入的值不能为0");
                     return;
-                } 
+                }
             } catch (NumberFormatException e) {
                 success = false;
                 System.err.println("ERROR: 线程数 你输入的值不是一个正整数");
@@ -159,8 +159,12 @@ public class file {
                 gpr = true;
             } else if ("on".equals(content)) {
                 gps = gpr = true;
-            }else if ("off".equals(content)) {
+            } else if ("off".equals(content)) {
                 gps = gpr = false;
+            } else {
+                success = false;
+                System.err.println("ERROR: 输出选项 内容异常");
+                return;
             }
         } else {
             gps = gpr = false;

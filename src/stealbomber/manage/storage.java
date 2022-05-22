@@ -1,16 +1,25 @@
 package stealbomber.manage;
 
-public class Storage {
-        public static final String[] bfnum = {
+/**
+ * 储存数据的类
+ * 
+ * @author ObcbO
+ */
+public final class Storage {
+        public static final String[] PRENUM = {
+                        // 中国移动
                         "134", "135", "136", "137", "138", "139", "144", "147", "148", "150", "151", "152", "157",
                         "158", "159", "172", "178", "182", "183", "184", "187", "188", "195", "197", "198", "187",
-                        "188", "178", "147", "172", "198", // 中国移动
+                        "188", "178", "147", "172", "198",
+                        // 中国联通
                         "130", "131", "132", "145", "155", "156", "166", "167", "171", "175", "176", "185", "186",
-                        "196", // 中国联通
-                        "133", "149", "153", "173", "177", "180", "181", "189", "190", "191", "193", "199", // 中国电信
-                        "192"// 中国广电
+                        "196",
+                        // 中国电信
+                        "133", "149", "153", "173", "177", "180", "181", "189", "190", "191", "193", "199",
+                        // 中国广电
+                        "192"
         };
-        public static final String[] useragent = {
+        public static final String[] UA = {
                         "Mozilla/5.0 (Linux; Android 11; SM-N9860 Build/RP1A.200720.012; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/3171 MMWEBSDK/20211202 Mobile Safari/537.36 MMWEBID/8157 MicroMessenger/8.0.18.2060(0x28001237) Process/toolsmp WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64",
                         "Mozilla/5.0 (Linux; Android 10; EVR-AN00 Build/HUAWEIEVR-AN00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/3179 MMWEBSDK/20211001 Mobile Safari/537.36 MMWEBID/2013 MicroMessenger/8.0.16.2040(0x2800105F) Process/toolsmp WeChat/arm64 Weixin NetType/5G Language/zh_CN ABI/arm64",
                         "Mozilla/5.0 (Linux; Android 11; POCO F2 Pro Build/RKQ1.200826.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 MMWEBID/1230 MicroMessenger/8.0.17.2040(0x28001133) Process/toolsmp WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64",
@@ -52,7 +61,7 @@ public class Storage {
                         "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Maxthon/4.4.3.4000 Chrome/30.0.1599.101 Safari/537.36",
                         "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 UBrowser/4.0.3214.0 Safari/537.36",
         };
-        public static final String[] passwords = {
+        public static final String[] PASSWORDS = {
                         "a123456",
                         "zz12369",
                         "123456aa",

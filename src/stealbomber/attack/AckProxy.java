@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * 处理代理
+ * 
+ * @author ObcbO
+ */
 public class AckProxy {
     protected static String[] readhttp(String filename) {
         List<String> list = new ArrayList<String>();

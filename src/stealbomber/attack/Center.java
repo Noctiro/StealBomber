@@ -11,6 +11,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import stealbomber.manage.ThreadControl;
 
+/**
+ * 攻击线程和主要方法
+ * 
+ * @author ObcbO
+ */
 public class Center implements Runnable {
     private static String[] proxyhttp;
     private static String[] proxysocks;
@@ -20,6 +25,9 @@ public class Center implements Runnable {
 
     /** 错误次数 */
     private static int error = 0;
+    /** final值 */
+    private static final String ERR = "Connect timed out";
+    private static final int UAL = stealbomber.manage.Storage.UA.length;
 
     {// 初始化
         if (stealbomber.manage.GetFile.proxyswitch) {
@@ -74,7 +82,8 @@ public class Center implements Runnable {
             switch (ThreadLocalRandom.current().nextInt(2)) {
                 case 2:
                     username.append(
-                            stealbomber.manage.Storage.bfnum[random.nextInt(stealbomber.manage.Storage.bfnum.length)]);
+                            stealbomber.manage.Storage.PRENUM[random
+                                    .nextInt(stealbomber.manage.Storage.PRENUM.length)]);
                     for (byte i = 0; i < 8; i++) {
                         username.append(ThreadLocalRandom.current().nextInt(10));
                     }
@@ -106,43 +115,42 @@ public class Center implements Runnable {
     }
 
     private static void go(String name, String pass, String surl, String proxytype, String proxyurl, int proxyport) {
-        HttpURLConnection httpURLConnection = null;
+        HttpURLConnection urlConn = null;
         try {
             URL url = new URL(surl);
             if (!stealbomber.manage.GetFile.proxyswitch) {
-                httpURLConnection = (HttpURLConnection) url.openConnection();
+                urlConn = (HttpURLConnection) url.openConnection();
             } else {
                 if ("http".equals(proxytype)) {
                     Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyurl, proxyport));
-                    httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
+                    urlConn = (HttpURLConnection) url.openConnection(proxy);
                 } else if ("socks".equals(proxytype)) {
                     Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(proxyurl, proxyport));
-                    httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
+                    urlConn = (HttpURLConnection) url.openConnection(proxy);
                 }
             }
-            httpURLConnection.setRequestMethod("POST");
+            urlConn.setRequestMethod("POST");
             // 超时时间
-            httpURLConnection.setConnectTimeout(3000);
+            urlConn.setConnectTimeout(3000);
             // 设置是否输出
-            httpURLConnection.setDoOutput(true);
+            urlConn.setDoOutput(true);
             // 设置是否读入
-            httpURLConnection.setDoInput(true);
+            urlConn.setDoInput(true);
             // 设置是否使用缓存
-            httpURLConnection.setUseCaches(false);
+            urlConn.setUseCaches(false);
             // 设置此 HttpURLConnection 实例是否应该自动执行 HTTP 重定向
-            httpURLConnection.setInstanceFollowRedirects(false);
+            urlConn.setInstanceFollowRedirects(false);
             // 设置请求头
-            httpURLConnection.setRequestProperty("Content-Length", "40");
-            httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            httpURLConnection.setRequestProperty("User-Agent",
-                    stealbomber.manage.Storage.useragent[random
-                            .nextInt(stealbomber.manage.Storage.useragent.length - 1)]);
+            urlConn.setRequestProperty("Content-Length", "40");
+            urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            urlConn.setRequestProperty("User-Agent",
+                    stealbomber.manage.Storage.UA[ThreadLocalRandom.current().nextInt(UAL)]);
             // 连接
-            httpURLConnection.connect();
+            urlConn.connect();
             // 写入参数到请求中
             String param = stealbomber.manage.GetFile.param.replace("$[account]", name);
             param = param.replace("$[password]", pass);
-            OutputStream out = httpURLConnection.getOutputStream();
+            OutputStream out = urlConn.getOutputStream();
             out.write(param.getBytes());
             out.flush();
             out.close();
@@ -169,15 +177,15 @@ public class Center implements Runnable {
                         ThreadControl.start();
                     }
                 }, "ReloadThread").start();
-            } else if (!"Connect timed out".equals(e.getLocalizedMessage())) {
+            } else if (!ERR.equals(e.getLocalizedMessage())) {
                 error = error + 5;
-            } else if ("Connect timed out".equals(e.getLocalizedMessage())) {
+            } else if (ERR.equals(e.getLocalizedMessage())) {
                 error++;
             }
         } finally {
-            if (null != httpURLConnection) {
+            if (null != urlConn) {
                 try {
-                    httpURLConnection.disconnect();
+                    urlConn.disconnect();
                 } catch (Exception e) {
                     System.out.println(surl + " httpURLConnection 流关闭异常：" + e.getLocalizedMessage());
                 }

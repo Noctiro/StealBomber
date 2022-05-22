@@ -1,13 +1,14 @@
 package stealbomber;
 
-import stealbomber.manage.*;
+import stealbomber.manage.GetFile;
+import stealbomber.manage.ThreadControl;
 
 /**
  * 程序的起点 stealbomber.app
  * 
  * @author ObcbO
  */
-public class App {
+public final class App {
     public static final float VERSION = 1.5f;
 
     public static void main(String[] args) {
@@ -20,7 +21,8 @@ public class App {
                         " ____) | ||  __/ (_| | | | |_) | (_) | | | | | | |_) |  __/ |   " + " V" + VERSION + "\n" +
                         "|_____/ /__/___|/__,_|_| |____/ /___/|_| |_| |_|_.__/ /___|_|   " + " Author: ObcbO" + "\n" +
                         " ------------------------------------https://github.com/obcbo/stealbomber\n");
-        if (GetFile.start(System.getProperty("file"))) {
+        boolean success = GetFile.start(System.getProperty("file"));
+        if (success) {
             ThreadControl.start();
         } else {
             System.exit(1);

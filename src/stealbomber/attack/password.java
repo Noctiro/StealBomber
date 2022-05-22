@@ -40,8 +40,8 @@ public class Password {
                     break;
                 // 弱口令
                 case 1:
-                    pass.append(stealbomber.manage.Storage.passwords[ThreadLocalRandom.current()
-                            .nextInt(stealbomber.manage.Storage.passwords.length)]);
+                    pass.append(stealbomber.manage.Storage.PASSWORDS[ThreadLocalRandom.current()
+                            .nextInt(stealbomber.manage.Storage.PASSWORDS.length)]);
                     break;
                 // 规则生成
                 case 2:
@@ -106,17 +106,23 @@ public class Password {
 
     private static void ms() {
         // 25%的概率
-        if (ThreadLocalRandom.current().nextInt(19) == 0) {
+        int probability = ThreadLocalRandom.current().nextInt(19);
+        if (probability == 0) {
             g(3, 1);
         }
     }
 
     private static void g(int options, int length) {
-        int tlength = switch (options) {// 某种类型的长度
-            case 0 -> 26;// 大写
-            case 1 -> 26;// 小写
-            case 2 -> 10;// 数字
-            case 3 -> 8;// 特殊符号
+        // 某种类型的长度
+        int tlength = switch (options) {
+            // 大写
+            case 0 -> 26;
+            // 小写
+            case 1 -> 26;
+            // 数字
+            case 2 -> 10;
+            // 特殊符号
+            case 3 -> 8;
             default -> throw new IllegalArgumentException("Unexpected value: " + options);
         };
         for (byte i = 0; i < length; i++) {

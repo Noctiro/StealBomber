@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 
 public class GetFile {
@@ -79,8 +80,8 @@ public class GetFile {
                     # proxyswitch=false
                     # proxyfile=all.txt
                     """);
-            fw.close();
             out.close();
+            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
             success = false;
@@ -132,10 +133,7 @@ public class GetFile {
                 System.err.println("ERROR: 攻击网址 你输入的字符串没有包含网址");
                 return;
             }
-            if (success) {
-                int size = list.size();
-                urls = (String[]) list.toArray(new String[size]);
-            }
+            urls = list.toArray(new String[list.size()]);
         } else {
             success = false;
             System.err.println("ERROR: 攻击网址 内容异常");
@@ -188,11 +186,12 @@ public class GetFile {
         boolean output = true;
         if ("Not Found".equals(properties.getProperty(value, "Not Found"))) {
             return udefault;
-        } else
+        } else {
             value = properties.getProperty(value);
-        if ("TRUE".equals(value.toUpperCase())) {
+        }
+        if ("TRUE".equals(value.toUpperCase(Locale.getDefault()))) {
             output = true;
-        } else if ("FALSE".equals(value.toUpperCase())) {
+        } else if ("FALSE".equals(value.toUpperCase(Locale.getDefault()))) {
             output = false;
         } else {
             System.err.println("ERROR: 布尔参数的值为 true 或 false");

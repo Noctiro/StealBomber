@@ -63,22 +63,23 @@ public class file {
     private static void generatefile() {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter("default.properties"));
-            out.write("""
-                    # StealBomber
-                    # Author: ObcbO
-                    # https://github.com/obcbo/stealbomber
-                    # 线程数
-                    threads=16
-                    # 攻击网址 可同时使用多个网址(用,来隔开)
-                    URL=http://47.93.13.217/2018.php
-                    # 攻击参数
-                    parameter=username=$[account]&pass=$[password]
-                    # 生成输出(suc, err, on, off)
-                    genoutput=off
-                    # 代理
-                    # proxyswitch=false
-                    # proxyfile=all.txt
-                    """);
+            String text = """
+                # StealBomber
+                # Author: ObcbO
+                # https://github.com/obcbo/stealbomber
+                # 线程数
+                threads=16
+                # 攻击网址 可同时使用多个网址(用,来隔开)
+                URL=http://47.93.13.217/2018.php
+                # 攻击参数
+                parameter=username=$[account]&pass=$[password]
+                # 生成输出(suc, err, on, off)
+                genoutput=off
+                # 代理
+                # proxyswitch=false
+                # proxyfile=all.txt
+                """;
+            out.write(text);
             out.close();
         } catch (IOException e) {
             e.printStackTrace();

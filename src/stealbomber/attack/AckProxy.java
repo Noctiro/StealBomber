@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class proxy {
+public class AckProxy {
     protected static String[] readhttp(String filename) {
         List<String> list = new ArrayList<String>();
         try (Scanner scanner = new Scanner(new File(filename))) {

@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 
-public class file {
+public class GetFile {
     // 初始化值为默认值
     private static boolean success = true;// 读取文件是否成功
     private static final Properties properties = new Properties();
@@ -29,7 +28,7 @@ public class file {
 
     public static boolean start(String getfile) {
         String file;
-        if (getfile == null || getfile == "" || getfile.trim() == "") {
+        if (getfile == null || "".equals(getfile) || "".equals(getfile.trim())) {
             if (!new File("default.properties").exists()) {
                 System.out.print("未发现配置文件");
                 generatefile();
@@ -62,7 +61,8 @@ public class file {
 
     private static void generatefile() {
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("default.properties"));
+            FileWriter fw = new FileWriter("default.properties");
+            BufferedWriter out = new BufferedWriter(fw);
             out.write("""
                     # StealBomber
                     # Author: ObcbO
@@ -79,6 +79,7 @@ public class file {
                     # proxyswitch=false
                     # proxyfile=all.txt
                     """);
+            fw.close();
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -172,12 +173,8 @@ public class file {
     }
 
     private static boolean find(String key) {
-        Set<String> set = new HashSet<String>(properties.stringPropertyNames());
-        if (set.contains(key)) {
-            return true;
-        } else {
-            return false;
-        }
+        // return后接boolean输出的方法就行
+        return new HashSet<String>(properties.stringPropertyNames()).contains(key);
     }
 
     private static void booleanmanage() {
@@ -189,7 +186,7 @@ public class file {
     // 默认值 文本
     private static boolean judge(boolean udefault, String value) {
         boolean output = true;
-        if (properties.getProperty(value, "Not Found") == "Not Found") {
+        if ("Not Found".equals(properties.getProperty(value, "Not Found"))) {
             return udefault;
         } else
             value = properties.getProperty(value);

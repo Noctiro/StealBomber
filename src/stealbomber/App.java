@@ -1,10 +1,12 @@
 package stealbomber;
 
-/** 
+import stealbomber.manage.*;
+
+/**
  * 程序的起点 stealbomber.app
  * 
- * @author ObcbO 
- * */
+ * @author ObcbO
+ */
 public class App {
     public static final float VERSION = 1.5f;
 
@@ -18,9 +20,8 @@ public class App {
                         " ____) | ||  __/ (_| | | | |_) | (_) | | | | | | |_) |  __/ |   " + " V" + VERSION + "\n" +
                         "|_____/ /__/___|/__,_|_| |____/ /___/|_| |_| |_|_.__/ /___|_|   " + " Author: ObcbO" + "\n" +
                         " ------------------------------------https://github.com/obcbo/stealbomber\n");
-        if (stealbomber.manage.file.start(System.getProperty("file"))) {
-            Runtime.getRuntime().gc();
-            stealbomber.manage.thread.start();
+        if (GetFile.start(System.getProperty("file"))) {
+            ThreadControl.start();
         } else {
             System.exit(1);
         }

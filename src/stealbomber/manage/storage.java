@@ -1,6 +1,6 @@
 package stealbomber.manage;
 
-public class storage {
+public class Storage {
         public static final String[] bfnum = {
                         "134", "135", "136", "137", "138", "139", "144", "147", "148", "150", "151", "152", "157",
                         "158", "159", "172", "178", "182", "183", "184", "187", "188", "195", "197", "198", "187",

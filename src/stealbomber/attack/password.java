@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * 
  * @author ObcbO
  */
-public class password {
+public class Password {
     private static StringBuilder pass;
 
     private static final String[] TYPE = {
@@ -40,8 +40,8 @@ public class password {
                     break;
                 // 弱口令
                 case 1:
-                    pass.append(stealbomber.manage.storage.passwords[ThreadLocalRandom.current()
-                            .nextInt(stealbomber.manage.storage.passwords.length)]);
+                    pass.append(stealbomber.manage.Storage.passwords[ThreadLocalRandom.current()
+                            .nextInt(stealbomber.manage.Storage.passwords.length)]);
                     break;
                 // 规则生成
                 case 2:

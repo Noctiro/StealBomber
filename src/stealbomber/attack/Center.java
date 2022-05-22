@@ -9,9 +9,9 @@ import java.net.URL;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import stealbomber.manage.thread;
+import stealbomber.manage.ThreadControl;
 
-public class main implements Runnable {
+public class Center implements Runnable {
     private static String[] proxyhttp;
     private static String[] proxysocks;
     private static boolean proxyhttpswich = false;
@@ -22,12 +22,12 @@ public class main implements Runnable {
     private static int error = 0;
 
     {// 初始化
-        if (stealbomber.manage.file.proxyswitch) {
-            proxyhttp = proxy.readhttp(stealbomber.manage.file.proxyfile);
+        if (stealbomber.manage.GetFile.proxyswitch) {
+            proxyhttp = AckProxy.readhttp(stealbomber.manage.GetFile.proxyfile);
             if (proxyhttp != null) {
                 proxyhttpswich = true;
             }
-            proxysocks = proxy.readsocks(stealbomber.manage.file.proxyfile);
+            proxysocks = AckProxy.readsocks(stealbomber.manage.GetFile.proxyfile);
             if (proxysocks != null) {
                 proxysocksswich = true;
             }
@@ -42,7 +42,7 @@ public class main implements Runnable {
         String proxytype = "";
         String proxyhost = "";
         int proxyport = 0;
-        if (stealbomber.manage.file.proxyswitch) {
+        if (stealbomber.manage.GetFile.proxyswitch) {
             if (proxyhttpswich && proxysocksswich) {
                 if (random.nextBoolean()) {
                     proxytype = "http";
@@ -58,23 +58,23 @@ public class main implements Runnable {
                 proxytype = "socks";
                 proxyurl = proxysocks[random.nextInt(proxysocks.length)];
             }
-            proxyiurl = proxy.iurl(proxyurl);
+            proxyiurl = AckProxy.iurl(proxyurl);
             proxyhost = proxyiurl[0];
             proxyport = Integer.valueOf(proxyiurl[1]);
             proxyurl = null;
             proxyiurl = null;
         }
-        while (thread.on) {
+        while (ThreadControl.on) {
             // System.out.println(Thread.currentThread().getName());
             // url
-            String url = stealbomber.manage.file.urls.length == 1 ? stealbomber.manage.file.urls[0]
-                    : stealbomber.manage.file.urls[random.nextInt(stealbomber.manage.file.urls.length - 1)];
+            String url = stealbomber.manage.GetFile.urls.length == 1 ? stealbomber.manage.GetFile.urls[0]
+                    : stealbomber.manage.GetFile.urls[random.nextInt(stealbomber.manage.GetFile.urls.length - 1)];
             // name
             StringBuilder username = new StringBuilder();
             switch (ThreadLocalRandom.current().nextInt(2)) {
                 case 2:
                     username.append(
-                            stealbomber.manage.storage.bfnum[random.nextInt(stealbomber.manage.storage.bfnum.length)]);
+                            stealbomber.manage.Storage.bfnum[random.nextInt(stealbomber.manage.Storage.bfnum.length)]);
                     for (byte i = 0; i < 8; i++) {
                         username.append(ThreadLocalRandom.current().nextInt(10));
                     }
@@ -101,22 +101,21 @@ public class main implements Runnable {
                     break;
             }
             // rp
-            go(username.toString(), password.get(), url, proxytype, proxyhost, proxyport);
+            go(username.toString(), Password.get(), url, proxytype, proxyhost, proxyport);
         }
-        return;
     }
 
     private static void go(String name, String pass, String surl, String proxytype, String proxyurl, int proxyport) {
         HttpURLConnection httpURLConnection = null;
         try {
             URL url = new URL(surl);
-            if (!stealbomber.manage.file.proxyswitch) {
+            if (!stealbomber.manage.GetFile.proxyswitch) {
                 httpURLConnection = (HttpURLConnection) url.openConnection();
             } else {
-                if (proxytype == "http") {
+                if ("http".equals(proxytype)) {
                     Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyurl, proxyport));
                     httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
-                } else if (proxytype == "socks") {
+                } else if ("socks".equals(proxytype)) {
                     Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(proxyurl, proxyport));
                     httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
                 }
@@ -136,39 +135,38 @@ public class main implements Runnable {
             httpURLConnection.setRequestProperty("Content-Length", "40");
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             httpURLConnection.setRequestProperty("User-Agent",
-                    stealbomber.manage.storage.useragent[random
-                            .nextInt(stealbomber.manage.storage.useragent.length - 1)]);
+                    stealbomber.manage.Storage.useragent[random
+                            .nextInt(stealbomber.manage.Storage.useragent.length - 1)]);
             // 连接
             httpURLConnection.connect();
             // 写入参数到请求中
-            String param = stealbomber.manage.file.param.replace("$[account]", name);
+            String param = stealbomber.manage.GetFile.param.replace("$[account]", name);
             param = param.replace("$[password]", pass);
             OutputStream out = httpURLConnection.getOutputStream();
             out.write(param.getBytes());
             out.flush();
             out.close();
             // 输出
-            if (stealbomber.manage.file.gps) {
+            if (stealbomber.manage.GetFile.gps) {
                 System.out.println(name + " " + pass);
             }
         } catch (IOException e) {
-            if (stealbomber.manage.file.gpr) {
+            if (stealbomber.manage.GetFile.gpr) {
                 System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
             }
             if (error >= 100) {
                 error = 0;
-                thread.stop();
+                ThreadControl.stop();
                 new Thread(new Runnable() {
                     public void run() {
-                        if (stealbomber.manage.file.gpr) {
+                        if (stealbomber.manage.GetFile.gpr) {
                             System.out.println("\n错误次数过多, 正在重新启动 10s\n");
                         }
-                        Runtime.getRuntime().gc();
                         try {
                             Thread.sleep(10000);// 1000ms=1s
                         } catch (InterruptedException e1) {
                         }
-                        thread.start();
+                        ThreadControl.start();
                     }
                 }, "ReloadThread").start();
             } else if (!"Connect timed out".equals(e.getLocalizedMessage())) {

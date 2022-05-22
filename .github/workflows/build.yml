@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ '14', '17' , '18' ]
+        java: [ '13', '17' , '18' ]
     name: Java ${{ matrix.Java }} Build
     steps:
       - uses: actions/checkout@v3

@@ -9,8 +9,8 @@
     </target>
     <target name="build">
         <mkdir dir="${bin.dir}" />
-        <javac srcdir="src" destdir="${bin.dir}" optimize="on" includeantruntime="on" />
-        <jar destfile="stealbomber-bf.jar" basedir="${bin.dir}" update="true" level="9">
+        <javac srcdir="src" destdir="${bin.dir}" includeantruntime="on" />
+        <jar destfile="stealbomber-bf.jar" basedir="${bin.dir}" update="true">
             <manifest>
                 <attribute name="Built-By" value="ObcbO" />
                 <attribute name="Specification-Title" value="StealBomber" />

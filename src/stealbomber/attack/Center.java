@@ -5,7 +5,12 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -113,7 +118,8 @@ public class Center implements Runnable {
                     break;
             }
             // rp
-            go(username.toString(), Password.get(), url, proxytype, proxyhost, proxyport);
+            //go(username.toString(), Password.get(), url, proxytype, proxyhost, proxyport);
+            gogo(username.toString(), Password.get(), url);
         }
     }
 
@@ -195,5 +201,39 @@ public class Center implements Runnable {
                 }
             }
         }
+    }
+
+    // Java11 HttpClient
+    private static void gogo(String name, String pass, String url) {
+        String param = stealbomber.manage.GetFile.param.replace("$[account]", name);
+        param = param.replace("$[password]", pass);
+
+        var values = new HashMap<String, String>() {
+            {
+                put("username", name);
+                put("pass", pass);
+            }
+        };
+
+        var Center = new Center();
+        String requestBody = Center
+                .writeValueAsString(values);
+
+        var request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+        var client = HttpClient.newHttpClient();
+        // 异步
+        if (stealbomber.manage.GetFile.gps) {
+            System.out.println(name + " " + pass);
+        }
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenAccept(System.out::println);
+    }
+
+    private String writeValueAsString(HashMap<String, String> values) {
+        return null;
     }
 }

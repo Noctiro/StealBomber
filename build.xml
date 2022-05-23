@@ -27,6 +27,7 @@
             -keep public class stealbomber.App {
                 public static void main(java.lang.String[]);
             }
+            -optimizationpasses 3
         </proguard>
         <delete file="stealbomber-bf.jar" />
     </target>

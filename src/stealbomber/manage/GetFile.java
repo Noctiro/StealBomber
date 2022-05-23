@@ -29,7 +29,7 @@ public class GetFile {
 
     public static boolean start(String getfile) {
         String file;
-        if (getfile == null || "".equals(getfile) || "".equals(getfile.trim())) {
+        if (getfile.isBlank()) {
             if (!new File("default.properties").exists()) {
                 System.out.print("未发现配置文件");
                 generatefile();

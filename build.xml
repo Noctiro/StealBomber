@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="StealBomber">
-    <property name="bin.dir" location="build" />
+    <taskdef resource="proguard/ant/task.properties" classpath="ant/lib/proguard-ant.jar" />
+    <property name="bin.dir" location="ant/build" />
     <property name="version" value="${version}" />
     <target name="help" description="Print help">
         <echo>help - Print help</echo>
@@ -9,7 +10,7 @@
     <target name="build">
         <mkdir dir="${bin.dir}" />
         <javac srcdir="src" destdir="${bin.dir}" optimize="on" includeantruntime="on" />
-        <jar destfile="stealbomber.jar" basedir="${bin.dir}" update="true" level="9" >
+        <jar destfile="stealbomber-bf.jar" basedir="${bin.dir}" update="true" level="9">
             <manifest>
                 <attribute name="Built-By" value="ObcbO" />
                 <attribute name="Specification-Title" value="StealBomber" />
@@ -18,5 +19,15 @@
             </manifest>
         </jar>
         <delete dir="${bin.dir}" />
+        <proguard>
+            -injars      stealbomber-bf.jar
+            -outjars     stealbomber.jar
+            -libraryjars  ${java.home}/jmods/java.base.jmod(!**.jar;!module-info.class)
+          
+            -keep public class stealbomber.App {
+                public static void main(java.lang.String[]);
+            }
+        </proguard>
+        <delete file="stealbomber-bf.jar" />
     </target>
 </project>

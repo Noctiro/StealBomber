@@ -54,8 +54,6 @@ public class AckProxy {
             porxy[0] = "socks";
             proxyurl = proxysocks[random.nextInt(proxysocks.length)];
         }
-        proxyurl = null;
-
         String[] temp = hp(proxyurl);// 数组[host, port]
         porxy[1] = temp[0];
         porxy[2] = temp[1];

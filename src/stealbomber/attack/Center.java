@@ -21,7 +21,6 @@ public class Center implements Runnable {
     /** final长度 */
     private static final int UAL;
     private static final int NUMSEGL;
-    private static final int URLL;
 
     private static final String ptype;// 代理类型
     private static final String phost;// 代理host
@@ -30,7 +29,6 @@ public class Center implements Runnable {
     static {// 初始化
         UAL = stealbomber.manage.Storage.UA.length;
         NUMSEGL = stealbomber.manage.Storage.NUMSEG.length;
-        URLL = stealbomber.manage.GetFile.urls.length;
 
         // proxy
         if (stealbomber.manage.GetFile.proxyswitch) {
@@ -45,51 +43,9 @@ public class Center implements Runnable {
     }
 
     public void run() {
-        while (ThreadControl.on) {
-            // System.out.println(Thread.currentThread().getName());
-            // url
-            String url = URLL == 1 ? stealbomber.manage.GetFile.urls[0]
-                    : stealbomber.manage.GetFile.urls[ThreadLocalRandom.current().nextInt(URLL)];
-            // name
-            StringBuilder username = new StringBuilder();
-            switch (ThreadLocalRandom.current().nextInt(2)) {
-                case 2:
-                    username.append(
-                            stealbomber.manage.Storage.NUMSEG[ThreadLocalRandom.current().nextInt(NUMSEGL)]);
-                    for (byte i = 0; i < 8; i++) {
-                        username.append(ThreadLocalRandom.current().nextInt(10));
-                    }
-                    break;
-                case 1:
-                    for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
-                        if (i == 0) {
-                            username.append(ThreadLocalRandom.current().nextInt(1, 10));
-                        } else {
-                            username.append(ThreadLocalRandom.current().nextInt(10));
-                        }
-                    }
-                    username.append("@qq.com");
-                    break;
-                case 0:
-                default:
-                    for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
-                        if (i == 0) {
-                            username.append(ThreadLocalRandom.current().nextInt(1, 10));
-                        } else {
-                            username.append(ThreadLocalRandom.current().nextInt(10));
-                        }
-                    }
-                    break;
-            }
-            // rp
-            go(username.toString(), Password.get(), url);
-        }
-    }
-
-    private static void go(String name, String pass, String surl) {
         HttpURLConnection urlConn = null;
         try {
-            URL url = new URL(surl);
+            URL url = new URL(stealbomber.manage.GetFile.url);
             if (!stealbomber.manage.GetFile.proxyswitch) {
                 urlConn = (HttpURLConnection) url.openConnection();
             } else {
@@ -119,20 +75,24 @@ public class Center implements Runnable {
                     stealbomber.manage.Storage.UA[ThreadLocalRandom.current().nextInt(UAL)]);
             // 连接
             urlConn.connect();
-            // 写入参数到请求中
-            String param = stealbomber.manage.GetFile.param.replace("$[account]", name);
-            param = param.replace("$[password]", pass);
-            OutputStream out = urlConn.getOutputStream();
-            out.write(param.getBytes());
-            out.flush();
-            out.close();
-            // 输出
-            if (stealbomber.manage.GetFile.gps) {
-                System.out.println(name + " " + pass);
+            while (ThreadControl.on) {
+                String name = username();
+                String pass = Password.get();
+                
+                String param = stealbomber.manage.GetFile.param.replace("$[account]", name);
+                param = param.replace("$[password]", pass);
+                OutputStream out = urlConn.getOutputStream();
+                out.write(param.getBytes());
+                out.flush();
+                out.close();
+                // 输出
+                if (stealbomber.manage.GetFile.gps) {
+                    System.out.println(name + " " + pass);
+                }
             }
         } catch (IOException e) {
             if (stealbomber.manage.GetFile.gpr) {
-                System.out.println(surl + " 转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
+                System.out.println("转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
             }
             if (error >= 100) {
                 error = 0;
@@ -160,9 +120,43 @@ public class Center implements Runnable {
                 try {
                     urlConn.disconnect();
                 } catch (Exception e) {
-                    System.out.println(surl + " httpURLConnection 流关闭异常：" + e.getLocalizedMessage());
+                    System.out.println("httpURLConnection 流关闭异常：" + e.getLocalizedMessage());
                 }
             }
         }
+    }
+
+    private static String username() {
+        StringBuilder username = new StringBuilder();
+        switch (ThreadLocalRandom.current().nextInt(2)) {
+            case 2:
+                username.append(
+                        stealbomber.manage.Storage.NUMSEG[ThreadLocalRandom.current().nextInt(NUMSEGL)]);
+                for (byte i = 0; i < 8; i++) {
+                    username.append(ThreadLocalRandom.current().nextInt(10));
+                }
+                break;
+            case 1:
+                for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
+                    if (i == 0) {
+                        username.append(ThreadLocalRandom.current().nextInt(1, 10));
+                    } else {
+                        username.append(ThreadLocalRandom.current().nextInt(10));
+                    }
+                }
+                username.append("@qq.com");
+                break;
+            case 0:
+            default:
+                for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
+                    if (i == 0) {
+                        username.append(ThreadLocalRandom.current().nextInt(1, 10));
+                    } else {
+                        username.append(ThreadLocalRandom.current().nextInt(10));
+                    }
+                }
+                break;
+        }
+        return username.toString();
     }
 }

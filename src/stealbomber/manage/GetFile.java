@@ -5,9 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -18,7 +16,7 @@ public class GetFile {
 
     // 值与开关
     public static int thnum = 16;// 线程数
-    public static String[] urls;// 网址
+    public static String url;// 网址
     public static String param;// 参数
 
     public static boolean gps;// 输出成功
@@ -112,28 +110,13 @@ public class GetFile {
         // URL
         if (find("URL")) {
             String rurl = properties.getProperty("URL");
-            List<String> list = new ArrayList<String>();
-            if (rurl.contains(",")) {
-                String[] urlStr = rurl.split(",");
-                for (String string : urlStr) {
-                    int i = 0;
-                    if (urlStr[i].matches("(http|https)+://[^\\s]*")) {
-                        list.add(string);
-                    } else {
-                        success = false;
-                        System.err.println("ERROR: 攻击网址 你输入的字符串不是一个网址");
-                        return;
-                    }
-                    i++;
-                }
-            } else if (rurl.matches("(http|https)+://[^\\s]*")) {
-                list.add(rurl);
+            if (rurl.matches("(http|https)+://[^\\s]*")) {
+                url = rurl;
             } else {
                 success = false;
                 System.err.println("ERROR: 攻击网址 你输入的字符串没有包含网址");
                 return;
             }
-            urls = list.toArray(new String[list.size()]);
         } else {
             success = false;
             System.err.println("ERROR: 攻击网址 内容异常");

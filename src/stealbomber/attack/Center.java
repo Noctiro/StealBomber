@@ -6,7 +6,6 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import stealbomber.manage.ThreadControl;
@@ -17,12 +16,6 @@ import stealbomber.manage.ThreadControl;
  * @author ObcbO
  */
 public class Center implements Runnable {
-    private static String[] proxyhttp;
-    private static String[] proxysocks;
-    private static boolean proxyhttpswich = false;
-    private static boolean proxysocksswich = false;
-    private static Random random = new Random();
-
     /** 错误次数 */
     private static int error = 0;
     /** final长度 */
@@ -34,48 +27,12 @@ public class Center implements Runnable {
         UAL = stealbomber.manage.Storage.UA.length;
         NUMSEGL = stealbomber.manage.Storage.NUMSEG.length;
         URLL = stealbomber.manage.GetFile.urls.length;
-        if (stealbomber.manage.GetFile.proxyswitch) {
-            proxyhttp = AckProxy.readhttp(stealbomber.manage.GetFile.proxyfile);
-            if (proxyhttp != null) {
-                proxyhttpswich = true;
-            }
-            proxysocks = AckProxy.readsocks(stealbomber.manage.GetFile.proxyfile);
-            if (proxysocks != null) {
-                proxysocksswich = true;
-            }
-        }
     }
 
     public void run() {
         // proxy
-        String proxyurl = "";
-        String[] proxyiurl = { "", "" };
+        String[] proxy = AckProxy.dispose();
 
-        String proxytype = "";
-        String proxyhost = "";
-        int proxyport = 0;
-        if (stealbomber.manage.GetFile.proxyswitch) {
-            if (proxyhttpswich && proxysocksswich) {
-                if (random.nextBoolean()) {
-                    proxytype = "http";
-                    proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
-                } else {
-                    proxytype = "socks";
-                    proxyurl = proxysocks[random.nextInt(proxysocks.length)];
-                }
-            } else if (proxyhttpswich && !proxysocksswich) {
-                proxytype = "http";
-                proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
-            } else if (!proxyhttpswich && proxysocksswich) {
-                proxytype = "socks";
-                proxyurl = proxysocks[random.nextInt(proxysocks.length)];
-            }
-            proxyiurl = AckProxy.iurl(proxyurl);
-            proxyhost = proxyiurl[0];
-            proxyport = Integer.valueOf(proxyiurl[1]);
-            proxyurl = null;
-            proxyiurl = null;
-        }
         while (ThreadControl.on) {
             // System.out.println(Thread.currentThread().getName());
             // url
@@ -113,23 +70,23 @@ public class Center implements Runnable {
                     break;
             }
             // rp
-            go(username.toString(), Password.get(), url, proxytype, proxyhost, proxyport);
+            go(username.toString(), Password.get(), url, proxy);
         }
     }
 
-    private static void go(String name, String pass, String surl, String proxytype, String proxyurl, int proxyport) {
+    private static void go(String name, String pass, String surl, String[] proxy) {
         HttpURLConnection urlConn = null;
         try {
             URL url = new URL(surl);
             if (!stealbomber.manage.GetFile.proxyswitch) {
                 urlConn = (HttpURLConnection) url.openConnection();
             } else {
-                if ("http".equals(proxytype)) {
-                    Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyurl, proxyport));
-                    urlConn = (HttpURLConnection) url.openConnection(proxy);
-                } else if ("socks".equals(proxytype)) {
-                    Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(proxyurl, proxyport));
-                    urlConn = (HttpURLConnection) url.openConnection(proxy);
+                if ("http".equals(proxy[0])) {
+                    Proxy lp = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxy[1], Integer.valueOf(proxy[2])));
+                    urlConn = (HttpURLConnection) url.openConnection(lp);
+                } else if ("socks".equals(proxy[0])) {
+                    Proxy lp = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(proxy[1], Integer.valueOf(proxy[2])));
+                    urlConn = (HttpURLConnection) url.openConnection(lp);
                 }
             }
             urlConn.setRequestMethod("POST");

@@ -63,7 +63,7 @@ public class Center implements Runnable {
             // 设置是否输出
             urlConn.setDoOutput(true);
             // 设置是否读入
-            urlConn.setDoInput(true);
+            urlConn.setDoInput(false);
             // 设置是否使用缓存
             urlConn.setUseCaches(false);
             // 设置此 HttpURLConnection 实例是否应该自动执行 HTTP 重定向
@@ -71,16 +71,18 @@ public class Center implements Runnable {
             // 设置请求头
             urlConn.setRequestProperty("Content-Length", "40");
             urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            urlConn.setRequestProperty("User-Agent",
-                    stealbomber.manage.Storage.UA[ThreadLocalRandom.current().nextInt(UAL)]);
             // 连接
-            urlConn.connect();
+            // urlConn.connect();
             while (ThreadControl.on) {
+                urlConn.setRequestProperty("User-Agent",
+                        stealbomber.manage.Storage.UA[ThreadLocalRandom.current().nextInt(UAL)]);
+                urlConn.connect();
+
                 String name = username();
                 String pass = Password.get();
-                
                 String param = stealbomber.manage.GetFile.param.replace("$[account]", name);
                 param = param.replace("$[password]", pass);
+
                 OutputStream out = urlConn.getOutputStream();
                 out.write(param.getBytes());
                 out.flush();
@@ -89,6 +91,7 @@ public class Center implements Runnable {
                 if (stealbomber.manage.GetFile.gps) {
                     System.out.println(name + " " + pass);
                 }
+                urlConn.disconnect();
             }
         } catch (IOException e) {
             if (stealbomber.manage.GetFile.gpr) {

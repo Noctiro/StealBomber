@@ -108,7 +108,7 @@ public class Password {
     }
 
     private static void ms() {
-        // 25%的概率
+        // 20%的概率
         if (ThreadLocalRandom.current().nextInt(19) == 0) {
             g(3, 1);
         }

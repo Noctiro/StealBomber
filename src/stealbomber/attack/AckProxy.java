@@ -50,10 +50,10 @@ public class AckProxy {
                 porxy[0] = "socks";
                 proxyurl = proxysocks[ThreadLocalRandom.current().nextInt(proxysocks.length)];
             }
-        } else if (httpwich && !socksswich) {// 只有http类型
+        } else if (httpwich) {// 只有http类型
             porxy[0] = "http";
             proxyurl = proxyhttp[ThreadLocalRandom.current().nextInt(proxyhttp.length)];
-        } else if (!httpwich && socksswich) {// 只有socks类型
+        } else if (socksswich) {// 只有socks类型
             porxy[0] = "socks";
             proxyurl = proxysocks[ThreadLocalRandom.current().nextInt(proxysocks.length)];
         }
@@ -77,7 +77,7 @@ public class AckProxy {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return (String[]) list.toArray(new String[list.size()]);
+        return list.toArray(new String[list.size()]);
     }
 
     // 读取 socks 类型的代理
@@ -93,7 +93,7 @@ public class AckProxy {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return (String[]) list.toArray(new String[list.size()]);
+        return list.toArray(new String[list.size()]);
     }
 
     // 分离 host和port

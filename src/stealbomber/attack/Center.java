@@ -62,6 +62,7 @@ public class Center implements Runnable {
 
     private static void go(String name, String pass) {
         HttpURLConnection urlConn = null;
+        OutputStream out = null;
         try {
             if (GetFile.proxyswitch) {
                 if ("http".equals(ptype)) {
@@ -92,12 +93,10 @@ public class Center implements Runnable {
             // 连接
             urlConn.connect();
             // 写入参数到请求中
-            String param = stealbomber.manage.GetFile.param.replace("$[account]", name);
+            String param = GetFile.param.replace("$[account]", name);
             param = param.replace("$[password]", pass);
-            OutputStream out = urlConn.getOutputStream();
+            out = urlConn.getOutputStream();
             out.write(param.getBytes());
-            out.flush();
-            out.close();
             // 输出
             if (GetFile.gps) {
                 System.out.println(name + " " + pass);
@@ -130,6 +129,8 @@ public class Center implements Runnable {
         } finally {
             if (null != urlConn) {
                 try {
+                    out.flush();
+                    out.close();
                     urlConn.disconnect();
                 } catch (Exception e) {
                     System.out.println("httpURLConnection 流关闭异常：" + e.getLocalizedMessage());
@@ -142,8 +143,7 @@ public class Center implements Runnable {
         StringBuilder username = new StringBuilder();
         switch (ThreadLocalRandom.current().nextInt(2)) {
             case 2:
-                username.append(
-                        stealbomber.manage.Storage.NUMSEG[ThreadLocalRandom.current().nextInt(NUMSEGL)]);
+                username.append(Storage.NUMSEG[ThreadLocalRandom.current().nextInt(NUMSEGL)]);
                 for (byte i = 0; i < 8; i++) {
                     username.append(ThreadLocalRandom.current().nextInt(10));
                 }

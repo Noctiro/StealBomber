@@ -58,9 +58,11 @@ public class GetFile {
     }
 
     private static void generatefile() {
+        FileWriter fw = null;
+        BufferedWriter out = null;
         try {
-            FileWriter fw = new FileWriter("default.properties");
-            BufferedWriter out = new BufferedWriter(fw);
+            fw = new FileWriter("default.properties");
+            out = new BufferedWriter(fw);
             out.write("""
                     # StealBomber
                     # Author: ObcbO
@@ -77,12 +79,17 @@ public class GetFile {
                     # proxyswitch=false
                     # proxyfile=all.txt
                     """);
-            out.close();
-            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
             success = false;
             System.err.println("ERROR: 生成配置文件 生成失败");
+        } finally {
+            try {
+                out.close();
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

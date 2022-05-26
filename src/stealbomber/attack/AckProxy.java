@@ -34,7 +34,7 @@ public class AckProxy {
         if (stealbomber.manage.GetFile.proxyswitch) {
             return classification();
         }
-        return null;
+        return new String[0];
     }
 
     private static String[] classification() {
@@ -77,8 +77,7 @@ public class AckProxy {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        int size = list.size();
-        return (String[]) list.toArray(new String[size]);
+        return (String[]) list.toArray(new String[list.size()]);
     }
 
     // 读取 socks 类型的代理
@@ -94,8 +93,7 @@ public class AckProxy {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        int size = list.size();
-        return (String[]) list.toArray(new String[size]);
+        return (String[]) list.toArray(new String[list.size()]);
     }
 
     // 分离 host和port

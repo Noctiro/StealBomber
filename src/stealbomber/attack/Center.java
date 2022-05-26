@@ -52,9 +52,7 @@ public class Center implements Runnable {
         HttpURLConnection urlConn = null;
         try {
             URL url = new URL(URL);
-            if (!stealbomber.manage.GetFile.proxyswitch) {
-                urlConn = (HttpURLConnection) url.openConnection();
-            } else {
+            if (stealbomber.manage.GetFile.proxyswitch) {
                 if ("http".equals(ptype)) {
                     Proxy lp = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(phost, pport));
                     urlConn = (HttpURLConnection) url.openConnection(lp);
@@ -62,6 +60,8 @@ public class Center implements Runnable {
                     Proxy lp = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(phost, pport));
                     urlConn = (HttpURLConnection) url.openConnection(lp);
                 }
+            } else {
+                urlConn = (HttpURLConnection) url.openConnection();
             }
             urlConn.setRequestMethod("POST");
             // 超时时间

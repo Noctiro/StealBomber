@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.concurrent.ThreadLocalRandom;
 
+import stealbomber.manage.GetFile;
+import stealbomber.manage.Storage;
 import stealbomber.manage.ThreadControl;
 
 /**
@@ -26,12 +29,21 @@ public class Center implements Runnable {
     private static final String phost;// 代理host
     private static final int pport;// 代理端口
 
+    private static URL url;
+
     static {// 初始化
-        UAL = stealbomber.manage.Storage.UA.length;
-        NUMSEGL = stealbomber.manage.Storage.NUMSEG.length;
+        UAL = Storage.UA.length;
+        NUMSEGL = Storage.NUMSEG.length;
+
+        // 设置攻击网址
+        try {
+            url = new URL(GetFile.url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
         // proxy
-        if (stealbomber.manage.GetFile.proxyswitch) {
+        if (GetFile.proxyswitch) {
             String[] proxy = AckProxy.dispose();
             ptype = proxy[0];
             phost = proxy[0];
@@ -44,15 +56,14 @@ public class Center implements Runnable {
 
     public void run() {
         while (ThreadControl.on) {
-            go(stealbomber.manage.GetFile.url, username(), Password.get());
+            go(username(), Password.get());
         }
     }
 
-    private static void go(String URL, String name, String pass) {
+    private static void go(String name, String pass) {
         HttpURLConnection urlConn = null;
         try {
-            URL url = new URL(URL);
-            if (stealbomber.manage.GetFile.proxyswitch) {
+            if (GetFile.proxyswitch) {
                 if ("http".equals(ptype)) {
                     Proxy lp = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(phost, pport));
                     urlConn = (HttpURLConnection) url.openConnection(lp);
@@ -77,8 +88,7 @@ public class Center implements Runnable {
             // 设置请求头
             urlConn.setRequestProperty("Content-Length", "40");
             urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            urlConn.setRequestProperty("User-Agent",
-                    stealbomber.manage.Storage.UA[ThreadLocalRandom.current().nextInt(UAL)]);
+            urlConn.setRequestProperty("User-Agent", Storage.UA[ThreadLocalRandom.current().nextInt(UAL)]);
             // 连接
             urlConn.connect();
             // 写入参数到请求中
@@ -89,11 +99,11 @@ public class Center implements Runnable {
             out.flush();
             out.close();
             // 输出
-            if (stealbomber.manage.GetFile.gps) {
+            if (GetFile.gps) {
                 System.out.println(name + " " + pass);
             }
         } catch (IOException e) {
-            if (stealbomber.manage.GetFile.gpr) {
+            if (GetFile.gpr) {
                 System.out.println("转发出错，错误信息：" + e.getLocalizedMessage() + ";" + e.getClass());
             }
             if (error >= 100) {
@@ -102,7 +112,7 @@ public class Center implements Runnable {
                 new Thread(new Runnable() {
                     public void run() {
                         System.gc();
-                        if (stealbomber.manage.GetFile.gpr) {
+                        if (GetFile.gpr) {
                             System.out.println("\n错误次数过多, 正在重新启动 10s\n");
                         }
                         try {

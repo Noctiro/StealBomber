@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Properties;
 
 public class GetFile {
@@ -160,26 +159,7 @@ public class GetFile {
 
     private static void booleanmanage() {
         // 代理
-        proxyswitch = judge(false, "proxyswitch");
-        proxyfile = properties.getProperty("proxyfile", "Not Found");
-    }
-
-    // 默认值 文本
-    private static boolean judge(boolean udefault, String value) {
-        boolean output = true;
-        if ("Not Found".equals(properties.getProperty(value, "Not Found"))) {
-            return udefault;
-        } else {
-            value = properties.getProperty(value);
-        }
-        if ("TRUE".equals(value.toUpperCase(Locale.getDefault()))) {
-            output = true;
-        } else if ("FALSE".equals(value.toUpperCase(Locale.getDefault()))) {
-            output = false;
-        } else {
-            System.err.println("ERROR: 布尔参数的值为 true 或 false");
-            output = true;
-        }
-        return output;
+        proxyswitch = Boolean.parseBoolean(properties.getProperty("proxyswitch", "false"));
+        proxyfile = properties.getProperty("proxyfile", null);
     }
 }

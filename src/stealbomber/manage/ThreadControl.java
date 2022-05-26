@@ -10,7 +10,7 @@ public class ThreadControl {
     private static ThreadGroup gat = new ThreadGroup("GroupAttack") {
         @Override
         public void uncaughtException(Thread t, Throwable e) {// 当线程抛出问题时执行
-            System.out.println(t.getName() + ": " + e.getMessage());
+            System.out.println(t.getName() + ": " + e.getMessage() + ";" + e.getClass());
             System.out.println("开始重启 " + t.getName() + " 线程");
             new Thread(gat, new stealbomber.attack.Center(), t.getName()).start();
         }

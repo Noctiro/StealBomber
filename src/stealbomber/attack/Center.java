@@ -62,7 +62,6 @@ public class Center implements Runnable {
 
     private static void go(String name, String pass) {
         HttpURLConnection urlConn = null;
-        OutputStream out = null;
         try {
             if (GetFile.proxyswitch) {
                 if ("http".equals(ptype)) {
@@ -95,11 +94,18 @@ public class Center implements Runnable {
             // 写入参数到请求中
             String param = GetFile.param.replace("$[account]", name);
             param = param.replace("$[password]", pass);
-            out = urlConn.getOutputStream();
-            out.write(param.getBytes());
-            // 输出
-            if (GetFile.gps) {
-                System.out.println(name + " " + pass);
+
+            OutputStream out = null;
+            try {
+                out = urlConn.getOutputStream();
+                out.write(param.getBytes());
+                // 输出
+                if (GetFile.gps) {
+                    System.out.println(name + " " + pass);
+                }
+            } finally {
+                out.flush();
+                out.close();
             }
         } catch (IOException e) {
             if (GetFile.gpr) {
@@ -129,8 +135,6 @@ public class Center implements Runnable {
         } finally {
             if (null != urlConn) {
                 try {
-                    out.flush();
-                    out.close();
                     urlConn.disconnect();
                 } catch (Exception e) {
                     System.out.println("httpURLConnection 流关闭异常：" + e.getLocalizedMessage());

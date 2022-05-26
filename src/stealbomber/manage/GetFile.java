@@ -69,7 +69,7 @@ public class GetFile {
                     # https://github.com/obcbo/stealbomber
                     # 线程数
                     threads=16
-                    # 攻击网址 可同时使用多个网址(用,来隔开)
+                    # 攻击网址
                     URL=http://47.93.13.217/2018.php
                     # 攻击参数
                     parameter=username=$[account]&pass=$[password]

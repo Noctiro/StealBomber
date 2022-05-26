@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 代理
@@ -16,7 +16,19 @@ public class AckProxy {
     private static boolean httpwich = false;
     private static boolean socksswich = false;
 
-    static Random random = new Random();
+    private static String[] proxyhttp;
+    private static String[] proxysocks;
+
+    static {
+        proxyhttp = readhttp(stealbomber.manage.GetFile.proxyfile);
+        if (proxyhttp != null) {
+            httpwich = true;
+        }
+        proxysocks = readsocks(stealbomber.manage.GetFile.proxyfile);
+        if (proxysocks != null) {
+            socksswich = true;
+        }
+    }
 
     protected static String[] dispose() {
         if (stealbomber.manage.GetFile.proxyswitch) {
@@ -26,33 +38,24 @@ public class AckProxy {
     }
 
     private static String[] classification() {
-        String[] proxyhttp = readhttp(stealbomber.manage.GetFile.proxyfile);
-        if (proxyhttp != null) {
-            httpwich = true;
-        }
-        String[] proxysocks = readsocks(stealbomber.manage.GetFile.proxyfile);
-        if (proxysocks != null) {
-            socksswich = true;
-        }
-
         String[] porxy = new String[3];// [type, host, port]
 
         String proxyurl = "";// 内容为 host:port 临时储存用
         // 随机选择一个链接
         if (httpwich && socksswich) {// 两种类型都有
-            if (random.nextBoolean()) {
+            if (ThreadLocalRandom.current().nextBoolean()) {
                 porxy[0] = "http";
-                proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
+                proxyurl = proxyhttp[ThreadLocalRandom.current().nextInt(proxyhttp.length)];
             } else {
                 porxy[0] = "socks";
-                proxyurl = proxysocks[random.nextInt(proxysocks.length)];
+                proxyurl = proxysocks[ThreadLocalRandom.current().nextInt(proxysocks.length)];
             }
         } else if (httpwich && !socksswich) {// 只有http类型
             porxy[0] = "http";
-            proxyurl = proxyhttp[random.nextInt(proxyhttp.length)];
+            proxyurl = proxyhttp[ThreadLocalRandom.current().nextInt(proxyhttp.length)];
         } else if (!httpwich && socksswich) {// 只有socks类型
             porxy[0] = "socks";
-            proxyurl = proxysocks[random.nextInt(proxysocks.length)];
+            proxyurl = proxysocks[ThreadLocalRandom.current().nextInt(proxysocks.length)];
         }
         String[] temp = hp(proxyurl);// 数组[host, port]
         porxy[1] = temp[0];

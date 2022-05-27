@@ -56,7 +56,7 @@ public class Center implements Runnable {
 
     public void run() {
         while (ThreadControl.on) {
-            go(username(), password.get());
+            go(username(), Password.get());
         }
     }
 

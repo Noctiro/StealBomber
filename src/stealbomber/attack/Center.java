@@ -56,7 +56,7 @@ public class Center implements Runnable {
 
     public void run() {
         while (ThreadControl.on) {
-            go(username(), Password.get());
+            go(username(), password.get());
         }
     }
 
@@ -103,8 +103,8 @@ public class Center implements Runnable {
                 if (GetFile.gps) {
                     System.out.println(name + " " + pass);
                 }
-            } finally {
                 out.flush();
+            } finally {
                 out.close();
             }
         } catch (IOException e) {

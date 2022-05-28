@@ -97,7 +97,7 @@ public class Password {
                     g(1, ThreadLocalRandom.current().nextInt(2, 5));
                     ms();
                 }
-                default -> throw new RuntimeException("错误的密码生成类型");
+                default -> throw new ArrayIndexOutOfBoundsException("错误的密码生成类型");
             }
             return pass.toString();
         } catch (ArrayIndexOutOfBoundsException e) {

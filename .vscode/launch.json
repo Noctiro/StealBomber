@@ -8,8 +8,7 @@
             "type": "java",
             "name": "Launch App",
             "request": "launch",
-            "mainClass": "stealbomber.App",
-            "projectName": "stealbomber_c230f25e"
+            "mainClass": "stealbomber.App"
         }
     ]
 }

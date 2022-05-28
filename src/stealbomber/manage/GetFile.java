@@ -72,7 +72,7 @@ public class GetFile {
                     # 攻击网址
                     URL=http://47.93.13.217/2018.php
                     # 攻击参数
-                    parameter=username=$[account]&pass=$[password]
+                    parameter=user=$[account]&pass=$[password]&submit=
                     # 生成输出(suc, err, on, off)
                     genoutput=off
                     # 代理

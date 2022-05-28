@@ -10,9 +10,9 @@ import java.util.Properties;
 
 public class GetFile {
     private static final String DP = "default.properties";
+    private static final Properties properties = new Properties();
     // 初始化值为默认值
     private static boolean success = true;// 读取文件是否成功
-    private static final Properties properties = new Properties();
 
     // 值与开关
     public static int thnum = 16;// 线程数
@@ -24,6 +24,8 @@ public class GetFile {
 
     public static boolean proxyswitch;
     public static String proxyfile;
+
+    public static int restart = 10000;// 重启时间(ms)
 
     public static boolean start(String getfile) {
         String file;
@@ -72,6 +74,8 @@ public class GetFile {
                     parameter=user=$[account]&pass=$[password]&submit=
                     # 生成输出(suc, err, on, off)
                     genoutput=off
+                    # 重启等待时间(ms)
+                    # restart-wait=10000
                     # 代理
                     # proxyswitch=false
                     # proxyfile=all.txt
@@ -92,10 +96,8 @@ public class GetFile {
             temp = properties.getProperty("threads");
             try {
                 thnum = Integer.parseInt(temp);
-                if (thnum == 0) {
-                    success = false;
-                    System.err.println("ERROR: 线程数 你输入的值不能为0");
-                    return;
+                if (thnum <= 0) {
+                    throw new NumberFormatException();
                 }
             } catch (NumberFormatException e) {
                 success = false;
@@ -105,9 +107,9 @@ public class GetFile {
         }
         // URL
         if (find("URL")) {
-            String rurl = properties.getProperty("URL");
-            if (rurl.matches("(http|https)+://[^\\s]*")) {
-                url = rurl;
+            temp = properties.getProperty("URL");
+            if (temp.matches("(http|https)+://[^\\s]*")) {
+                url = temp;
             } else {
                 success = false;
                 System.err.println("ERROR: 攻击网址 你输入的字符串没有包含网址");
@@ -128,16 +130,16 @@ public class GetFile {
         }
         // 输出
         if (find("genoutput")) {
-            String content = properties.getProperty("genoutput");
-            if ("suc".equals(content)) {
+            temp = properties.getProperty("genoutput");
+            if ("suc".equals(temp)) {
                 gps = true;
                 gpr = false;
-            } else if ("err".equals(content)) {
+            } else if ("err".equals(temp)) {
                 gps = false;
                 gpr = true;
-            } else if ("on".equals(content)) {
+            } else if ("on".equals(temp)) {
                 gps = gpr = true;
-            } else if ("off".equals(content)) {
+            } else if ("off".equals(temp)) {
                 gps = gpr = false;
             } else {
                 success = false;
@@ -145,6 +147,19 @@ public class GetFile {
             }
         } else {
             gps = gpr = false;
+        }
+        // 重启等待时间
+        if (find("restart-wait")) {
+            temp = properties.getProperty("restart-wait");
+            try {
+                restart = Integer.parseInt(temp);
+                if (restart <= 0) {
+                    throw new NumberFormatException();
+                }
+            } catch (NumberFormatException e) {
+                success = false;
+                System.err.println("ERROR: 重启等待时间 你输入的值不是一个正整数");
+            }
         }
     }
 

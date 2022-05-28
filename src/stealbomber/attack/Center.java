@@ -115,7 +115,7 @@ public class Center implements Runnable {
                         System.out.println("\n错误次数过多, 正在重新启动 10s\n");
                     }
                     try {
-                        Thread.sleep(10000);// 1000ms=1s
+                        Thread.sleep(GetFile.restart);// 1000ms=1s
                     } catch (InterruptedException e1) {
                         Thread.currentThread().interrupt();
                     }

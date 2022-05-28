@@ -15,21 +15,19 @@ public class UserName {
     protected static String get() {
         try {
             switch (ThreadLocalRandom.current().nextInt(2)) {
-                case 2:
+                case 2 -> {
                     username = new StringBuilder(11);
                     username.append(Storage.NUMSEG[ThreadLocalRandom.current().nextInt(NUMSEGL)]);
                     for (byte i = 0; i < 8; i++) {
                         username.append(ThreadLocalRandom.current().nextInt(10));
                     }
-                    break;
-                case 1:
+                }
+                case 1 -> {
                     qqnum();
                     username.append("@qq.com");
-                    break;
-                case 0:
-                    qqnum();
-                    break;
-                default:
+                }
+                case 0 -> qqnum();
+                default -> throw new ArrayIndexOutOfBoundsException();
             }
             return username.toString();
         } catch (ArrayIndexOutOfBoundsException e) {

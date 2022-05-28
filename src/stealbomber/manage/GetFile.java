@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Properties;
 
 public class GetFile {
+    private static final String DP = "default.properties";
     // 初始化值为默认值
     private static boolean success = true;// 读取文件是否成功
     private static final Properties properties = new Properties();
@@ -27,21 +28,22 @@ public class GetFile {
     public static boolean start(String getfile) {
         String file;
         if (getfile == null || getfile.isBlank()) {
-            if (!new File("default.properties").exists()) {
+            if (!new File(DP).exists()) {
                 System.out.print("未发现配置文件");
                 generatefile();
                 System.out.println(", 现已自动生成并使用默认配置文件");
+                System.out.println("配置文件位置： " + System.getProperty("user.dir") + File.separator + DP);
             }
-            file = "default.properties";
-            try {
-                properties.load(new FileInputStream(System.getProperty("user.dir") + File.separator + file));
+            file = DP;
+            try (FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + File.separator + file)) {
+                properties.load(fis);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             file = getfile;
-            try {
-                properties.load(new FileInputStream(file));
+            try (FileInputStream fis = new FileInputStream(file)) {
+                properties.load(fis);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -50,7 +52,6 @@ public class GetFile {
                 System.exit(1);
             }
         }
-        // properties.load(file.class.getClassLoader().getResourceAsStream(file));
         properties.list(System.out);
         System.out.println("-- file readout completed --");
         manage();
@@ -58,11 +59,7 @@ public class GetFile {
     }
 
     private static void generatefile() {
-        FileWriter fw = null;
-        BufferedWriter out = null;
-        try {
-            fw = new FileWriter("default.properties");
-            out = new BufferedWriter(fw);
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(DP))) {
             out.write("""
                     # StealBomber
                     # Author: ObcbO
@@ -83,13 +80,6 @@ public class GetFile {
             e.printStackTrace();
             success = false;
             System.err.println("ERROR: 生成配置文件 生成失败");
-        } finally {
-            try {
-                out.close();
-                fw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -152,7 +142,6 @@ public class GetFile {
             } else {
                 success = false;
                 System.err.println("ERROR: 输出选项 内容异常");
-                return;
             }
         } else {
             gps = gpr = false;

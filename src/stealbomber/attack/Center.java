@@ -25,9 +25,9 @@ public class Center implements Runnable {
     private static final int UAL;
     private static final int NUMSEGL;
 
-    private static final String ptype;// 代理类型
-    private static final String phost;// 代理host
-    private static final int pport;// 代理端口
+    private static String ptype;// 代理类型
+    private static String phost;// 代理host
+    private static int pport;// 代理端口
 
     private static URL url;
 
@@ -95,17 +95,13 @@ public class Center implements Runnable {
             String param = GetFile.param.replace("$[account]", name);
             param = param.replace("$[password]", pass);
 
-            OutputStream out = null;
-            try {
-                out = urlConn.getOutputStream();
+            try (OutputStream out = urlConn.getOutputStream()) {
                 out.write(param.getBytes());
                 // 输出
                 if (GetFile.gps) {
                     System.out.println(name + " " + pass);
                 }
                 out.flush();
-            } finally {
-                out.close();
             }
         } catch (IOException e) {
             if (GetFile.gpr) {
@@ -114,18 +110,16 @@ public class Center implements Runnable {
             if (error >= 100) {
                 error = 0;
                 ThreadControl.stop();
-                new Thread(new Runnable() {
-                    public void run() {
-                        System.gc();
-                        if (GetFile.gpr) {
-                            System.out.println("\n错误次数过多, 正在重新启动 10s\n");
-                        }
-                        try {
-                            Thread.sleep(10000);// 1000ms=1s
-                        } catch (InterruptedException e1) {
-                        }
-                        ThreadControl.start();
+                new Thread(() -> {
+                    if (GetFile.gpr) {
+                        System.out.println("\n错误次数过多, 正在重新启动 10s\n");
                     }
+                    try {
+                        Thread.sleep(10000);// 1000ms=1s
+                    } catch (InterruptedException e1) {
+                        Thread.currentThread().interrupt();
+                    }
+                    ThreadControl.start();
                 }, "ReloadThread").start();
             } else if (!"Connect timed out".equals(e.getLocalizedMessage())) {
                 error = error + 5;

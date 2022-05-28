@@ -22,7 +22,6 @@ public final class App {
                         "|_____/ /__/___|/__,_|_| |____/ /___/|_| |_| |_|_.__/ /___|_|   " + " Author: ObcbO" + "\n" +
                         "-------------------------------------https://github.com/obcbo/stealbomber\n");
         if (GetFile.start(System.getProperty("file"))) {
-            System.gc();
             ThreadControl.start();
         } else {
             System.exit(1);

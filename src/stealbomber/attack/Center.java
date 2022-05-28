@@ -23,7 +23,6 @@ public class Center implements Runnable {
     private static int error = 0;
     /** final长度 */
     private static final int UAL;
-    private static final int NUMSEGL;
 
     private static String ptype;// 代理类型
     private static String phost;// 代理host
@@ -33,7 +32,6 @@ public class Center implements Runnable {
 
     static {// 初始化
         UAL = Storage.UA.length;
-        NUMSEGL = Storage.NUMSEG.length;
 
         // 设置攻击网址
         try {
@@ -56,7 +54,7 @@ public class Center implements Runnable {
 
     public void run() {
         while (ThreadControl.on) {
-            go(username(), Password.get());
+            go(UserName.get(), Password.get());
         }
     }
 
@@ -111,6 +109,7 @@ public class Center implements Runnable {
                 error = 0;
                 ThreadControl.stop();
                 new Thread(() -> {
+                    System.gc();
                     if (GetFile.gpr) {
                         System.out.println("\n错误次数过多, 正在重新启动 10s\n");
                     }
@@ -135,38 +134,5 @@ public class Center implements Runnable {
                 }
             }
         }
-    }
-
-    private static String username() {
-        StringBuilder username = new StringBuilder();
-        switch (ThreadLocalRandom.current().nextInt(2)) {
-            case 2:
-                username.append(Storage.NUMSEG[ThreadLocalRandom.current().nextInt(NUMSEGL)]);
-                for (byte i = 0; i < 8; i++) {
-                    username.append(ThreadLocalRandom.current().nextInt(10));
-                }
-                break;
-            case 1:
-                for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
-                    if (i == 0) {
-                        username.append(ThreadLocalRandom.current().nextInt(1, 10));
-                    } else {
-                        username.append(ThreadLocalRandom.current().nextInt(10));
-                    }
-                }
-                username.append("@qq.com");
-                break;
-            case 0:
-            default:
-                for (byte i = 0; i < ThreadLocalRandom.current().nextInt(8, 13); i++) {
-                    if (i == 0) {
-                        username.append(ThreadLocalRandom.current().nextInt(1, 10));
-                    } else {
-                        username.append(ThreadLocalRandom.current().nextInt(10));
-                    }
-                }
-                break;
-        }
-        return username.toString();
     }
 }

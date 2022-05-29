@@ -50,7 +50,7 @@ public class GetFile {
                 e.printStackTrace();
             }
             if (!new File(file).exists()) {
-                System.err.println("未发现选定的配置文件");
+                System.err.println("ERROR: 找不到指定的配置文件 " + file);
                 System.exit(1);
             }
         }
@@ -83,7 +83,7 @@ public class GetFile {
         } catch (IOException e) {
             e.printStackTrace();
             success = false;
-            System.err.println("ERROR: 生成配置文件 生成失败");
+            System.err.println("ERROR: 配置文件 生成失败");
         }
     }
 
@@ -172,5 +172,9 @@ public class GetFile {
         // 代理
         proxyswitch = Boolean.parseBoolean(properties.getProperty("proxyswitch", "false"));
         proxyfile = properties.getProperty("proxyfile", null);
+        if (proxyswitch && !new File(proxyfile).exists()) {
+            System.err.println("ERROR: 找不到指定的代理文件 " + proxyfile);
+            System.exit(1);
+        }
     }
 }

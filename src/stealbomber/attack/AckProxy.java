@@ -20,11 +20,11 @@ public class AckProxy {
     private static String[] proxysocks;
 
     static {
-        proxyhttp = readhttp(stealbomber.manage.GetFile.proxyfile);
+        proxyhttp = read(0, stealbomber.manage.GetFile.proxyfile);
         if (proxyhttp != null) {
             httpwich = true;
         }
-        proxysocks = readsocks(stealbomber.manage.GetFile.proxyfile);
+        proxysocks = read(1, stealbomber.manage.GetFile.proxyfile);
         if (proxysocks != null) {
             socksswich = true;
         }
@@ -63,34 +63,24 @@ public class AckProxy {
         return porxy;
     }
 
-    // 读取 http 类型的代理
-    protected static String[] readhttp(String filename) {
+    // 读取 http,socks 类型的代理
+    protected static String[] read(int type, String filename) {
+        String judge = switch (type) {
+            case 0 -> "(http|https)+://[^\\s]*";
+            case 1 -> "(socks4|socks5)+://[^\\s]*";
+            default -> throw new IllegalArgumentException("Unexpected value: " + type);
+        };
         List<String> list = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(filename))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                if (line.matches("(http|https)+://[^\\s]*")) {
+                if (line.matches(judge)) {
                     list.add(line);
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return list.toArray(new String[list.size()]);
-    }
-
-    // 读取 socks 类型的代理
-    protected static String[] readsocks(String filename) {
-        List<String> list = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new File(filename))) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if (line.matches("(socks4|socks5)+://[^\\s]*")) {
-                    list.add(line);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("ERROR: 代理 " + e.getLocalizedMessage());
+            System.exit(1);
         }
         return list.toArray(new String[list.size()]);
     }

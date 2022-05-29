@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * 代理
+ * 代理分类和分配
  * 
  * @author ObcbO
  */

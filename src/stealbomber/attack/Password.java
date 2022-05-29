@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Password {
     private static StringBuilder pass;
-    
+
     /** final长度 */
     private static final int PWL = stealbomber.manage.Storage.PW.length;
 
@@ -114,10 +114,8 @@ public class Password {
 
     private static void g(int options, int length) {
         int tlength = switch (options) {
-            // 大写
-            case 0 -> 26;
-            // 小写
-            case 1 -> 26;
+            // 大小写
+            case 0, 1 -> 26;
             // 数字
             case 2 -> 10;
             // 特殊符号

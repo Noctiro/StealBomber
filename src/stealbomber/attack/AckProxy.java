@@ -40,33 +40,32 @@ public class AckProxy {
     private static String[] classification() {
         String[] porxy = new String[3];// [type, host, port]
 
-        String proxyurl = "";// 内容为 host:port 临时储存用
+        String[] hp = new String[2];// 数组[host, port]
         // 随机选择一个链接
         if (httpwich && socksswich) {// 两种类型都有
             if (ThreadLocalRandom.current().nextBoolean()) {
                 porxy[0] = "http";
-                proxyurl = proxyhttp[ThreadLocalRandom.current().nextInt(proxyhttp.length)];
+                hp = separate(proxyhttp[ThreadLocalRandom.current().nextInt(proxyhttp.length)]);
             } else {
                 porxy[0] = "socks";
-                proxyurl = proxysocks[ThreadLocalRandom.current().nextInt(proxysocks.length)];
+                hp = separate(proxysocks[ThreadLocalRandom.current().nextInt(proxysocks.length)]);
             }
         } else if (httpwich) {// 只有http类型
             porxy[0] = "http";
-            proxyurl = proxyhttp[ThreadLocalRandom.current().nextInt(proxyhttp.length)];
+            hp = separate(proxyhttp[ThreadLocalRandom.current().nextInt(proxyhttp.length)]);
         } else if (socksswich) {// 只有socks类型
             porxy[0] = "socks";
-            proxyurl = proxysocks[ThreadLocalRandom.current().nextInt(proxysocks.length)];
+            hp = separate(proxysocks[ThreadLocalRandom.current().nextInt(proxysocks.length)]);
         }
-        String[] temp = hp(proxyurl);// 数组[host, port]
-        porxy[1] = temp[0];
-        porxy[2] = temp[1];
+        porxy[1] = hp[0];
+        porxy[2] = hp[1];
 
         return porxy;
     }
 
     // 读取 http 类型的代理
     protected static String[] readhttp(String filename) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(filename))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -82,7 +81,7 @@ public class AckProxy {
 
     // 读取 socks 类型的代理
     protected static String[] readsocks(String filename) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(filename))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -97,7 +96,7 @@ public class AckProxy {
     }
 
     // 分离 host和port
-    protected static String[] hp(String url) {
+    protected static String[] separate(String url) {
         String[] iurl = { "", "" };
         iurl[0] = url.substring(url.indexOf("://") + 3, url.lastIndexOf(':'));
         iurl[1] = url.substring(url.lastIndexOf(':') + 1);

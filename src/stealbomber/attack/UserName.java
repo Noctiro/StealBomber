@@ -28,12 +28,9 @@ public class UserName {
             case 0:
             default:
                 int length = ThreadLocalRandom.current().nextInt(8, 13);
-                for (byte i = 0; i < length; i++) {
-                    if (i == 0) {
-                        username.insert(0, ThreadLocalRandom.current().nextInt(1, 10));
-                    } else {
-                        username.insert(0, ThreadLocalRandom.current().nextInt(10));
-                    }
+                username.insert(0, ThreadLocalRandom.current().nextInt(1, 10));// 首位不为0
+                for (byte i = 0; i < length - 1; i++) {
+                    username.insert(1, ThreadLocalRandom.current().nextInt(10));
                 }
                 break;
         }

@@ -3,3 +3,9 @@ stealbomber.jar
 stealbomber-bf.jar
 default.properties
 *.txt
+
+# check tools
+# pmd.bat -d src -f html --report-file pmd.html -R rulesets/java/quickstart.xml,category/java/codestyle.xml
+# cpd.bat --minimum-tokens 100 --files src --language java --format text
+pmd.html
+cpd.html

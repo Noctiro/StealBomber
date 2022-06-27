@@ -19,6 +19,7 @@ import stealbomber.manage.ThreadControl;
  * @author ObcbO
  */
 public class Center implements Runnable {
+    private static ThreadControl ThreadControl = new ThreadControl("AttackGroup-Main");
     /** 错误次数 */
     private static int error = 0;
     /** final长度 */
@@ -52,8 +53,12 @@ public class Center implements Runnable {
         }
     }
 
+    public static void start() {
+        ThreadControl.start();
+    }
+
     public void run() {
-        while (ThreadControl.on) {
+        while (ThreadControl.state()) {
             go(UserName.get(), Password.get());
         }
     }

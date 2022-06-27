@@ -1,7 +1,7 @@
 ant/build
 stealbomber.jar
 stealbomber-bf.jar
-default.properties
+/default.properties
 *.txt
 
 # check tools

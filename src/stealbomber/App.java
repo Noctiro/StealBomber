@@ -1,7 +1,7 @@
 package stealbomber;
 
+import stealbomber.attack.Center;
 import stealbomber.manage.GetFile;
-import stealbomber.manage.ThreadControl;
 
 /**
  * 程序的起点 stealbomber.app
@@ -23,7 +23,7 @@ public final class App {
                         "-------------------------------------https://github.com/obcbo/stealbomber\n");
         if (GetFile.start(System.getProperty("file"))) {
             System.gc();
-            ThreadControl.start();
+            Center.start();
         } else {
             System.exit(1);
         }

@@ -1,16 +1,16 @@
 package stealbomber.attack;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
+import java.net.Authenticator;
 import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
-import java.net.Proxy;
+import java.net.ProxySelector;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
+import java.net.http.HttpClient.Redirect;
+import java.net.http.HttpClient.Version;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.time.Duration;
 import java.util.concurrent.ThreadLocalRandom;
 
 import stealbomber.manage.GetFile;
@@ -56,6 +56,15 @@ public class Center implements Runnable {
     }
 
     public void run() {
+        if (GetFile.proxyswitch) {
+            client = HttpClient.newBuilder()
+                    .version(Version.HTTP_2)
+                    .followRedirects(Redirect.NORMAL)
+                    .connectTimeout(Duration.ofSeconds(20))
+                    .proxy(ProxySelector.of(new InetSocketAddress(phost, pport)))
+                    .authenticator(Authenticator.getDefault())
+                    .build();
+        }
         while (ThreadControl.state()) {
             go(UserName.get(), Password.get());
         }
@@ -65,7 +74,8 @@ public class Center implements Runnable {
         String param = GetFile.param.replace("$[account]", name);
         param = param.replace("$[password]", pass);
         request = HttpRequest.newBuilder()
-                .POST(HttpRequest.BodyPublishers.ofString("param"))
+                .POST(HttpRequest.BodyPublishers.ofString(param))
+                .header("User-Agent", Storage.UA[ThreadLocalRandom.current().nextInt(UAL)])
                 .uri(URI.create(GetFile.url))
                 .build();
         try {

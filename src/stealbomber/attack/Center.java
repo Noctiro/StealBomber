@@ -75,6 +75,7 @@ public class Center implements Runnable {
         param = param.replace("$[password]", pass);
         request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(param))
+                .timeout(Duration.ofSeconds(3))// 3秒超时
                 .header("User-Agent", Storage.UA[ThreadLocalRandom.current().nextInt(UAL)])
                 .uri(URI.create(GetFile.url))
                 .build();
@@ -101,7 +102,7 @@ public class Center implements Runnable {
                     ThreadControl.start();
                 }, "ReloadThread").start();
             } else {
-                error = error + 5;
+                error++;
             }
         }
     }

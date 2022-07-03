@@ -23,6 +23,7 @@
             -injars      stealbomber-bf.jar
             -outjars     stealbomber.jar
             -libraryjars  ${java.home}/jmods/java.base.jmod(!**.jar;!module-info.class)
+            -dontwarn
           
             -keep public class stealbomber.App {
                 public static void main(java.lang.String[]);

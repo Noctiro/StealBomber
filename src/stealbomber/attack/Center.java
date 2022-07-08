@@ -29,7 +29,6 @@ public class Center implements Runnable {
     /** final长度 */
     private static final int UAL;
 
-    private static String ptype;// 代理类型
     private static String phost;// 代理host
     private static int pport;// 代理端口
 
@@ -40,13 +39,11 @@ public class Center implements Runnable {
         UAL = Storage.UA.length;
 
         // proxy
-        if (GetFile.proxyswitch) {
+        if ("true".equals(GetFile.proxyswitch)) {
             String[] proxy = AckProxy.dispose();
-            ptype = proxy[0];
             phost = proxy[0];
             pport = Integer.valueOf(proxy[2]);
         } else {
-            ptype = phost = null;
             pport = 0;
         }
     }
@@ -56,14 +53,27 @@ public class Center implements Runnable {
     }
 
     public void run() {
-        if (GetFile.proxyswitch) {
-            client = HttpClient.newBuilder()
-                    .version(Version.HTTP_2)
-                    .followRedirects(Redirect.NORMAL)
-                    .connectTimeout(Duration.ofSeconds(20))
-                    .proxy(ProxySelector.of(new InetSocketAddress(phost, pport)))
-                    .authenticator(Authenticator.getDefault())
-                    .build();
+        if ("true".equals(GetFile.proxyswitch)) {
+            switch (GetFile.proxyswitch) {
+                case "system" -> {
+                    client = HttpClient.newBuilder()
+                            .version(Version.HTTP_2)
+                            .followRedirects(Redirect.NORMAL)
+                            .connectTimeout(Duration.ofSeconds(20))
+                            .proxy(ProxySelector.getDefault())
+                            .authenticator(Authenticator.getDefault())
+                            .build();
+                }
+                case "socks" -> {
+                    client = HttpClient.newBuilder()
+                            .version(Version.HTTP_2)
+                            .followRedirects(Redirect.NORMAL)
+                            .connectTimeout(Duration.ofSeconds(20))
+                            .proxy(ProxySelector.of(new InetSocketAddress(phost, pport)))
+                            .authenticator(Authenticator.getDefault())
+                            .build();
+                }
+            }
         }
         while (ThreadControl.state()) {
             go(UserName.get(), Password.get());

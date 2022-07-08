@@ -37,13 +37,8 @@
 | threads | 否 | 16 | 并行攻击的线程数量 |
 | URL | 是 | - | 发送账号密码的网址 |
 | parameter | 是 | - | 向网站发送的参数([见下例](#parameter写法)) |
+| proxyswitch | 否 | false | 是否使用代理攻击(真为true 选择系统代理为system) |
 | proxyfile | 否 | - | 代理文件地址 |
-
-功能开关(只能填true或false)
-
-| 键 | 默认值 | 说明 |
-| --- | --- | --- |
-| proxyswitch | false | 使用代理攻击 |
 
 ### parameter写法
 

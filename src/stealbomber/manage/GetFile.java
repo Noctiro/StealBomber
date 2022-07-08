@@ -22,7 +22,7 @@ public class GetFile {
     public static boolean gps;// 输出成功
     public static boolean gpr;// 输出失败
 
-    public static boolean proxyswitch;
+    public static String proxyswitch;
     public static String proxyfile;
 
     public static int restart = 10000;// 重启时间(ms)
@@ -170,9 +170,14 @@ public class GetFile {
 
     private static void booleanmanage() {
         // 代理
-        proxyswitch = Boolean.parseBoolean(properties.getProperty("proxyswitch", "false"));
+        proxyswitch = properties.getProperty("proxyswitch", "false");
+        if (!"true".equals(proxyswitch) && !"false".equals(proxyswitch) && !"system".equals(proxyswitch)) {
+            success = false;
+            System.err.println("ERROR: 代理开关 值不符合要求");
+        }
+
         proxyfile = properties.getProperty("proxyfile", null);
-        if (proxyswitch && !new File(proxyfile).exists()) {
+        if ("true".equals(proxyswitch) && !new File(proxyfile).exists()) {
             System.err.println("ERROR: 找不到指定的代理文件 " + proxyfile);
             System.exit(1);
         }

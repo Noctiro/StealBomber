@@ -31,7 +31,7 @@ public class AckProxy {
     }
 
     protected static String[] dispose() {
-        if (stealbomber.manage.GetFile.proxyswitch) {
+        if ("true".equals(stealbomber.manage.GetFile.proxyswitch)) {
             return classification();
         }
         return new String[0];

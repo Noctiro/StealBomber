@@ -1,3 +1,7 @@
+> [!WARNING]  
+> 此项目已重写
+> 新版 https://github.com/Noctiro/stormin
+
 <img src="logo.png" alt="logo" width="100" height="100" align="right" />
 
 # Steal Bomber
